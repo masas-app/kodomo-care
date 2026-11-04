@@ -373,13 +373,13 @@ function render(){
     if(/^\d{4}-\d{2}-\d{2}$/.test(due)){
       const now=new Date(),todayLocal=new Date(now.getFullYear(),now.getMonth(),now.getDate());
       const [y,m,d]=due.split('-').map(Number);
-      remaining=Math.round((new Date(y,m-1,d)-todayLocal)/86400000);
+      remaining=Math.round((Date.UTC(y,m-1,d)-Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);
     }
     const tasks=[['due','出産予定日を登録'],['procedure','出産後に必要な手続きを確認'],['hospital','入院準備の持ち物を確認']];
     const completed=JSON.parse(localStorage.getItem('care-prenatal-tasks')||'{}');
     $('#view').innerHTML=`<div class="care-shell">
       <div class="care-pre-head"><div class="care-kicker">こどもケア · 出産前</div><h1>出産前の準備</h1><p>必要な準備を、家族で少しずつ。</p></div>
-      <div class="care-prenatal-hero"><div>出産予定日まで</div><div class="care-days">${remaining===null?'予定日を登録':remaining>=0?'あと '+remaining+' 日':'予定日から '+Math.abs(remaining)+' 日'}</div><small>予定日を登録すると自動計算</small><input aria-label="出産予定日" type="date" value="${due}" onchange="careSetDueDate(this.value)"></div>
+      <div class="care-prenatal-hero"><div>出産予定日まで</div><div class="care-days" id="careCountdown">${remaining===null?'予定日を登録':remaining>=0?'あと '+remaining+' 日':'予定日から '+Math.abs(remaining)+' 日'}</div><small>予定日を登録すると自動計算</small><input aria-label="出産予定日" type="date" value="${due}" oninput="careSetDueDate(this.value)" onchange="careSetDueDate(this.value)"></div>
       <div class="care-section"><h2>出産準備メニュー</h2><div class="care-prenatal-grid">
         <button class="care-prenatal-tile" onclick="carePrenatalInfo('procedure')"><span class="care-tile-icon">▤</span><b>出産手続きナビ</b><small>自治体別の必要手続き</small></button>
         <button class="care-prenatal-tile" onclick="carePrenatalInfo('checklist')"><span class="care-tile-icon">☑</span><b>準備チェックリスト</b><small>入院・育児用品など</small></button>
@@ -395,9 +395,23 @@ function render(){
 }
 
 function careSetDueDate(value){
-  if(value)localStorage.setItem('care-prenatal-due',value);
-  else localStorage.removeItem('care-prenatal-due');
-  render();
+  // Update the displayed count immediately, without rebuilding the date input.
+  // iOS can show a selected date before the input's change/blur event fires.
+  const el=document.getElementById('careCountdown');
+  if(!value){
+    localStorage.removeItem('care-prenatal-due');
+    if(el)el.textContent='予定日を登録';
+    return;
+  }
+  const match=/^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if(!match)return;
+  const y=Number(match[1]),m=Number(match[2]),d=Number(match[3]);
+  const target=new Date(y,m-1,d);
+  if(target.getFullYear()!==y||target.getMonth()!==m-1||target.getDate()!==d)return;
+  localStorage.setItem('care-prenatal-due',value);
+  const now=new Date();
+  const days=Math.round((Date.UTC(y,m-1,d)-Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);
+  if(el)el.textContent=days>=0?'あと '+days+' 日':'予定日から '+Math.abs(days)+' 日';
 }
 function careSetPrenatalTask(id,checked){
   const tasks=JSON.parse(localStorage.getItem('care-prenatal-tasks')||'{}');
