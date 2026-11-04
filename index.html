@@ -370,7 +370,7 @@ function render(){
   if(careSection==='prenatal'){
     const due=localStorage.getItem('care-prenatal-due')||'';
     let remaining=null;
-    if(/^\\d{4}-\\d{2}-\\d{2}$/.test(due)){
+    if(/^\d{4}-\d{2}-\d{2}$/.test(due)){
       const now=new Date(),todayLocal=new Date(now.getFullYear(),now.getMonth(),now.getDate());
       const [y,m,d]=due.split('-').map(Number);
       remaining=Math.round((new Date(y,m-1,d)-todayLocal)/86400000);
