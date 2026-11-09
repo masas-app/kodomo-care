@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.09.4"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.09.5"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
 
 :root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#20342c;background:#f2f7f3}*{box-sizing:border-box}body{margin:0}.app{max-width:480px;margin:auto;min-height:100dvh;position:relative;overflow:hidden;background:linear-gradient(145deg,#eaf8eb,#faf9ee)}.photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.95;pointer-events:none}.wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.20),rgba(255,255,255,.08) 32%,rgba(255,255,255,.44) 85%);pointer-events:none}.content{position:relative;padding:20px 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-size:24px;font-weight:850;color:white;text-shadow:0 2px 7px #253d3b88}.switch{border:0;border-radius:22px;background:#ffffffed;padding:12px 15px;font-weight:750;color:#234437;max-width:50%}h1{color:white;text-shadow:0 2px 8px #203c3488;font-size:31px;margin:0}h2{font-size:20px;margin:10px 0}p{margin:5px 0}.sub{color:#f9fffc;text-shadow:0 1px 6px #2448;font-weight:600}.hero{margin-top:20px;background:linear-gradient(115deg,#16a977,#0c9870);border-radius:20px;padding:20px;color:white;box-shadow:0 7px 18px #154d3326}.hero small{font-weight:750}.hero strong{display:block;font-size:20px;margin:8px 0}.hero button{float:right;border:0;background:transparent;color:white;font-size:22px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.tile{background:#ffffffed;border:0;border-radius:17px;padding:15px 5px;text-align:center;box-shadow:0 5px 15px #344b2518;cursor:pointer}.tile b{display:block;font-size:25px}.tile small{font-weight:700}.white{background:#fffffff0;border-radius:18px;padding:16px;margin:11px 0;box-shadow:0 5px 15px #334b2515}.action{width:100%;border:0;background:#fffffff0;padding:16px;text-align:left;border-radius:15px;margin:7px 0;font-weight:750;font-size:16px;cursor:pointer}.action span{float:right;color:#748780}.action .action-icon{float:none;display:inline-flex;align-items:center;justify-content:center;width:24px;margin-right:7px;vertical-align:middle;color:#d18a26}.btn{border:0;border-radius:11px;background:#0e9e72;color:white;padding:11px 14px;font-weight:700;cursor:pointer}.btn.alt{background:#e7f3ee;color:#196d52}.btn.warn{background:#c65b55}.small{font-size:12px;color:#64766b}.row{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{background:#e5f5ee;padding:6px 9px;border-radius:30px;font-size:12px;font-weight:700}.field{width:100%;border:1px solid #cadbd0;border-radius:10px;padding:12px;font:inherit;background:white;margin:5px 0 10px}label{display:block;font-size:13px;font-weight:700;margin-top:9px}.hide{display:none!important}.item{border-bottom:1px solid #e5ebe6;padding:12px 0}.item:last-child{border:0}.muted{color:#64766b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.day{text-align:center;border:0;border-radius:9px;background:#f0f5f0;padding:9px 2px;min-height:43px;font-size:13px}.day.has{background:#d7efe4}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin:2px}.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}.sheet{background:#fff;border-radius:20px;padding:20px;width:min(440px,100%);max-height:88dvh;overflow:auto}.error{color:#a23d3d;white-space:pre-wrap}.note{padding:10px;background:#fff7db;border-radius:10px;font-size:12px;color:#5b512a}.empty{padding:15px;color:#687d70;text-align:center}.footer{font-size:11px;color:#52675b;text-align:center;margin-top:24px}
 
@@ -188,7 +188,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSideMenu
 const APP_PREF_KEY='kodomo-care-preferences-v1';
 function getAppPrefs(){let raw={};try{raw=JSON.parse(localStorage.getItem(APP_PREF_KEY)||'{}')||{}}catch{}let days=Array.isArray(raw.reminderDaysSelected)?raw.reminderDaysSelected:(Number.isInteger(raw.reminderDays)?[raw.reminderDays]:[1]);return {fontSize:['small','normal','large'].includes(raw.fontSize)?raw.fontSize:'normal',reminderDaysSelected:[...new Set(days.map(Number).filter(n=>[0,1,3,7].includes(n)))],reminderHour:Number.isInteger(raw.reminderHour)&&raw.reminderHour>=0&&raw.reminderHour<=23?raw.reminderHour:8,reminderMinute:Number.isInteger(raw.reminderMinute)&&raw.reminderMinute>=0&&raw.reminderMinute<=59?raw.reminderMinute:0}}
 function applyAppPrefs(){let p=getAppPrefs();document.documentElement.dataset.fontSize=p.fontSize;document.documentElement.style.fontSize=p.fontSize==='large'?'19px':p.fontSize==='small'?'14px':'16px';}
-function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.09.4</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
+function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.09.5</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
 function refreshPushPermissionStatus(){
   const status=document.getElementById('pushPermissionStatus');
   const enable=document.getElementById('pushEnableButton');
@@ -470,6 +470,7 @@ const careProcedureStages = [
     rules: [
       { id: 'handbook', title: '妊娠届・母子健康手帳' },
       { id: 'pregnancyGrant', title: '妊婦のための支援給付' },
+      { id: 'localPrenatalSupport' },
     ],
   },
   {
@@ -2684,6 +2685,156 @@ const careProcedureCommon = {
 };
 
 const careProcedureLocalGuides = {
+  // 南国市
+  "392049": {
+    handbook: {
+      timing: '妊娠と診断されたら、早めに届出を。来所は事前予約を推奨。',
+      office: '南国市こども家庭センター（保健福祉センター内、南国市大そね甲320番地、088-863-7374）',
+      documents: ['妊娠を確認できるもの（医療機関から妊娠届出書を受け取った場合はその書類）', 'マイナンバーカード、またはマイナンバーと本人確認ができる書類', '給付金の申請も行う場合は、妊婦本人の口座が分かるもの'],
+      note: '予約は原則オンラインで、来所希望日の2日前まで。交付時は保健師などとの面談があります。',
+      url: 'https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=3213',
+    },
+    pregnancyGrant: {
+      timing: '1回目は医療機関で胎児心拍を確認した日から、2回目は原則、出産予定日の8週間前から。それぞれ2年間。',
+      office: '南国市こども家庭センター 母子保健係（088-863-7374）',
+      documents: ['妊婦本人の確認書類の写し', '本人名義の振込口座が分かる書類の写し'],
+      note: '1回目は妊娠の届出とあわせて申請します。市は2回目の申請と胎児の数の届出を、産後の赤ちゃん訪問時に案内しています。',
+      url: 'https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=9333',
+    },
+    birth: {
+      office: '南国市で提出する場合は、南国市役所 市民課市民係',
+      documents: ['医師または助産師の出生証明書が付いた出生届書', '母子健康手帳'],
+      note: '夜間・休日は庁舎西入口の当直室へ。国保加入世帯は、資格を示す書類の持参について窓口で確認してください。',
+      url: 'https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=1762',
+    },
+    allowance: {
+      office: '南国市役所 子育て支援課（088-880-6562）。勤務先から支給される公務員は勤務先へ。',
+      documents: ['初回は請求者名義の口座が分かるもの、認印、請求者と配偶者のマイナンバーが分かるもの', '請求者が被用者で国民年金以外に加入している場合は、健康保険の加入情報または年金加入証明'],
+      note: 'すでに受給していてお子さんが増えた場合は、額改定の手続きです。養育状況によって追加書類が必要です。',
+      url: 'https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=7328',
+    },
+    insurance: {
+      timing: '国保に入る場合は出生後14日以内。勤務先の健康保険に入る場合は、出生後すぐに勤務先へ。',
+      office: '国保は南国市役所 市民課 国保係（088-880-6555）。勤務先の健康保険は勤務先へ。',
+      documents: ['来庁する方の本人確認書類など。出生時の持ち物は国保係に確認してください。'],
+      documentsAreTypical: true,
+      url: 'https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=9083',
+    },
+    medical: {
+      office: '南国市役所 子育て支援課（088-880-6562）',
+      documents: ['赤ちゃんの保険資格が分かるもの（資格確認書、資格情報のお知らせ、マイナポータルの資格情報など）', '印鑑'],
+      url: 'https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=2094',
+    },
+    localBirthSupport: {
+      title: '産後ケア事業（訪問・通所・宿泊）',
+      timing: '妊娠8か月から申請できます。利用前に市への申請が必要です。',
+      office: '南国市こども家庭センター（088-863-7374）',
+      documents: ['産後ケア事業の利用申請書と認印', '生活保護世帯は受給証明書。非課税世帯は課税状況を市で確認できないときに追加書類が必要な場合があります。', '利用当日は母子健康手帳など。利用する方法や施設に応じた持ち物は市の案内を確認。'],
+      note: '市に住民票があり市内に住む、産後12か月未満のお母さんと赤ちゃんが対象です。母親の心身の不調や育児不安など、利用条件があります。施設によって対象月齢や料金が異なります。',
+      url: 'https://www.city.nankoku.lg.jp/life/life_dtl.php?hdnKey=4996',
+    },
+  },
+  // 香南市
+  "392111": {
+    handbook: {
+      timing: '産婦人科で妊娠と診断されたら、早めに届出。',
+      office: '香南市役所2階 健康対策課（0887-50-3011）',
+      documents: ['出産予定日が分かる妊娠届出書など', '給付金の申請に使う、妊婦本人の口座情報', '代理人が届け出る場合は、代理人の本人確認書類'],
+      note: '開庁日の8時30分〜12時、13時〜17時に受付。受付時間外を希望する場合は事前に電話で相談できます。',
+      url: 'https://www.city.kochi-konan.lg.jp/soshikikarasagasu/kenkotaisakuka/test/pe-ziitiran/10083.html',
+    },
+    pregnancyGrant: {
+      timing: '1回目は医療機関で胎児心拍を確認した日から、2回目は原則、出産予定日の8週間前から。それぞれ2年間。',
+      office: '香南市役所 健康対策課（0887-50-3011）',
+      documents: ['妊娠届出時または赤ちゃん訪問時に受け取る申請書', '妊婦本人の口座が分かるもの。添付書類は申請書と市の案内を確認。'],
+      note: '里帰り先で赤ちゃん訪問を受けた場合も、香南市に住民票があれば香南市へ申請します。',
+      url: 'https://www.city.kochi-konan.lg.jp/soshikikarasagasu/kenkotaisakuka/test/pe-ziitiran/10091.html',
+      additionalSource: { title: '香南市の実施要綱（申請期限など）', url: 'https://www.city.kochi-konan.lg.jp/section/reiki_int/reiki_honbun/r254RG00001976.html' },
+    },
+    localPrenatalSupport: {
+      title: '産前産後ヘルパー派遣事業',
+      timing: '利用希望日の1週間前までに申請。妊娠中から相談できます。',
+      office: '香南市役所 健康対策課（0887-50-3011）',
+      documents: ['産前産後ヘルパー派遣事業の利用申請書（市の公式案内に掲載）'],
+      note: '市に住民登録がある妊婦や産後12か月未満の方などで、家族等の助けを得られず、日中の家事・育児に支援が必要な世帯が対象です。利用条件や費用は市の案内で確認できます。',
+      url: 'https://www.city.kochi-konan.lg.jp/soshikikarasagasu/kenkotaisakuka/test/pe-ziitiran/10125.html',
+      additionalSource: { title: '香南市の実施要綱（対象と申請期限）', url: 'https://www.city.kochi-konan.lg.jp/section/reiki_int/reiki_honbun/r254RG00001827.html' },
+    },
+    birth: {
+      office: '香南市で提出する場合は、市役所1階 市民保険課（0887-57-8506）または各支所',
+      documents: ['医師または助産師の出生証明書が付いた出生届書', '母子健康手帳', '来庁する方の本人確認書類（市の出生時の手続き案内を参照）'],
+      url: 'https://www.city.kochi-konan.lg.jp/lifescenekarasagasu/sumu/hitsuyonatodokede/4748.html',
+      additionalSource: { title: '香南市の出生時の手続き一覧', url: 'https://www.city.kochi-konan.lg.jp/soshikikarasagasu/shiminhokenka/todokede_shomei/3/1922.html' },
+    },
+    allowance: {
+      office: '香南市役所 市民保険課または各支所。勤務先から支給される公務員は勤務先へ。',
+      documents: ['初回の認定請求書、請求者名義の口座が分かるもの', '来庁者の本人確認書類と、請求者・配偶者のマイナンバーが分かるもの', '共済加入の場合は保険資格が分かる書類の写しなど、該当する方の添付書類'],
+      note: 'すでに受給していてお子さんが増えた場合は、額改定の手続きです。別居などがある場合は市の案内で追加書類を確認してください。',
+      url: 'https://www.city.kochi-konan.lg.jp/soshikikarasagasu/shiminhokenka/ikuji/1/1/1921.html',
+    },
+    insurance: {
+      timing: '国保に入る場合は出生後14日以内。勤務先の健康保険に入る場合は、出生後すぐに勤務先へ。',
+      office: '国保は香南市役所 市民保険課（0887-57-8506）または各支所。勤務先の健康保険は勤務先へ。',
+      documents: ['来庁者の本人確認書類', '出生届とあわせて手続きするときは母子健康手帳も持参'],
+      url: 'https://www.city.kochi-konan.lg.jp/kurashi_tetsuzuki/hoken_nenkin/kokuminkenkohoken/3694.html',
+      additionalSource: { title: '香南市の出生時の手続き一覧（PDF）', url: 'https://www.city.kochi-konan.lg.jp/material/files/group/6/tetuduki_syussyo.pdf' },
+    },
+    medical: {
+      office: '香南市役所 市民保険課（0887-57-8506）または各支所',
+      documents: ['申請する方の本人確認書類と、世帯全員のマイナンバーが分かるもの', '赤ちゃんの保険資格が分かるもの（保険者名・記号番号・資格取得日を確認できるもの）', '児童手当受給者が市外に住む場合は、その方のマイナンバーが分かるもの'],
+      note: '別世帯の方が手続きする場合は、市所定の委任状を確認してください。',
+      url: 'https://www.city.kochi-konan.lg.jp/kosodate_kyoiku/boshinokenko/kenko_iryonikansurusupport/1/3709.html',
+    },
+  },
+  // 香美市
+  "392120": {
+    handbook: {
+      timing: '産婦人科で妊娠の確定診断を受けたら、早めに届出。',
+      office: '香美市役所本庁舎2階8番窓口 健康推進課 親子すこやか係（0887-52-9281）',
+      documents: ['妊娠を確認できるもの（妊娠届出書、通っている産婦人科の診察券など）', 'マイナンバーカード、またはマイナンバーと本人確認ができる書類', '代理人が届け出る場合は、代理人の本人確認書類'],
+      note: '交付時に妊婦・産婦・乳児の健診や、新生児聴覚検査の受診票も受け取れます。',
+      url: 'https://www.city.kami.lg.jp/soshiki/18/bositecyou.html',
+    },
+    pregnancyGrant: {
+      timing: '1回目は胎児心拍の確認後、2回目は原則、出産予定日の8週間前から。それぞれ2年間。',
+      office: '香美市役所 健康推進課 親子すこやか係（0887-52-9281）',
+      documents: ['紙で申請する場合は、市の申請書、本人確認書類の写し、本人の口座が分かる通帳またはキャッシュカードの写し'],
+      note: '市は1回目を妊娠の届出時、2回目を出生の届出時や新生児訪問時の面談後に案内しています。登録済みの公金受取口座を使う場合はマイナポータルでも申請できます。',
+      url: 'https://www.city.kami.lg.jp/soshiki/18/ninnpusiennkyuuhukinn.html',
+    },
+    birth: {
+      office: '香美市で提出する場合は、香美市役所 市民保険課 市民係（0887-53-3126）',
+      documents: ['医師または助産師の出生証明書が付いた出生届書1通', '母子健康手帳'],
+      note: '時間外は宿直・日直が戸籍の届出を受け付けます。支所での手続きについては事前に窓口へ確認してください。',
+      url: 'https://www.city.kami.lg.jp/soshiki/16/syussyou.html',
+    },
+    allowance: {
+      office: '香美市役所2階 福祉事務所 社会福祉係（0887-53-3117）。勤務先から支給される公務員は勤務先へ。',
+      documents: ['初回の認定請求書と、請求者名義の口座が分かるもの', '請求者の健康保険または年金の加入状況が分かるもの'],
+      note: 'すでに受給していてお子さんが増えた場合は、額改定の手続きです。お子さんとの別居など、状況に応じた添付書類は市の一覧で確認してください。',
+      url: 'https://www.city.kami.lg.jp/soshiki/22/jidouteate.html',
+    },
+    insurance: {
+      timing: '国保に入る場合は出生後14日以内。勤務先の健康保険に入る場合は、出生後すぐに勤務先へ。',
+      office: '国保は香美市役所 市民保険課 保険係（0887-53-3115）。勤務先の健康保険は勤務先へ。',
+      documents: ['来庁する方の本人確認書類など。出生時の持ち物は保険係に確認してください。'],
+      documentsAreTypical: true,
+      url: 'https://www.city.kami.lg.jp/soshiki/17/kokuhoido.html',
+    },
+    medical: {
+      office: '香美市役所 福祉事務所 社会福祉係、または各支所',
+      documents: ['赤ちゃんの保険資格が分かるもの（被保険者名と適用年月日が記載されているもの）'],
+      url: 'https://www.city.kami.lg.jp/soshiki/22/nyuuyouji02.html',
+    },
+    localBirthSupport: {
+      title: '産後ケア事業（訪問・通所・宿泊）',
+      timing: '妊娠8か月から申請できます。利用前に市への申請が必要です。',
+      office: '香美市役所 健康推進課 親子すこやか係（0887-52-9281）',
+      documents: ['産後ケア事業の利用申請書（市の公式案内に掲載）'],
+      note: '市に住民票がある、産後1年未満のお母さんと赤ちゃんが対象です。訪問型は自己負担なし。通所・宿泊は施設ごとに費用が異なり、利用できる月齢に条件がある施設もあります。',
+      url: 'https://www.city.kami.lg.jp/soshiki/18/sangokeajigyou.html',
+    },
+  },
   // 土佐市
   "392057": {
     handbook: {
