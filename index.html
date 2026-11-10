@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.10.9"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.10.10"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
 
 :root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#20342c;background:#f2f7f3}*{box-sizing:border-box}body{margin:0}.app{max-width:480px;margin:auto;min-height:100dvh;position:relative;overflow:hidden;background:linear-gradient(145deg,#eaf8eb,#faf9ee)}.photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.95;pointer-events:none}.wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.20),rgba(255,255,255,.08) 32%,rgba(255,255,255,.44) 85%);pointer-events:none}.content{position:relative;padding:20px 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-size:24px;font-weight:850;color:white;text-shadow:0 2px 7px #253d3b88}.switch{border:0;border-radius:22px;background:#ffffffed;padding:12px 15px;font-weight:750;color:#234437;max-width:50%}h1{color:white;text-shadow:0 2px 8px #203c3488;font-size:31px;margin:0}h2{font-size:20px;margin:10px 0}p{margin:5px 0}.sub{color:#f9fffc;text-shadow:0 1px 6px #2448;font-weight:600}.hero{margin-top:20px;background:linear-gradient(115deg,#16a977,#0c9870);border-radius:20px;padding:20px;color:white;box-shadow:0 7px 18px #154d3326}.hero small{font-weight:750}.hero strong{display:block;font-size:20px;margin:8px 0}.hero button{float:right;border:0;background:transparent;color:white;font-size:22px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.tile{background:#ffffffed;border:0;border-radius:17px;padding:15px 5px;text-align:center;box-shadow:0 5px 15px #344b2518;cursor:pointer}.tile b{display:block;font-size:25px}.tile small{font-weight:700}.white{background:#fffffff0;border-radius:18px;padding:16px;margin:11px 0;box-shadow:0 5px 15px #334b2515}.action{width:100%;border:0;background:#fffffff0;padding:16px;text-align:left;border-radius:15px;margin:7px 0;font-weight:750;font-size:16px;cursor:pointer}.action span{float:right;color:#748780}.action .action-icon{float:none;display:inline-flex;align-items:center;justify-content:center;width:24px;margin-right:7px;vertical-align:middle;color:#d18a26}.btn{border:0;border-radius:11px;background:#0e9e72;color:white;padding:11px 14px;font-weight:700;cursor:pointer}.btn.alt{background:#e7f3ee;color:#196d52}.btn.warn{background:#c65b55}.small{font-size:12px;color:#64766b}.row{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{background:#e5f5ee;padding:6px 9px;border-radius:30px;font-size:12px;font-weight:700}.field{width:100%;border:1px solid #cadbd0;border-radius:10px;padding:12px;font:inherit;background:white;margin:5px 0 10px}label{display:block;font-size:13px;font-weight:700;margin-top:9px}.hide{display:none!important}.item{border-bottom:1px solid #e5ebe6;padding:12px 0}.item:last-child{border:0}.muted{color:#64766b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.day{text-align:center;border:0;border-radius:9px;background:#f0f5f0;padding:9px 2px;min-height:43px;font-size:13px}.day.has{background:#d7efe4}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin:2px}.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}.sheet{background:#fff;border-radius:20px;padding:20px;width:min(440px,100%);max-height:88dvh;overflow:auto}.error{color:#a23d3d;white-space:pre-wrap}.note{padding:10px;background:#fff7db;border-radius:10px;font-size:12px;color:#5b512a}.empty{padding:15px;color:#687d70;text-align:center}.footer{font-size:11px;color:#52675b;text-align:center;margin-top:24px}
 
@@ -188,7 +188,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSideMenu
 const APP_PREF_KEY='kodomo-care-preferences-v1';
 function getAppPrefs(){let raw={};try{raw=JSON.parse(localStorage.getItem(APP_PREF_KEY)||'{}')||{}}catch{}let days=Array.isArray(raw.reminderDaysSelected)?raw.reminderDaysSelected:(Number.isInteger(raw.reminderDays)?[raw.reminderDays]:[1]);return {fontSize:['small','normal','large'].includes(raw.fontSize)?raw.fontSize:'normal',reminderDaysSelected:[...new Set(days.map(Number).filter(n=>[0,1,3,7].includes(n)))],reminderHour:Number.isInteger(raw.reminderHour)&&raw.reminderHour>=0&&raw.reminderHour<=23?raw.reminderHour:8,reminderMinute:Number.isInteger(raw.reminderMinute)&&raw.reminderMinute>=0&&raw.reminderMinute<=59?raw.reminderMinute:0}}
 function applyAppPrefs(){let p=getAppPrefs();document.documentElement.dataset.fontSize=p.fontSize;document.documentElement.style.fontSize=p.fontSize==='large'?'19px':p.fontSize==='small'?'14px':'16px';}
-function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.10.9</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
+function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.10.10</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
 function refreshPushPermissionStatus(){
   const status=document.getElementById('pushPermissionStatus');
   const enable=document.getElementById('pushEnableButton');
@@ -8594,6 +8594,20 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.awa.lg.jp/docs/2023040600014/",
         "linkLabel": "阿波市の公式案内",
         "note": "原則、誕生日から次の誕生日の前日まで利用できます。転入時の交付は市の案内へ。"
+      },
+      {
+        "linkLabel": "阿波市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "出産祝金支給申請書",
+          "申請者名義の通帳"
+        ],
+        "title": "出産祝金",
+        "summary": "市内で対象となる新生児1人につき3万円。出産時に市内に居住し、子とともに出産後も6か月以上継続して市内に住む父または母が対象。",
+        "timing": "原則、出産の日から6か月以内に申請。",
+        "office": "阿波市 市民課（本庁1階、0883-36-8710）",
+        "url": "https://www.city.awa.lg.jp/docs/2013071000013/",
+        "note": "申請者と子の住民登録が必要。期限までに申請し、出生日から6か月以内に転出すると原則返還が必要です。"
       }
     ]
   },
@@ -8799,11 +8813,42 @@ const careProcedureRegionalPrograms = {
     ]
   },
   "364011": {
-    "cards": [],
-    "overview": {
-      "title": "松茂町の妊娠・子育て案内",
-      "url": "https://www.town.matsushige.tokushima.jp/category/bunya/kenko_fukushi/ninshin/"
-    }
+    "cards": [
+      {
+        "linkLabel": "松茂町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "助成申請書",
+          "受診の領収書・明細書",
+          "原則として申請者名義の通帳",
+          "本人確認書類",
+          "該当者は世帯の課税証明書または生活保護受給証明書"
+        ],
+        "title": "低所得妊婦の初回産科受診料助成",
+        "summary": "町内に住民票があり、妊娠検査薬で陽性を確認した町民税非課税世帯・生活保護世帯の方へ、初回の妊娠判定の費用を上限1万円助成。年度内2回まで。",
+        "timing": "原則、受診が終わった日の属する年度内に申請。",
+        "office": "松茂町こども家庭センター（保健相談センター内、088-683-4535）",
+        "url": "https://www.town.matsushige.tokushima.jp/docs/2026041500031/"
+      },
+      {
+        "linkLabel": "松茂町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "助成申請書",
+          "母子健康手帳の該当ページの写し",
+          "交通費・宿泊費の領収書",
+          "振込先口座の確認書類の写し",
+          "本人確認書類",
+          "里帰りの場合は里帰り先の住所が分かる書類"
+        ],
+        "title": "遠方の分娩施設への交通費・宿泊費助成",
+        "summary": "出産時に町内に住民票があり、住所地や里帰り先から最寄りの分娩施設までおおむね60分以上かかる場合などに、交通費1往復と入院前の宿泊費最大14泊分を一部助成。",
+        "timing": "費用を負担した日が属する年度末までに申請。",
+        "office": "松茂町こども家庭センター（保健相談センター内、088-683-4535）",
+        "url": "https://www.town.matsushige.tokushima.jp/docs/2025080500026/",
+        "note": "医学的に周産期母子医療センターで出産が必要な場合は、最寄りの同センターまでの所要時間で判定されます。"
+      }
+    ]
   },
   "364029": {
     "cards": [
@@ -8843,16 +8888,16 @@ const careProcedureRegionalPrograms = {
     "cards": [
       {
         "title": "出産祝金",
-        "summary": "対象の出生児1人につき10万円。",
-        "timing": "出生後、住民課で申請手順を確認。",
+        "summary": "出生届時に町に住民登録された新生児1人につき10万円。出生時に父母のいずれかが町内に住民登録し、引き続き町で養育する意思があることが条件。",
+        "timing": "出生届を出した日から6か月以内に申請。",
         "office": "板野町 住民課（088-672-5984）",
         "documents": [
           "必要書類は公式案内または窓口で確認"
         ],
         "documentsAreTypical": true,
-        "url": "https://www.town.itano.tokushima.jp/docs/2020100200016/files/kosodateguidebook.pdf",
-        "linkLabel": "板野町の子育てガイドブック（PDF）",
-        "note": "町の子育てガイドブックで制度を確認できます。"
+        "url": "https://www.town.itano.tokushima.jp/docs/2022122600010/",
+        "linkLabel": "板野町の公式案内",
+        "note": "2023年1月1日以降に生まれた子どもが対象です。"
       }
     ]
   },
@@ -8871,6 +8916,18 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.townkamiita.jp/reiki_int/reiki_honbun/o028RG00000530.html",
         "linkLabel": "上板町の出産祝金交付要綱",
         "note": "2025年4月1日以降の出生が対象。住民登録と、交付決定後1年以上居住する誓約などの条件があります。"
+      },
+      {
+        "linkLabel": "広報かみいた2026年4月号（PDF）",
+        "documentsAreTypical": true,
+        "documents": [
+          "必要書類は公式案内または窓口で確認"
+        ],
+        "title": "出産祝い育児用品等支援事業",
+        "summary": "町民の出産を祝い、紙おむつやおしりふきなどの育児用品セットを配布。",
+        "timing": "出産後の受け取り時期・方法は町へ確認。",
+        "office": "上板町 福祉介護課（088-694-6810）",
+        "url": "https://www.townkamiita.jp/docs/2011020900018/file_contents/kouhou334.pdf#page=19"
       }
     ]
   },
@@ -8892,11 +8949,25 @@ const careProcedureRegionalPrograms = {
     ]
   },
   "364894": {
-    "cards": [],
-    "overview": {
-      "title": "東みよし町の妊娠・子育て案内",
-      "url": "https://www.town.higashimiyoshi.lg.jp/lifeevent/ninshin/"
-    }
+    "cards": [
+      {
+        "linkLabel": "東みよし町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書",
+          "該当する場合は育児休業給付金等支給決定通知書の写し",
+          "通帳またはキャッシュカードの写し",
+          "印鑑",
+          "父母の健康保険の加入が確認できるもの"
+        ],
+        "title": "すくすく家庭保育応援手当",
+        "summary": "昼間に在宅で育児する町内在住の保護者が対象。育休給付等を受給する世帯は月5,000円、受給しない世帯は月1万5,000円。",
+        "timing": "満6か月の翌月から満1歳の年度末までが対象。対象期間の2か月前から申請可。",
+        "office": "東みよし町 福祉課（0883-82-6306）",
+        "url": "https://www.town.higashimiyoshi.lg.jp/docs/693592.html",
+        "note": "満6か月を迎えた月以降の申請は、申請した月の翌月から対象です。保育所等に入所中の場合などは対象外です。"
+      }
+    ]
   },
   "372013": {
     "cards": [
@@ -8928,6 +8999,19 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.marugame.lg.jp/site/life-stage/1480.html",
         "linkLabel": "丸亀市の公式案内",
         "note": "対象児を含めて3人以上を養育し、市内の住民登録と居住などの要件を満たす方が対象です。"
+      },
+      {
+        "linkLabel": "丸亀市の公式案内",
+        "documentsAreTypical": true,
+        "documents": [
+          "必要書類は公式案内または窓口で確認"
+        ],
+        "title": "子育て応援育児用品貸出事業",
+        "summary": "市内に住民登録がある就学前の子どもの保護者などへ、ベビーベッド・チャイルドシート・ベビーカーなどを無料で貸し出し。",
+        "timing": "妊娠中は出産予定日の2週間前から申請可。事前に在庫を問い合わせ。",
+        "office": "丸亀市社会福祉協議会 本所または綾歌分室",
+        "url": "https://www.city.marugame.lg.jp/site/life-stage/1426.html",
+        "note": "子ども1人につき2種類、1種類につき1台までです。貸出期限は用品により異なります。"
       }
     ]
   },
@@ -8997,18 +9081,57 @@ const careProcedureRegionalPrograms = {
     ]
   },
   "372064": {
-    "cards": [],
-    "overview": {
-      "title": "さぬき市の妊娠・子育て案内",
-      "url": "https://www.city.sanuki.lg.jp/kosodatekyoiku/ninshinsshussan/support-ninshinsshussan/index.html"
-    }
+    "cards": [
+      {
+        "linkLabel": "さぬき市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "初回の産科受診の領収書と明細書の原本",
+          "申請者名義の振込口座が分かるもの",
+          "1月1日時点で市外に住民登録があった場合は課税状況が分かる書類"
+        ],
+        "title": "初回産科受診料給付等事業",
+        "summary": "市内に住民票があり、住民税非課税世帯または同等の所得水準の方に、妊娠判定のための初回産科受診料を上限1万円助成。",
+        "timing": "初回の産科受診から3か月以内に申請。",
+        "office": "さぬき市 国保・健康課 健康係（寒川庁舎2階）",
+        "url": "https://www.city.sanuki.lg.jp/soshiki/kokuhokenko/gyomu/10/2/575.html",
+        "note": "所得確認と、医療機関等との支援情報の共有に同意が必要です。"
+      }
+    ]
   },
   "372072": {
-    "cards": [],
-    "overview": {
-      "title": "東かがわ市の妊娠・子育て案内",
-      "url": "https://www.higashikagawa.jp/hojokin_joseikin/ninshin_shussan/index.html"
-    }
+    "cards": [
+      {
+        "linkLabel": "東かがわ市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "保護者名義の通帳またはキャッシュカード"
+        ],
+        "title": "新生児定額給付金",
+        "summary": "市内に住民登録があり、出生後も市内で暮らす新生児1人につき10万円。",
+        "timing": "原則、出生後3か月以内に申請。",
+        "office": "東かがわ市 こども家庭課（0879-26-1229）",
+        "url": "https://www.higashikagawa.jp/soshikikarasagasu/kodomokateika/806/705.html",
+        "note": "出生後3年以内に転出すると原則として返還が必要です。やむを得ない理由による転出は例外です。"
+      },
+      {
+        "linkLabel": "東かがわ市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "母子健康手帳",
+          "受診した妊婦本人の印鑑",
+          "妊婦本人名義の通帳の写し",
+          "写真付き本人確認書類"
+        ],
+        "title": "妊婦健診受診支援事業",
+        "summary": "市内に住民票がある間に、妊婦一般健康診査受診票を使った健診1回につき2,000円。最大14回、多胎妊娠は19回。",
+        "timing": "最終の妊婦健診を受けた日から1年以内にまとめて申請。",
+        "office": "東かがわ市 こども家庭課（0879-26-1229）",
+        "url": "https://www.higashikagawa.jp/kosodate_kyoiku/boshinokenko/kenshin_ninshin_shussan/2308.html"
+      }
+    ]
   },
   "372081": {
     "cards": [
@@ -9075,11 +9198,21 @@ const careProcedureRegionalPrograms = {
     ]
   },
   "373419": {
-    "cards": [],
-    "overview": {
-      "title": "三木町の妊娠・子育て案内",
-      "url": "https://www.town.miki.lg.jp/life/dtl.php?hdnKey=6367"
-    }
+    "cards": [
+      {
+        "linkLabel": "三木町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "子育て支援金支給申請書"
+        ],
+        "title": "子育て支援金",
+        "summary": "2026年4月1日以降に生まれた子が対象。第1子・第2子は各1万円、第3子以降は各20万円。",
+        "timing": "対象の子の出生日から3か月以内に申請。出生届の手続きの際に案内。",
+        "office": "三木町 こども課",
+        "url": "https://www.town.miki.lg.jp/life/dtl.php?hdnKey=8654",
+        "note": "出生時に保護者が町内在住で、新生児も町に住民登録されることなどが条件。子の人数は原則同じ世帯で、18歳になった後の最初の3月31日までの児童を数えます。"
+      }
+    ]
   },
   "373648": {
     "cards": [
@@ -9146,11 +9279,21 @@ const careProcedureRegionalPrograms = {
     ]
   },
   "374032": {
-    "cards": [],
-    "overview": {
-      "title": "琴平町の妊娠・子育て案内",
-      "url": "https://www.town.kotohira.kagawa.jp/site/child/list50-123.html"
-    }
+    "cards": [
+      {
+        "linkLabel": "琴平町の公式案内",
+        "documentsAreTypical": true,
+        "documents": [
+          "必要書類は公式案内または窓口で確認"
+        ],
+        "title": "子育て短期支援事業（ショートステイ等）",
+        "summary": "保護者の病気や出産などで一時的に家庭での養育が難しいとき、委託先の施設で子どもを預かります。",
+        "timing": "必要になったときに町へ相談。ショートステイは原則7日以内。",
+        "office": "琴平町の子育て短期支援窓口",
+        "url": "https://www.town.kotohira.kagawa.jp/site/child/1474.html",
+        "note": "平日夜間や休日に養育が難しい場合には、トワイライト事業の案内もあります。"
+      }
+    ]
   },
   "374041": {
     "cards": [
@@ -9231,6 +9374,20 @@ const careProcedureRegionalPrograms = {
         "url": "https://imakoso-imabari.jp/service/egaokko/",
         "linkLabel": "今治市の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "今治市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "母子健康手帳",
+          "申請者の本人確認書類"
+        ],
+        "title": "子どもが真ん中応援券",
+        "summary": "対象の0歳児1人につきPayPay商品券18万円分。出生時に夫婦とも35歳以下なら20万円分。育児用品などに利用できます。",
+        "timing": "2026年度生まれは2027年5月23日までにオンライン申請。申請時に満1歳未満であること。",
+        "office": "今治市 ネウボラ推進課（本庁4階）または各支所住民サービス課で申請方法を案内",
+        "url": "https://imakoso-imabari.jp/service/kodomo-mannaka/",
+        "note": "市内の住民登録期間などに条件があります。利用期限は出生年度の翌年度末です。"
       }
     ]
   },
@@ -9265,6 +9422,21 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.yawatahama.ehime.jp/doc/2021072100014/",
         "linkLabel": "八幡浜市の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "八幡浜市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書類",
+          "母子健康手帳の写し",
+          "購入後の払い戻しを申請する場合は領収書と振込先口座が分かる書類など"
+        ],
+        "title": "出産世帯応援事業（はまっこ未来応援券など）",
+        "summary": "育児用品・時短家電等を支援。対象児1人につき、出生日に父母とも29歳以下なら30万円分、それ以外は20万円分。",
+        "timing": "子どもの1歳の誕生日の前日まで。出生年度と母子健康手帳の交付日で申請方法が異なります。",
+        "office": "八幡浜市 子育て支援課（八幡浜庁舎1階11番窓口）",
+        "url": "https://www.city.yawatahama.ehime.jp/doc/2023080100017/",
+        "note": "2026年1月1日以降に母子健康手帳が交付された対象世帯にはPayPay商品券を交付します。交付日がそれ以前の場合は市の別区分を確認してください。"
       }
     ]
   },
@@ -9282,6 +9454,21 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.niihama.lg.jp/soshiki/kosodate/egaonokosodateouennjigyou.html",
         "linkLabel": "新居浜市の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "新居浜市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "申請者名義の振込先口座が分かるもの",
+          "母子健康手帳"
+        ],
+        "title": "出産世帯応援給付金・Hello！New Baby応援券",
+        "summary": "出産時に父母とも35歳以下なら給付金10万円、それ以外は9万9,000円。登録店で育児用品などに使える応援券5万円分も交付。",
+        "timing": "出生日から1歳の誕生日の前日までに申請。応援券は出生年度の翌年度末まで。",
+        "office": "新居浜市 こども未来課",
+        "url": "https://www.city.niihama.lg.jp/soshiki/kosodate/syussannouen.html",
+        "note": "申請時に市内に住民票があり、申請日から半年以上住む意思があることなどが条件。ひとり親世帯は養育者の年齢で判定します。"
       }
     ]
   },
@@ -9299,6 +9486,24 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.saijo.ehime.jp/soshiki/kosodateshien/omutsuken-201707.html",
         "linkLabel": "西条市の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "西条市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書",
+          "購入明細",
+          "領収書の原本",
+          "母子健康手帳",
+          "請求書",
+          "振込先が分かるもの"
+        ],
+        "title": "出産世帯応援事業（育児用品購入補助）",
+        "summary": "市内在住の0歳児世帯に育児用品の購入費を補助。出生時に夫婦とも35歳以下なら上限15万円、それ以外は14万円。紙おむつは第1子分が対象。",
+        "timing": "2026年度の出産は2027年3月25日まで。2025年度の出産は1歳の誕生日前日と2027年3月25日の早い方まで。",
+        "office": "西条市 本庁こども未来課または西部支所福祉課",
+        "url": "https://www.city.saijo.ehime.jp/soshiki/kosodateshien/shussannsetai-r7.html",
+        "note": "2025年4月2日以降の出産が対象。2025年度にこの事業を申請済みの方は対象外です。"
       }
     ]
   },
@@ -9316,6 +9521,35 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.ozu.ehime.jp/site/kosodate/24006.html",
         "linkLabel": "大洲市の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "大洲市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "母子健康手帳",
+          "申請者の本人確認書類"
+        ],
+        "title": "第1子おむつ券交付事業",
+        "summary": "市に住民登録がある満1歳未満の第1子1人につき、紙おむつの購入券5万円分。転入児も対象。",
+        "timing": "満1歳未満の間に申請。券は交付年度の翌年度末まで利用可。",
+        "office": "大洲市役所 子育て支援課（1階）または各支所",
+        "url": "https://www.city.ozu.ehime.jp/site/kosodate/55629.html"
+      },
+      {
+        "linkLabel": "大洲市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "申請明細書",
+          "母子健康手帳",
+          "レシートまたは領収書の原本（省略できる場合あり）",
+          "品目に応じた追加書類"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "市内店舗で購入した育児用品・時短家電・省エネ家電の費用を補助。2025年4月以降の出生は上限20万円、出産時に父母とも35歳以下なら30万円。",
+        "timing": "市に住民登録後、1歳の誕生日の前日まで。期限が土日祝なら直前の平日。",
+        "office": "大洲市 子育て支援課",
+        "url": "https://www.city.ozu.ehime.jp/site/kosodate/56249.html"
       }
     ]
   },
@@ -9333,6 +9567,22 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.iyo.lg.jp/kosodateshien/20170420kosodateouen.html",
         "linkLabel": "伊予市の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "伊予市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "申請明細書",
+          "母子健康手帳の写し",
+          "領収証等",
+          "別居などの場合は住民票の写しや戸籍謄本等"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "2025年4月以降に出産した世帯へ、育児用品・時短家電・省エネ家電の購入費を補助。出生時に父母とも35歳以下なら上限30万円、それ以外は20万円。",
+        "timing": "1歳の誕生日の前日と2027年3月31日のうち早い日まで。電子申請も可。",
+        "office": "伊予市 地域創生課（本庁3階）",
+        "url": "https://www.city.iyo.lg.jp/kosodateshien/jakunen_shussan.html"
       }
     ]
   },
@@ -9363,6 +9613,19 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.shikokuchuo.ehime.jp/site/kosodate/37117.html",
         "linkLabel": "四国中央市の公式案内",
         "note": "申請時に1歳未満の子を養育し、住民登録などの要件を満たす世帯が対象。2025年度出生分は別の期限があり、詳細は市の案内へ。"
+      },
+      {
+        "linkLabel": "四国中央市の公式案内",
+        "documentsAreTypical": true,
+        "documents": [
+          "必要書類は公式案内または窓口で確認"
+        ],
+        "title": "紙のまちの子育て応援 乳児紙おむつ支給",
+        "summary": "1歳未満の子どもがいる市内の家庭へ、紙おむつと交換できる引換券を最大40枚（40袋分）配布。",
+        "timing": "出生届提出後に受け取り。転入した場合も1歳未満なら保健センターで手続き。",
+        "office": "四国中央市 保健センター",
+        "url": "https://www.city.shikokuchuo.ehime.jp/site/kosodate/1758.html",
+        "note": "引換券に必要事項を記入し、登録店で対象の商品と交換します。"
       }
     ]
   },
@@ -9380,6 +9643,23 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.seiyo.ehime.jp/kakuka/fukushi_jimusho/kosodate/kyuuhushien/kosodateouenken/414.html",
         "linkLabel": "西予市の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "西予市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "領収書の原本",
+          "家電は型番が分かる書類",
+          "申請者名義の通帳の写し",
+          "母子健康手帳"
+        ],
+        "title": "出産世帯応援事業補助金",
+        "summary": "2025年4月以降に生まれた乳児を育てる対象世帯に定額10万円。夫婦とも35歳以下の場合、対象の育児用品・家電の購入費を別に上限10万円補助。",
+        "timing": "出生後に申請。市の2026年度案内では2027年2月26日が期限と案内されています。",
+        "office": "西予市 子育て支援課（0894-62-6551）",
+        "url": "https://www.city.seiyo.ehime.jp/kurashi/kosodate_kyouiku/kodomogaumaretara/15696.html",
+        "note": "市の案内には期限の予定表記もあります。最新の受付状況や対象経費は窓口で確認してください。"
       }
     ]
   },
@@ -9397,6 +9677,24 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.city.toon.ehime.jp/soshiki/24/1262.html",
         "linkLabel": "東温市の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "東温市の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "内訳一覧表",
+          "領収書の原本",
+          "口座情報の写し",
+          "母子健康手帳",
+          "該当時は委任状や配偶者の本人確認書類等"
+        ],
+        "title": "出産世帯応援事業（育児用品等の購入助成）",
+        "summary": "育児用品・時短家電等の購入費を助成。2025年4月以降の出産は上限20万円、出産時に夫婦とも35歳以下なら30万円。",
+        "timing": "出生日から1歳の誕生日の前日までに、子ども1人につき1回申請。",
+        "office": "東温市 子育て支援課（市役所1階8番窓口、089-907-2236）",
+        "url": "https://www.city.toon.ehime.jp/soshiki/37/20347.html",
+        "note": "申請時に3か月以上継続して市に住民登録があり、申請日から1年以上住む意思があることなどが条件です。"
       }
     ]
   },
@@ -9414,6 +9712,23 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.town.kamijima.lg.jp/soshiki/5/26537.html",
         "linkLabel": "上島町の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "上島町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書と内訳書",
+          "領収書の原本",
+          "母子健康手帳の写し",
+          "振込先口座が分かるもの",
+          "対象品目や世帯状況による追加書類"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "2025年4月1日〜2027年3月31日生まれが対象。育児用品・家電の費用を上限20万円、出産時に父母とも35歳以下なら30万円補助。",
+        "timing": "子どもの出生から1年を迎える日が属する年度の3月末までに申請。",
+        "office": "上島町 住民課または町民生活課",
+        "url": "https://www.town.kamijima.lg.jp/soshiki/5/26548.html",
+        "note": "紙おむつは第1子分が対象。申請時に3か月以上継続して上島町に住んでいることなどが条件です。"
       }
     ]
   },
@@ -9431,6 +9746,22 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.kumakogen.jp/soshiki/3/7926.html",
         "linkLabel": "久万高原町の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "久万高原町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "交付申請書兼請求書",
+          "対象区分に応じて領収書等",
+          "家電は設置状況・型式等の写真",
+          "該当者は町外の住民票や完納証明書など"
+        ],
+        "title": "出産世帯応援事業補助金",
+        "summary": "2025年4月1日〜2027年3月31日生まれの対象世帯へ、育児用品・時短家電等の購入費を補助。出生日に父母とも35歳以下なら上限30万円、それ以外は20万円。",
+        "timing": "出生届が住民票に反映された後から、1歳に達する日が属する年度の末日まで。郵送は必着。",
+        "office": "久万高原町こども家庭センター（0892-58-9990）",
+        "url": "https://www.kumakogen.jp/soshiki/3/12705.html",
+        "note": "町に3か月以上住民登録があることや、補助金交付決定後1年以上住む意思があることなどが条件。紙おむつは別制度で確認できます。"
       }
     ]
   },
@@ -9461,6 +9792,22 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.town.masaki.ehime.jp/site/allkosodatetop2/30313.html",
         "linkLabel": "松前町の公式案内",
         "note": "第1子は町独自の松前っ子おむつ券を利用できます。使える店舗や商品の詳細は町の案内へ。"
+      },
+      {
+        "linkLabel": "松前町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "母子健康手帳",
+          "交付申請書と別紙",
+          "町税に関する同意書など",
+          "購入費の領収書等（実績報告時）"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "2025年4月1日〜2027年3月31日に生まれた子の対象世帯へ育児用品・時短家電等の購入費を補助。出生時に父母等がともに36歳未満なら上限30万円、それ以外は20万円。",
+        "timing": "町へ交付申請。交付決定を受けた年度の3月31日までに実績報告。",
+        "office": "松前町 子育て支援課 こども家庭センター係（はぐはぐ）",
+        "url": "https://www.town.masaki.ehime.jp/soshiki/54/26991.html",
+        "note": "母子健康手帳の交付日から子どもが1歳に達する日までの購入が対象。申請から実績報告、請求までの流れは町の案内へ。"
       }
     ]
   },
@@ -9478,6 +9825,38 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.town.tobe.ehime.jp/tobekosodateoensaito/kodomonotetsuzuki/2999.html",
         "linkLabel": "砥部町の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "砥部町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "母子健康手帳、または保護者の本人確認ができる書類",
+          "申請書（窓口で入手）"
+        ],
+        "title": "子育て用品購入費助成事業",
+        "summary": "町内に住所がある満1歳未満の子の保護者に、おむつ・ミルクなどに使える引換券を交付。町で生まれた子は1人3万6,000円分。",
+        "timing": "子どもが満1歳未満のうちに手続き。申請は最大2か月分さかのぼれます。",
+        "office": "砥部町 子育て支援課または広田支所",
+        "url": "https://www.town.tobe.ehime.jp/tobekosodateoensaito/kodomonotetsuzuki/2998.html",
+        "note": "転入の場合は、転入月から1歳の誕生月の前月までの月数に応じて月3,000円分。"
+      },
+      {
+        "linkLabel": "砥部町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "母子健康手帳",
+          "申請書兼請求書（要押印）",
+          "購入内訳書",
+          "振込先口座の確認書類",
+          "領収書・レシートの原本",
+          "品目や世帯状況による追加書類"
+        ],
+        "title": "出産世帯応援事業（育児用品等の購入補助）",
+        "summary": "育児用品・時短家電・省エネ家電の購入費を補助。出産時に父母とも35歳以下なら上限30万円、それ以外は20万円。",
+        "timing": "2026年度の出産は出生日から2027年3月31日まで。2025年度の出産は子どもが1歳に達する日まで。",
+        "office": "砥部町 子育て支援課",
+        "url": "https://www.town.tobe.ehime.jp/tobekosodateoensaito/teate_josei_kyufukin/3492.html",
+        "note": "紙おむつは町の別の助成事業に掲載されています。"
       }
     ]
   },
@@ -9495,6 +9874,23 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.town.uchiko.ehime.jp/site/kosodate/egaonokosodateouennzigyou.html",
         "linkLabel": "内子町の公式案内",
         "note": "住民登録などの条件があります。使える製品、登録店舗、転入時の手続きと券の有効期限は公式案内へ。"
+      },
+      {
+        "linkLabel": "内子町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "申請額等内訳書",
+          "購入費分の領収書の原本",
+          "母子健康手帳",
+          "振込先口座が分かるもの",
+          "必要に応じて住民票等"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "2025年4月1日〜2027年3月19日生まれが対象。定額10万円と購入費分を合わせ、通常は上限20万円、父母とも35歳以下は30万円。",
+        "timing": "子どもが満1歳に達する日の前日と2027年3月19日のうち早い日までに、1回限り申請。",
+        "office": "内子町 こども支援課",
+        "url": "https://www.town.uchiko.ehime.jp/site/kosodate/145851.html"
       }
     ]
   },
@@ -9525,6 +9921,24 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.town.ikata.ehime.jp/site/kosodate/24645.html",
         "linkLabel": "伊方町の公式案内",
         "note": "現金と地域電子商品券の組み合わせ。町内居住や町税等の条件があります。初回や戸籍変更時に戸籍謄本が必要です。"
+      },
+      {
+        "linkLabel": "伊方町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書",
+          "申請明細書",
+          "母子健康手帳または写し",
+          "領収書の原本（条件により省略可）",
+          "口座の確認書類",
+          "必要に応じて住民票や家電の保証書等"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "2025年4月以降に出産した世帯の育児用品・家電購入費を補助。出産時に父母とも35歳以下なら子1人あたり上限10万円、それ以外は9万円。",
+        "timing": "2026年度の申請は2027年3月15日必着。窓口または郵送。",
+        "office": "伊方町 保健福祉課・各支所・町見出張所",
+        "url": "https://www.town.ikata.ehime.jp/site/kosodate/20912.html",
+        "note": "紙おむつは第1子分が対象。購入を誓約する場合、上限内で領収書を省略できます。"
       }
     ]
   },
@@ -9533,15 +9947,33 @@ const careProcedureRegionalPrograms = {
       {
         "title": "乳幼児用紙おむつ券",
         "summary": "第1子から対象。満1歳未満の子に、紙おむつ購入券5万円分。",
-        "timing": "出生届を出す際に申請を確認。対象は満1歳未満。",
+        "timing": "満1歳未満のうちに、出生届または転入の手続き時に申請。",
         "office": "松野町 町民課児童福祉係（0895-42-1113）",
         "documents": [
-          "必要書類は公式案内または窓口で確認"
+          "申請時は交付申請書と申請者の認め印",
+          "受取時は母子健康手帳、窓口に来る方の本人確認書類と申請者の認め印"
         ],
-        "documentsAreTypical": true,
+        "documentsAreTypical": false,
         "url": "https://www.town.matsuno.ehime.jp/soshiki/6/1300.html",
         "linkLabel": "松野町の公式案内",
         "note": "町内の取扱店で利用できます。お子さんの人数によって対象製品が異なる場合があります。"
+      },
+      {
+        "linkLabel": "松野町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書と内訳書",
+          "町税等の納付状況調査同意書",
+          "購入費分の領収書の原本",
+          "母子健康手帳",
+          "振込先通帳の写し",
+          "配偶者が町外に住民登録している場合は住民票"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "育児用品・時短家電等の費用を助成。定額10万円と購入費分を合わせ、上限は夫婦とも35歳以下なら30万円、それ以外は20万円。",
+        "timing": "1歳の誕生日が属する年度末まで。2026年度の申請は2027年3月31日まで。",
+        "office": "松野町 町民課 児童福祉係",
+        "url": "https://www.town.matsuno.ehime.jp/soshiki/6/15523.html"
       }
     ]
   },
@@ -9559,6 +9991,24 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.town.kihoku.ehime.jp/soshiki/choumin/11411.html",
         "linkLabel": "鬼北町の公式案内",
         "note": "町内の登録店舗で利用できます。対象製品や券の有効期限は町の公式案内へ。"
+      },
+      {
+        "linkLabel": "鬼北町の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "申請書兼請求書と申請明細書",
+          "町税等の申出書・同意書",
+          "母子健康手帳の写し",
+          "通帳の写し",
+          "購入費分の領収書の原本",
+          "必要に応じて住民票や戸籍謄本"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "2025年4月1日〜2027年3月31日生まれが対象。定額10万円と購入費分を合わせ、父母とも35歳以下は上限30万円、それ以外は20万円。",
+        "timing": "2026年度に申請する場合は2027年3月31日必着。2027年度は原則1歳の誕生日の前日まで。出生時期・購入日で異なるため公式案内を確認。",
+        "office": "鬼北町 保健介護課 こども家庭センター",
+        "url": "https://www.town.kihoku.ehime.jp/soshiki/hoken/24413.html",
+        "note": "申請時点で3か月以上継続して町内に住んでいることなどが条件。申請は窓口または郵送。"
       }
     ]
   },
@@ -9589,6 +10039,74 @@ const careProcedureRegionalPrograms = {
         "url": "https://www.town.ainan.ehime.jp/kurashi/kenko/kosodate/enjo/syussankosodateshienkin.html",
         "linkLabel": "愛南町の公式案内",
         "note": "乳児健診時に対象予定者へ申請書を配布。住所・養育などの条件があり、申請者名義の口座が分かる通帳等を用意します。"
+      },
+      {
+        "linkLabel": "愛南町の公式案内",
+        "documentsAreTypical": true,
+        "documents": [
+          "窓口から案内される申請書類",
+          "購入費分の領収書やレシート"
+        ],
+        "title": "出産世帯応援補助金",
+        "summary": "2025年4月以降に出産した対象世帯へ定額10万円と育児用品等の購入補助。合計上限は出産時に夫婦とも29歳以下で30万円、ともに35歳以下で25万円、それ以外で20万円。",
+        "timing": "出生後に申請。2026年度分は2027年3月12日まで。申請前に子育て支援課へ問い合わせ。",
+        "office": "愛南町 子育て支援課（0895-73-7135）",
+        "url": "https://www.town.ainan.ehime.jp/kurashi/kenko/kosodate/jyakunenshussansetaiouen.html",
+        "note": "申請時に6か月以上継続して町に住民登録があることなどが条件。定額分と購入費分は各1回申請できます。"
+      }
+    ]
+  },
+  "392090": {
+    "cards": [
+      {
+        "linkLabel": "土佐清水市の公式案内",
+        "documentsAreTypical": true,
+        "documents": [
+          "必要書類は公式案内または窓口で確認"
+        ],
+        "title": "赤ちゃん紙おむつ・粉ミルク等購入支援事業",
+        "summary": "市内在住の1歳未満の子どもの保護者へ、おむつ・ミルク等に使えるチケットを新生児1人につき6万円分支給。",
+        "timing": "1歳未満の間に受取方法を確認。チケットは1歳の誕生月の末日まで。",
+        "office": "土佐清水市 福祉事務所（0880-82-1118）",
+        "url": "https://www.city.tosashimizu.kochi.jp/kurashi/section/fukushi/19818.html",
+        "note": "市外からの転入は、1歳の誕生月の前月までの月数に応じて月5,000円分（最低1か月分）。"
+      }
+    ]
+  },
+  "394289": {
+    "cards": [
+      {
+        "linkLabel": "黒潮町の出生祝金支給規則",
+        "documentsAreTypical": false,
+        "documents": [
+          "出生祝金支給申請書",
+          "出生証明の写し"
+        ],
+        "title": "出生祝金",
+        "summary": "町の規則では、町内に住所がある方が出産した場合に、出産した本人または新生児の保護者へ新生児1人につき2万円。",
+        "timing": "出生後、受付窓口と申請時期を町に確認。",
+        "office": "黒潮町役場の出生祝金担当窓口",
+        "url": "https://www.town.kuroshio.lg.jp/reiki_int/reiki_honbun/r256RG00000267.html"
+      }
+    ]
+  },
+  "393070": {
+    "cards": [
+      {
+        "linkLabel": "芸西村の公式案内",
+        "documentsAreTypical": false,
+        "documents": [
+          "交付申請書",
+          "領収書または販売証明書の写し",
+          "保証書の写し",
+          "安全基準適合（Eマーク）が確認できる書類"
+        ],
+        "title": "チャイルドシート等購入補助制度",
+        "summary": "村内在住の6歳未満の子どもの保護者が対象。ベビーシートまたはチャイルドシートは上限5万円、ジュニアシートは上限1万円。",
+        "timing": "出生・住民登録後に受付。購入日の翌日から1年以内に申請。",
+        "office": "芸西村 企画振興課",
+        "url": "https://www.vill.geisei.kochi.jp/pages/m000574.php",
+        "note": "出産前に購入したものも対象です。ベビーシートまたはチャイルドシートで1回、ジュニアシートで1回申請できます。"
       }
     ]
   }
