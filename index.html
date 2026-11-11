@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.11.13"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.11.14"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
 
 :root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#20342c;background:#f2f7f3}*{box-sizing:border-box}body{margin:0}.app{max-width:480px;margin:auto;min-height:100dvh;position:relative;overflow:hidden;background:linear-gradient(145deg,#eaf8eb,#faf9ee)}.photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.95;pointer-events:none}.wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.20),rgba(255,255,255,.08) 32%,rgba(255,255,255,.44) 85%);pointer-events:none}.content{position:relative;padding:20px 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-size:24px;font-weight:850;color:white;text-shadow:0 2px 7px #253d3b88}.switch{border:0;border-radius:22px;background:#ffffffed;padding:12px 15px;font-weight:750;color:#234437;max-width:50%}h1{color:white;text-shadow:0 2px 8px #203c3488;font-size:31px;margin:0}h2{font-size:20px;margin:10px 0}p{margin:5px 0}.sub{color:#f9fffc;text-shadow:0 1px 6px #2448;font-weight:600}.hero{margin-top:20px;background:linear-gradient(115deg,#16a977,#0c9870);border-radius:20px;padding:20px;color:white;box-shadow:0 7px 18px #154d3326}.hero small{font-weight:750}.hero strong{display:block;font-size:20px;margin:8px 0}.hero button{float:right;border:0;background:transparent;color:white;font-size:22px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.tile{background:#ffffffed;border:0;border-radius:17px;padding:15px 5px;text-align:center;box-shadow:0 5px 15px #344b2518;cursor:pointer}.tile b{display:block;font-size:25px}.tile small{font-weight:700}.white{background:#fffffff0;border-radius:18px;padding:16px;margin:11px 0;box-shadow:0 5px 15px #334b2515}.action{width:100%;border:0;background:#fffffff0;padding:16px;text-align:left;border-radius:15px;margin:7px 0;font-weight:750;font-size:16px;cursor:pointer}.action span{float:right;color:#748780}.action .action-icon{float:none;display:inline-flex;align-items:center;justify-content:center;width:24px;margin-right:7px;vertical-align:middle;color:#d18a26}.btn{border:0;border-radius:11px;background:#0e9e72;color:white;padding:11px 14px;font-weight:700;cursor:pointer}.btn.alt{background:#e7f3ee;color:#196d52}.btn.warn{background:#c65b55}.small{font-size:12px;color:#64766b}.row{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{background:#e5f5ee;padding:6px 9px;border-radius:30px;font-size:12px;font-weight:700}.field{width:100%;border:1px solid #cadbd0;border-radius:10px;padding:12px;font:inherit;background:white;margin:5px 0 10px}label{display:block;font-size:13px;font-weight:700;margin-top:9px}.hide{display:none!important}.item{border-bottom:1px solid #e5ebe6;padding:12px 0}.item:last-child{border:0}.muted{color:#64766b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.day{text-align:center;border:0;border-radius:9px;background:#f0f5f0;padding:9px 2px;min-height:43px;font-size:13px}.day.has{background:#d7efe4}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin:2px}.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}.sheet{background:#fff;border-radius:20px;padding:20px;width:min(440px,100%);max-height:88dvh;overflow:auto}.error{color:#a23d3d;white-space:pre-wrap}.note{padding:10px;background:#fff7db;border-radius:10px;font-size:12px;color:#5b512a}.empty{padding:15px;color:#687d70;text-align:center}.footer{font-size:11px;color:#52675b;text-align:center;margin-top:24px}
 
@@ -188,7 +188,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSideMenu
 const APP_PREF_KEY='kodomo-care-preferences-v1';
 function getAppPrefs(){let raw={};try{raw=JSON.parse(localStorage.getItem(APP_PREF_KEY)||'{}')||{}}catch{}let days=Array.isArray(raw.reminderDaysSelected)?raw.reminderDaysSelected:(Number.isInteger(raw.reminderDays)?[raw.reminderDays]:[1]);return {fontSize:['small','normal','large'].includes(raw.fontSize)?raw.fontSize:'normal',reminderDaysSelected:[...new Set(days.map(Number).filter(n=>[0,1,3,7].includes(n)))],reminderHour:Number.isInteger(raw.reminderHour)&&raw.reminderHour>=0&&raw.reminderHour<=23?raw.reminderHour:8,reminderMinute:Number.isInteger(raw.reminderMinute)&&raw.reminderMinute>=0&&raw.reminderMinute<=59?raw.reminderMinute:0}}
 function applyAppPrefs(){let p=getAppPrefs();document.documentElement.dataset.fontSize=p.fontSize;document.documentElement.style.fontSize=p.fontSize==='large'?'19px':p.fontSize==='small'?'14px':'16px';}
-function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.11.13</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
+function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.11.14</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
 function refreshPushPermissionStatus(){
   const status=document.getElementById('pushPermissionStatus');
   const enable=document.getElementById('pushEnableButton');
@@ -14475,6 +14475,3336 @@ const careProcedureMunicipalitySources = {
         "note": "お届け員が親子と面会し、受取時に翌月分の内容を確認します。"
       }
     ]
+  },
+  "401005": {
+    "overview": {
+      "title": "北九州市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kitakyushu.lg.jp/category/menu00_0002.html"
+    },
+    "links": {
+      "handbook": "https://www.city.kitakyushu.lg.jp/category/menu00_0003.html",
+      "birth": "https://www.city.kitakyushu.lg.jp/contents/14900029.html",
+      "allowance": "https://www.city.kitakyushu.lg.jp/contents/924_10089.html",
+      "insurance": "https://www.city.kitakyushu.lg.jp/category/menu00_0005.html"
+    },
+    "cards": []
+  },
+  "401307": {
+    "overview": {
+      "title": "福岡市の妊娠・出産・子育て案内",
+      "url": "https://www.city.fukuoka.lg.jp/kosodate/index.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "おむつと安心定期便",
+        "summary": "0歳から3歳の誕生月までの子どもを育てる市内の家庭が、対象施設・サービスを利用して電子スタンプを集め、育児用品と交換できます。用品は自宅へ配送されます。",
+        "timing": "専用サイトに登録し、子どもプラザ・産後ケア等の対象サービス利用時にスタンプを取得して交換。",
+        "office": "福岡市 おむつと安心定期便事務局（092-292-5431）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.fukuoka.lg.jp/kodomo-mirai/k-sukoyaka/child/omutsutoanshinteikibin.html",
+        "linkLabel": "福岡市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "配送を受けるには対象サービスの利用と交換手続きが必要です。利用できる施設・用品は公式案内で確認できます。"
+      }
+    ]
+  },
+  "402028": {
+    "overview": {
+      "title": "大牟田市の妊娠・出産・子育て案内",
+      "url": "https://www.city.omuta.lg.jp/list01224.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402036": {
+    "overview": {
+      "title": "久留米市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kurume.fukuoka.jp/1110dekigoto/2010maternity/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402044": {
+    "overview": {
+      "title": "直方市の妊娠・出産・子育て案内",
+      "url": "https://www.city.nogata.fukuoka.jp/kenko.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402052": {
+    "overview": {
+      "title": "飯塚市の妊娠・出産・子育て案内",
+      "url": "https://www.city.iizuka.lg.jp/site/kosodate/list81-271.html"
+    },
+    "links": {
+      "handbook": "https://www.city.iizuka.lg.jp/site/kosodate/1952.html"
+    },
+    "cards": []
+  },
+  "402061": {
+    "overview": {
+      "title": "田川市の公式サイト",
+      "url": "https://www.joho.tagawa.fukuoka.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402079": {
+    "overview": {
+      "title": "柳川市の妊娠・出産・子育て案内",
+      "url": "https://www.city.yanagawa.fukuoka.jp/riyoushabetsu/shussan-kosaodate/kosodate.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402109": {
+    "overview": {
+      "title": "八女市の妊娠・出産・子育て案内",
+      "url": "https://www.city.yame.fukuoka.jp/scene/kosodate/index.html"
+    },
+    "links": {
+      "insurance": "https://www.city.yame.fukuoka.jp/scene/kosodate/1458102148830.html"
+    },
+    "cards": []
+  },
+  "402117": {
+    "overview": {
+      "title": "筑後市の妊娠・出産・子育て案内",
+      "url": "https://www.city.chikugo.lg.jp/kosodate.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402125": {
+    "overview": {
+      "title": "大川市の妊娠・出産・子育て案内",
+      "url": "https://www.city.okawa.lg.jp/060/000/010/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.okawa.lg.jp/s086/001/010/20150214123211.html"
+    },
+    "cards": []
+  },
+  "402133": {
+    "overview": {
+      "title": "行橋市の妊娠・出産・子育て案内",
+      "url": "https://www.city.yukuhashi.fukuoka.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402141": {
+    "overview": {
+      "title": "豊前市の妊娠・出産・子育て案内",
+      "url": "https://www.city.buzen.lg.jp/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402150": {
+    "overview": {
+      "title": "中間市の妊娠・出産・子育て案内",
+      "url": "https://www.city.nakama.lg.jp/site/kosodate/list20-66.html"
+    },
+    "links": {
+      "handbook": "https://www.city.nakama.lg.jp/site/kosodate/1114.html"
+    },
+    "cards": []
+  },
+  "402168": {
+    "overview": {
+      "title": "小郡市の妊娠・出産・子育て案内",
+      "url": "https://www.city.ogori.fukuoka.jp/203"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402176": {
+    "overview": {
+      "title": "筑紫野市の妊娠・出産・子育て案内",
+      "url": "https://www.city.chikushino.fukuoka.jp/life/2/32/"
+    },
+    "links": {
+      "handbook": "https://www.city.chikushino.fukuoka.jp/soshiki/16/32665.html",
+      "pregnancyGrant": "https://www.city.chikushino.fukuoka.jp/soshiki/16/25149.html"
+    },
+    "cards": []
+  },
+  "402184": {
+    "overview": {
+      "title": "春日市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kasuga.fukuoka.jp/kosodate/ninshin/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.kasuga.fukuoka.jp/kosodate/ninshin/ninshintodoke/index.html",
+      "pregnancyGrant": "https://www.city.kasuga.fukuoka.jp/kosodate/ninshin/1015626.html"
+    },
+    "cards": []
+  },
+  "402192": {
+    "overview": {
+      "title": "大野城市の妊娠・出産・子育て案内",
+      "url": "https://www.city.onojo.fukuoka.jp/kosodate/default.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402206": {
+    "overview": {
+      "title": "宗像市の妊娠・出産・子育て案内",
+      "url": "https://www.city.munakata.lg.jp/list00301.html"
+    },
+    "links": {
+      "allowance": "https://www.city.munakata.lg.jp/list00214.html"
+    },
+    "cards": []
+  },
+  "402214": {
+    "overview": {
+      "title": "太宰府市の妊娠・出産・子育て案内",
+      "url": "https://www.city.dazaifu.lg.jp/life/3/19/102/"
+    },
+    "links": {
+      "handbook": "https://www.city.dazaifu.lg.jp/site/navi/3632.html",
+      "pregnancyGrant": "https://www.city.dazaifu.lg.jp/soshiki/18/26891.html"
+    },
+    "cards": []
+  },
+  "402231": {
+    "overview": {
+      "title": "古賀市の妊娠・出産・子育て案内",
+      "url": "https://www.city.koga.fukuoka.jp/sp-children/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402249": {
+    "overview": {
+      "title": "福津市の妊娠・出産・子育て案内",
+      "url": "https://www.city.fukutsu.lg.jp/mokuteki/ninshin/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.fukutsu.lg.jp/mokuteki/ninshin/6151.html",
+      "birth": "https://www.city.fukutsu.lg.jp/mokuteki/ninshin/8470.html"
+    },
+    "cards": []
+  },
+  "402257": {
+    "overview": {
+      "title": "うきは市の妊娠・出産・子育て案内",
+      "url": "https://www.city.ukiha.fukuoka.jp/list00750.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.ukiha.fukuoka.jp/kiji0036882/index.html"
+    },
+    "cards": []
+  },
+  "402265": {
+    "overview": {
+      "title": "宮若市の妊娠・出産・子育て案内",
+      "url": "https://www.city.miyawaka.lg.jp/list00071.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402273": {
+    "overview": {
+      "title": "嘉麻市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kama.lg.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402281": {
+    "overview": {
+      "title": "朝倉市の妊娠・出産・子育て案内",
+      "url": "https://www.city.asakura.lg.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402290": {
+    "overview": {
+      "title": "みやま市の妊娠・出産・子育て案内",
+      "url": "https://www.city.miyama.lg.jp/li/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402303": {
+    "overview": {
+      "title": "糸島市の妊娠・出産・子育て案内",
+      "url": "https://www.city.itoshima.lg.jp/li/thema/010/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "402311": {
+    "overview": {
+      "title": "那珂川市の妊娠・出産・子育て案内",
+      "url": "https://www.city.nakagawa.lg.jp/life/9/45/"
+    },
+    "links": {
+      "handbook": "https://www.city.nakagawa.lg.jp/site/nobinobi/bositechokoufu.html",
+      "birth": "https://www.city.nakagawa.lg.jp/soshiki/6/syuseitodoke.html"
+    },
+    "cards": []
+  },
+  "403415": {
+    "overview": {
+      "title": "宇美町の妊娠・出産・子育て案内",
+      "url": "https://www.town.umi.lg.jp/life/10/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "403423": {
+    "overview": {
+      "title": "篠栗町の妊娠・出産・子育て案内",
+      "url": "https://www.town.sasaguri.fukuoka.jp/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "403431": {
+    "overview": {
+      "title": "志免町の妊娠・出産・子育て案内",
+      "url": "https://www.town.shime.lg.jp/life/1/1/3/"
+    },
+    "links": {
+      "handbook": "https://www.town.shime.lg.jp/soshiki/7/bosikenkoutetyoukouhu.html",
+      "pregnancyGrant": "https://www.town.shime.lg.jp/web-koho/kouhou/66044.html",
+      "birth": "https://www.town.shime.lg.jp/soshiki/4/syussyou.html"
+    },
+    "cards": []
+  },
+  "403440": {
+    "overview": {
+      "title": "須恵町の妊娠・出産・子育て案内",
+      "url": "https://www.town.sue.fukuoka.jp/life_scene/ninshin.html"
+    },
+    "links": {
+      "handbook": "https://www.town.sue.fukuoka.jp/kosodate_kyoiku/ninshin_shussan/2759.html",
+      "pregnancyGrant": "https://www.town.sue.fukuoka.jp/kosodate_kyoiku/ninshin_shussan/5444.html",
+      "allowance": "https://www.town.sue.fukuoka.jp/kosodate_kyoiku/ninshin_shussan/8658.html"
+    },
+    "cards": []
+  },
+  "403458": {
+    "overview": {
+      "title": "新宮町の妊娠・出産・子育て案内",
+      "url": "https://www.town.shingu.fukuoka.jp/navi/1965.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.shingu.fukuoka.jp/kosodate_kyoiku/ninshin_shussan/7228.html",
+      "birth": "https://www.town.shingu.fukuoka.jp/kosodate_kyoiku/ninshin_shussan/3570.html"
+    },
+    "cards": []
+  },
+  "403482": {
+    "overview": {
+      "title": "久山町の妊娠・出産・子育て案内",
+      "url": "https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html"
+    },
+    "links": {
+      "allowance": "https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/teate/3775.html"
+    },
+    "cards": []
+  },
+  "403491": {
+    "overview": {
+      "title": "粕屋町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kasuya.fukuoka.jp/li/010/010/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "403814": {
+    "overview": {
+      "title": "芦屋町の妊娠・出産・子育て案内",
+      "url": "https://www.town.ashiya.lg.jp/life/1/3/15/"
+    },
+    "links": {
+      "handbook": "https://www.town.ashiya.lg.jp/site/kosodate/2051.html",
+      "pregnancyGrant": "https://www.town.ashiya.lg.jp/site/kosodate/36979.html",
+      "allowance": "https://www.town.ashiya.lg.jp/site/kosodate/2079.html"
+    },
+    "cards": [
+      {
+        "title": "出産祝金（商品券）",
+        "summary": "第1子5万円分、第2子10万円分、第3子以降20万円分の芦屋町商工会商品券を交付します。",
+        "timing": "子どもが生まれた日から6か月後の月末までに申請。",
+        "office": "芦屋町の子育て支援担当窓口",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.town.ashiya.lg.jp/site/kosodate/2088.html",
+        "linkLabel": "芦屋町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "出生前から町内に住所があり、引き続き1年以上居住する意思、町税等の滞納がないこと、自治区への加入などが条件です。"
+      }
+    ]
+  },
+  "403822": {
+    "overview": {
+      "title": "水巻町の妊娠・出産・子育て案内",
+      "url": "https://www.town.mizumaki.lg.jp/li/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "403831": {
+    "overview": {
+      "title": "岡垣町の妊娠・出産・子育て案内",
+      "url": "https://www.town.okagaki.lg.jp/170/010/index.html"
+    },
+    "links": {
+      "handbook": "https://www.town.okagaki.lg.jp/s048/010/010/201502050086.html",
+      "pregnancyGrant": "https://www.town.okagaki.lg.jp/s048/010/040/20250404161711.html",
+      "birth": "https://www.town.okagaki.lg.jp/s009/010/020/040/201502050023.html"
+    },
+    "cards": []
+  },
+  "403849": {
+    "overview": {
+      "title": "遠賀町の妊娠・出産・子育て案内",
+      "url": "https://www.town.onga.lg.jp/life/3/12/46/"
+    },
+    "links": {
+      "handbook": "https://www.town.onga.lg.jp/soshiki/11/1413.html",
+      "pregnancyGrant": "https://www.town.onga.lg.jp/soshiki/11/67308.html",
+      "allowance": "https://www.town.onga.lg.jp/soshiki/41/60925.html",
+      "medical": "https://www.town.onga.lg.jp/soshiki/43/1418.html"
+    },
+    "cards": []
+  },
+  "404012": {
+    "overview": {
+      "title": "小竹町の妊娠・出産・子育て案内",
+      "url": "https://town.kotake.lg.jp/hpkiji/pub/List.aspx?c_id=3&class_set_id=3&class_id=300"
+    },
+    "links": {
+      "pregnancyGrant": "https://town.kotake.lg.jp/hpkiji/pub/detail.aspx?c_id=3&id=3689&class_set_id=3&class_id=300"
+    },
+    "cards": []
+  },
+  "404021": {
+    "overview": {
+      "title": "鞍手町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kurate.lg.jp/kyouiku-kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "404217": {
+    "overview": {
+      "title": "桂川町の妊娠・出産・子育て案内",
+      "url": "https://www.town.keisen.fukuoka.jp/shisetsu/himawarinotane/himawarinotane.php"
+    },
+    "links": {},
+    "cards": []
+  },
+  "404471": {
+    "overview": {
+      "title": "筑前町の妊娠・出産・子育て案内",
+      "url": "https://www.town.chikuzen.fukuoka.jp/li/040/index.html"
+    },
+    "links": {
+      "allowance": "https://www.town.chikuzen.fukuoka.jp/li/040/010/040/index.html"
+    },
+    "cards": []
+  },
+  "404489": {
+    "overview": {
+      "title": "東峰村の公式サイト",
+      "url": "https://vill.toho-info.com/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "子育て支援金（出生時）",
+        "summary": "出生時のお祝いとして10万円を支給します。小学校・中学校・高校への入学時にも、それぞれ別の支給時期があります。",
+        "timing": "出生後、該当年度内に申請。出生後1か月以上の住民登録などを確認。",
+        "office": "東峰村 住民福祉課（0946-74-2311）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://vill.toho-info.com/30000/30100/post-468.html",
+        "linkLabel": "東峰村の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "出生3か月以上前からの村内住民登録、親子の同居・監護、村税等の滞納がないことなどが条件です。"
+      }
+    ]
+  },
+  "405035": {
+    "overview": {
+      "title": "大刀洗町の妊娠・出産・子育て案内",
+      "url": "https://www.town.tachiarai.fukuoka.jp/list00122.html"
+    },
+    "links": {
+      "handbook": "https://www.town.tachiarai.fukuoka.jp/kiji003635/index.html"
+    },
+    "cards": []
+  },
+  "405221": {
+    "overview": {
+      "title": "大木町の妊娠・出産・子育て案内",
+      "url": "https://www.town.ooki.lg.jp/scene/ninshin/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "405442": {
+    "overview": {
+      "title": "広川町の妊娠・出産・子育て案内",
+      "url": "https://www.town.hirokawa.fukuoka.jp/life/ninshin_shussan/index.html"
+    },
+    "links": {
+      "handbook": "https://www.town.hirokawa.fukuoka.jp/life/ninshin_shussan/1680.html"
+    },
+    "cards": []
+  },
+  "406015": {
+    "overview": {
+      "title": "香春町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kawara.fukuoka.jp/020/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "406023": {
+    "overview": {
+      "title": "添田町の妊娠・出産・子育て案内",
+      "url": "https://www.town.soeda.fukuoka.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "406040": {
+    "overview": {
+      "title": "糸田町の妊娠・出産・子育て案内",
+      "url": "https://www.town.itoda.lg.jp/cases/pregnancy"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.itoda.lg.jp/residents/raising_child_aid/grants/page_01315.html"
+    },
+    "cards": []
+  },
+  "406058": {
+    "overview": {
+      "title": "川崎町の妊娠・出産・子育て案内",
+      "url": "https://www.town-kawasaki.com/jinsei/kodomo"
+    },
+    "links": {
+      "birth": "https://www.town-kawasaki.com/kurashi/koseki/3165",
+      "insurance": "https://www.town-kawasaki.com/hoken/kenkohoken/384",
+      "medical": "https://www.town-kawasaki.com/kosodatekyoiku/kodomoiryo/526"
+    },
+    "cards": []
+  },
+  "406082": {
+    "overview": {
+      "title": "大任町の妊娠・出産・子育て案内",
+      "url": "https://www.town.oto.fukuoka.jp/list00306.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "406091": {
+    "overview": {
+      "title": "赤村の公式サイト",
+      "url": "https://www.akamura.net/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "406104": {
+    "overview": {
+      "title": "福智町の妊娠・出産・子育て案内",
+      "url": "https://www.town.fukuchi.lg.jp/life/ninshin/index.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.fukuchi.lg.jp/life/ninshin/4078.html",
+      "birth": "https://www.town.fukuchi.lg.jp/life/ninshin/1837.html",
+      "allowance": "https://www.town.fukuchi.lg.jp/life/ninshin/950.html"
+    },
+    "cards": []
+  },
+  "406210": {
+    "overview": {
+      "title": "苅田町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kanda.lg.jp/life/3/13/"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.kanda.lg.jp/page/12842.html"
+    },
+    "cards": []
+  },
+  "406252": {
+    "overview": {
+      "title": "みやこ町の妊娠・出産・子育て案内",
+      "url": "https://www.town.miyako.lg.jp/genre/0010/0021/0002.html"
+    },
+    "links": {
+      "handbook": "https://www.town.miyako.lg.jp/kosodatekennkoushiennka3/kenkou/boshitetyo_kouhu.html",
+      "pregnancyGrant": "https://www.town.miyako.lg.jp/kosodatekennkoushiennka3/kenkou/ninpusienkin.html",
+      "medical": "https://www.town.miyako.lg.jp/hokennfukushika3/iryou/nyuyouji_iryou.html"
+    },
+    "cards": [
+      {
+        "title": "出産祝金（1歳以降に申請）",
+        "summary": "第1子から第3子は10万円、第4子以降は20万円。町内で子どもを養育する対象の保護者へ支給します。",
+        "timing": "出産日から1年を超えた日から6か月未満の間に申請。出生直後の申請ではありません。",
+        "office": "みやこ町の子育て支援担当窓口",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.town.miyako.lg.jp/kosodatekennkoushiennka3/kodomo/iwai/shusan_iwae_2.html",
+        "linkLabel": "みやこ町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "2025年4月以降の出生児は、出生前から町に住所があること、養育・居住継続の意思、税等の滞納がないことなどが条件です。"
+      }
+    ]
+  },
+  "406422": {
+    "overview": {
+      "title": "吉富町の妊娠・出産・子育て案内",
+      "url": "https://www.town.yoshitomi.lg.jp/kosodate/"
+    },
+    "links": {
+      "medical": "https://www.town.yoshitomi.lg.jp/gyosei/chosei/v995/y209/kosodate/p677/"
+    },
+    "cards": []
+  },
+  "406465": {
+    "overview": {
+      "title": "上毛町の妊娠・出産・子育て案内",
+      "url": "https://www.town.koge.lg.jp/life/1/index.html"
+    },
+    "links": {
+      "handbook": "https://www.town.koge.lg.jp/life/1/1875.html",
+      "pregnancyGrant": "https://www.town.koge.lg.jp/life/1/5243.html",
+      "allowance": "https://www.town.koge.lg.jp/life/1/1880.html",
+      "insurance": "https://www.town.koge.lg.jp/life/1/1881.html",
+      "medical": "https://www.town.koge.lg.jp/life/1/1882.html"
+    },
+    "cards": [
+      {
+        "title": "赤ちゃん祝金",
+        "summary": "第1子5万円、第2子7万円、第3子以降10万円。出生時に町に住民登録がある父母などが対象です。",
+        "timing": "出生日から1年以内に申請。町内居住1年未満の場合は、1年経過後の取扱いを窓口で確認。",
+        "office": "上毛町 子ども未来課（0979-72-3127）",
+        "documents": [
+          "支給申請書",
+          "支給決定後の請求書",
+          "子どもが記載された戸籍謄本",
+          "振込先口座の通帳の写し"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.koge.lg.jp/ijyu_teiju/2012.html",
+        "linkLabel": "上毛町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "居住期間、養育、町税等の滞納がないことなどの条件があります。生活保護受給世帯は対象外です。"
+      }
+    ]
+  },
+  "406473": {
+    "overview": {
+      "title": "築上町の妊娠・出産・子育て案内",
+      "url": "https://www.town.chikujo.fukuoka.jp/li/050/050/010/index.html"
+    },
+    "links": {
+      "handbook": "https://www.town.chikujo.fukuoka.jp/s013/010/030/030/010/010/20230523112406.html",
+      "birth": "https://www.town.chikujo.fukuoka.jp/s011/010/010/080/010/shusseitodoke.html"
+    },
+    "cards": []
+  },
+  "412015": {
+    "overview": {
+      "title": "佐賀市の妊娠・出産・子育て案内",
+      "url": "https://www.city.saga.lg.jp/kosodate-kyoiku/index.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "物価高騰対応新生児子育て応援手当（2026年出生児）",
+        "summary": "2026年4月1日から12月31日に生まれた子ども1人につき2万円。2026年6月30日時点で佐賀市に住民登録がある父母等が対象です。",
+        "timing": "申請が必要な場合の締切は2027年2月26日。市から児童手当を受ける人は原則申請不要ですが、公務員などは申請方法を確認。",
+        "office": "佐賀市の子育て支援担当窓口",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.saga.lg.jp/main/114024.html",
+        "linkLabel": "佐賀市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "対象期間・基準日のある臨時の手当です。市から届く通知と公式案内で、申請の要否を確認してください。"
+      }
+    ]
+  },
+  "412023": {
+    "overview": {
+      "title": "唐津市の妊娠・出産・子育て案内",
+      "url": "https://www.city.karatsu.lg.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "412031": {
+    "overview": {
+      "title": "鳥栖市の妊娠・出産・子育て案内",
+      "url": "https://www.city.tosu.lg.jp/life/2/14/"
+    },
+    "links": {
+      "handbook": "https://www.city.tosu.lg.jp/soshiki/10/1857.html",
+      "pregnancyGrant": "https://www.city.tosu.lg.jp/soshiki/9/103908.html",
+      "allowance": "https://www.city.tosu.lg.jp/soshiki/9/83003.html"
+    },
+    "cards": []
+  },
+  "412040": {
+    "overview": {
+      "title": "多久市の妊娠・出産・子育て案内",
+      "url": "https://www.city.taku.lg.jp/life/13/64/"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.taku.lg.jp/soshiki/9/33269.html"
+    },
+    "cards": [
+      {
+        "title": "紙おむつプレゼント（2026年度）",
+        "summary": "2026年4月1日から2027年3月31日に生まれた赤ちゃんへ、紙おむつ計8パック（新生児用2・Sサイズ3・Mサイズ3）を贈呈します。",
+        "timing": "出生届を提出した後、健康増進課で受取。",
+        "office": "多久市 健康増進課（0952-75-3355）",
+        "documents": [
+          "母子健康手帳"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.city.taku.lg.jp/soshiki/9/35879.html",
+        "linkLabel": "多久市の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "412058": {
+    "overview": {
+      "title": "伊万里市の妊娠・出産・子育て案内",
+      "url": "https://www.city.imari.lg.jp/1123.htm"
+    },
+    "links": {
+      "handbook": "https://www.city.imari.lg.jp/6768.htm",
+      "pregnancyGrant": "https://www.city.imari.lg.jp/21807.htm",
+      "birth": "https://www.city.imari.lg.jp/5784.htm",
+      "allowance": "https://www.city.imari.lg.jp/5688.htm",
+      "medical": "https://www.city.imari.lg.jp/5687.htm"
+    },
+    "cards": []
+  },
+  "412066": {
+    "overview": {
+      "title": "武雄市の公式サイト",
+      "url": "https://www.city.takeo.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "412074": {
+    "overview": {
+      "title": "鹿島市の妊娠・出産・子育て案内",
+      "url": "https://www.city.saga-kashima.lg.jp/main/24208.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "412082": {
+    "overview": {
+      "title": "小城市の妊娠・出産・子育て案内",
+      "url": "https://www.city.ogi.lg.jp/main/10115.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.ogi.lg.jp/main/48892.html",
+      "birth": "https://www.city.ogi.lg.jp/main/11647.html",
+      "allowance": "https://www.city.ogi.lg.jp/main/7647.html",
+      "insurance": "https://www.city.ogi.lg.jp/main/26927.html",
+      "medical": "https://www.city.ogi.lg.jp/main/97.html"
+    },
+    "cards": []
+  },
+  "412091": {
+    "overview": {
+      "title": "嬉野市の妊娠・出産・子育て案内",
+      "url": "https://www.city.ureshino.lg.jp/lifeEvent/_24798.html"
+    },
+    "links": {
+      "birth": "https://www.city.ureshino.lg.jp/kurashi/koseki/_24844/_20721.html"
+    },
+    "cards": []
+  },
+  "412104": {
+    "overview": {
+      "title": "神埼市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kanzaki.saga.jp/main/31.html"
+    },
+    "links": {
+      "handbook": "https://www.city.kanzaki.saga.jp/main/7095.html",
+      "pregnancyGrant": "https://www.city.kanzaki.saga.jp/main/15453.html"
+    },
+    "cards": []
+  },
+  "413275": {
+    "overview": {
+      "title": "吉野ヶ里町の公式サイト",
+      "url": "https://www.town.yoshinogari.lg.jp/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出生祝金",
+        "summary": "第1子・第2子は2万円、第3子以降は10万円。町内在住の新生児の親権者へ支給します。",
+        "timing": "出生日から起算して60日以内に申請。",
+        "office": "吉野ヶ里町 こども・保健課 子育て支援係（0952-37-0346）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.town.yoshinogari.lg.jp/lifeinfo/soshiki/kodomo_hoken/2/2/5/1530.html",
+        "linkLabel": "吉野ヶ里町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "祝金を支給する前に町外へ転出した場合は対象になりません。"
+      }
+    ]
+  },
+  "413411": {
+    "overview": {
+      "title": "基山町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kiyama.lg.jp/list00300.html"
+    },
+    "links": {
+      "handbook": "https://www.town.kiyama.lg.jp/kiji003217/index.html",
+      "birth": "https://www.town.kiyama.lg.jp/kiji003332/index.html",
+      "allowance": "https://www.town.kiyama.lg.jp/kiji003555/index.html"
+    },
+    "cards": []
+  },
+  "413453": {
+    "overview": {
+      "title": "上峰町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kamimine.lg.jp/list00798.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "413461": {
+    "overview": {
+      "title": "みやき町の妊娠・出産・子育て案内",
+      "url": "https://www.town.miyaki.lg.jp/kosodateoen.html"
+    },
+    "links": {
+      "handbook": "https://www.town.miyaki.lg.jp/kosodate/ninshin/_1034.html",
+      "pregnancyGrant": "https://www.town.miyaki.lg.jp/kosodate/ninshin/_6199.html",
+      "medical": "https://www.town.miyaki.lg.jp/kosodate/kenko/_1036.html"
+    },
+    "cards": []
+  },
+  "413879": {
+    "overview": {
+      "title": "玄海町の妊娠・出産・子育て案内",
+      "url": "https://www.town.genkai.lg.jp/life/1/7/38/"
+    },
+    "links": {
+      "handbook": "https://www.town.genkai.lg.jp/soshiki/24/1212.html",
+      "birth": "https://www.town.genkai.lg.jp/soshiki/20/1154.html"
+    },
+    "cards": []
+  },
+  "414018": {
+    "overview": {
+      "title": "有田町の妊娠・出産・子育て案内",
+      "url": "https://www.town.arita.lg.jp/list00144.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "有田っ子出産・子育て応援ニコッと給付金",
+        "summary": "新生児1人につき出産祝い金10万円。最初の住民登録が有田町にある子どもと、町に住民登録がある保護者が対象です。",
+        "timing": "出生届の際に申請。出生から1年以内。",
+        "office": "有田町の子育て支援担当窓口",
+        "documents": [
+          "申請書兼請求書",
+          "本人確認書類の写し",
+          "振込口座が分かるものの写し"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.arita.lg.jp/kiji003301/",
+        "linkLabel": "有田町の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "414239": {
+    "overview": {
+      "title": "大町町の妊娠・出産・子育て案内",
+      "url": "https://www.town.omachi.lg.jp/list00695.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "414247": {
+    "overview": {
+      "title": "江北町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kouhoku.saga.jp/list00060.html"
+    },
+    "links": {
+      "birth": "https://www.town.kouhoku.saga.jp/kiji003553/index.html"
+    },
+    "cards": []
+  },
+  "414255": {
+    "overview": {
+      "title": "白石町の公式サイト",
+      "url": "https://www.town.shiroishi.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "414417": {
+    "overview": {
+      "title": "太良町の妊娠・出産・子育て案内",
+      "url": "https://www.town.tara.lg.jp/case/_1764.html"
+    },
+    "links": {
+      "handbook": "https://www.town.tara.lg.jp/kenkou/_1662/_1664/_1536.html",
+      "birth": "https://www.town.tara.lg.jp/kurashi/_1024/_1651/_1776.html"
+    },
+    "cards": [
+      {
+        "title": "誕生祝金",
+        "summary": "第1子10万円、第2子15万円、第3子20万円。第4子以降も出生順位が1人増えるごとに5万円を加算します。",
+        "timing": "出生日から3か月を経過した後、1年未満の間に申請。",
+        "office": "太良町 子育て支援課（0954-68-0110）",
+        "documents": [
+          "申請書・請求書",
+          "振込口座が分かるものの写し",
+          "本籍が町外にある場合は戸籍謄本"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.tara.lg.jp/kurashi/_1647/_2158.html",
+        "linkLabel": "太良町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "親子の町内居住と継続居住の意思、町税等の滞納がないことなどが条件です。"
+      }
+    ]
+  },
+  "422011": {
+    "overview": {
+      "title": "長崎市の妊娠・出産・子育て案内",
+      "url": "https://www.city.nagasaki.lg.jp/site/e-kao/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "422029": {
+    "overview": {
+      "title": "佐世保市の妊娠・出産・子育て案内",
+      "url": "https://www.city.sasebo.lg.jp/kodomomirai/kodosei/kosodate-portal.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.sasebo.lg.jp/kodomomirai/sukosen/2023_bansou_start.html"
+    },
+    "cards": []
+  },
+  "422037": {
+    "overview": {
+      "title": "島原市の妊娠・出産・子育て案内",
+      "url": "https://www.city.shimabara.lg.jp/hpkiji/pub/List.aspx?c_id=3&class_set_id=3&class_id=3"
+    },
+    "links": {
+      "handbook": "https://www.city.shimabara.lg.jp/page4222.html",
+      "insurance": "https://www.city.shimabara.lg.jp/page1116.html",
+      "medical": "https://www.city.shimabara.lg.jp/page3742.html"
+    },
+    "cards": []
+  },
+  "422045": {
+    "overview": {
+      "title": "諫早市の妊娠・出産・子育て案内",
+      "url": "https://www.city.isahaya.nagasaki.jp/life/2/11/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "422053": {
+    "overview": {
+      "title": "大村市の妊娠・出産・子育て案内",
+      "url": "https://www.city.omura.nagasaki.jp/kenko/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "422070": {
+    "overview": {
+      "title": "平戸市の公式サイト",
+      "url": "https://www.city.hirado.nagasaki.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "422088": {
+    "overview": {
+      "title": "松浦市の公式サイト",
+      "url": "https://www.city-matsuura.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "422096": {
+    "overview": {
+      "title": "対馬市の公式サイト",
+      "url": "https://www.city.tsushima.nagasaki.jp/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "乳児紙おむつ費等助成",
+        "summary": "対象の乳児の紙おむつ・おしりふき・粉ミルク・哺乳瓶などの購入費を、月1万円まで助成します。購入後に申請する償還払いです。",
+        "timing": "出生・転入の翌月から1歳の誕生月までが対象。購入月から1年以内に申請。",
+        "office": "対馬市の子育て支援担当窓口",
+        "documents": [
+          "申請書兼請求書（押印）",
+          "購入内容が分かる領収書・レシート等"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.city.tsushima.nagasaki.jp/gyousei/soshiki/fukushi/kodomomiraika/kosodateshien/6060.html",
+        "linkLabel": "対馬市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "対象品目・居住条件は公式案内で確認してください。購入日と内容が分かる領収書等を保管。"
+      }
+    ]
+  },
+  "422100": {
+    "overview": {
+      "title": "壱岐市の妊娠・出産・子育て案内",
+      "url": "https://www.city.iki.nagasaki.jp/mokuteki/ninshin_shussan/index.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出産祝金",
+        "summary": "第2子は10万円、第3子以降は20万円。対象の子どもを監護する保護者へ支給します。",
+        "timing": "出生後、子育て支援課で申請方法と期限を確認。",
+        "office": "壱岐市 子育て支援課（0920-45-1181）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.iki.nagasaki.jp/kosodate/kocomoteateseido/16064.html",
+        "linkLabel": "壱岐市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "以後3年間、市内に住み続ける意思があることなどが条件です。"
+      }
+    ]
+  },
+  "422118": {
+    "overview": {
+      "title": "五島市の妊娠・出産・子育て案内",
+      "url": "https://www.city.goto.nagasaki.jp:443/li/070/010/index.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.goto.nagasaki.jp:443/s037/010/010/050/20230113161402.html"
+    },
+    "cards": []
+  },
+  "422126": {
+    "overview": {
+      "title": "西海市の妊娠・出産・子育て案内",
+      "url": "https://www.city.saikai.nagasaki.jp/bamen/ninshin/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "422134": {
+    "overview": {
+      "title": "雲仙市の妊娠・出産・子育て案内",
+      "url": "https://www.city.unzen.nagasaki.jp/list00001.html"
+    },
+    "links": {
+      "handbook": "https://www.city.unzen.nagasaki.jp/kiji0034588/index.html",
+      "birth": "https://www.city.unzen.nagasaki.jp/kiji003375/index.html",
+      "allowance": "https://www.city.unzen.nagasaki.jp/kiji0036694/index.html"
+    },
+    "cards": [
+      {
+        "title": "赤ちゃん支援金",
+        "summary": "2022年4月1日以降に生まれた対象の赤ちゃん1人につき20万円を支給します。",
+        "timing": "出生後1年以内に申請。",
+        "office": "雲仙市の子育て支援担当窓口",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.unzen.nagasaki.jp/kiji0035007/index.html",
+        "linkLabel": "雲仙市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "親子が市内同住所に住民登録し、3年以上居住する誓約、自治会加入、世帯の対象者に市税等の滞納がないことなどが条件です。"
+      }
+    ]
+  },
+  "422142": {
+    "overview": {
+      "title": "南島原市の妊娠・出産・子育て案内",
+      "url": "https://www.city.minamishimabara.lg.jp/list00102.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "423076": {
+    "overview": {
+      "title": "長与町の妊娠・出産・子育て案内",
+      "url": "https://webtown.nagayo.jp/list00762.html"
+    },
+    "links": {
+      "birth": "https://webtown.nagayo.jp/kiji003513/index.html",
+      "allowance": "https://webtown.nagayo.jp/kiji0031906/index.html"
+    },
+    "cards": []
+  },
+  "423084": {
+    "overview": {
+      "title": "時津町の妊娠・出産・子育て案内",
+      "url": "https://www.town.togitsu.nagasaki.jp/kurashi_joho/ninshin_syussan/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "423211": {
+    "overview": {
+      "title": "東彼杵町の妊娠・出産・子育て案内",
+      "url": "https://www.town.higashisonogi.lg.jp/lifescene/7/index.html"
+    },
+    "links": {
+      "handbook": "https://www.town.higashisonogi.lg.jp/lifescene/7/894.html",
+      "pregnancyGrant": "https://www.town.higashisonogi.lg.jp/lifescene/7/3205.html",
+      "birth": "https://www.town.higashisonogi.lg.jp/lifescene/7/921.html",
+      "insurance": "https://www.town.higashisonogi.lg.jp/lifescene/7/1208.html"
+    },
+    "cards": []
+  },
+  "423220": {
+    "overview": {
+      "title": "川棚町の妊娠・出産・子育て案内",
+      "url": "https://www.kawatana.jp/cat02/c2-01/index.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.kawatana.jp/cat02/c2-01/post_657/index.html"
+    },
+    "cards": []
+  },
+  "423238": {
+    "overview": {
+      "title": "波佐見町の妊娠・出産・子育て案内",
+      "url": "https://www.town.hasami.lg.jp/list00571.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "423831": {
+    "overview": {
+      "title": "小値賀町の公式サイト",
+      "url": "https://www.town.ojika.lg.jp/index.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出生祝金",
+        "summary": "出生時に第1子10万円、第2子20万円、第3子以降30万円。第3子以降は、小学校入学時にも別途20万円の制度があります。",
+        "timing": "出生後1か月以上の在住などの要件を満たした後、申請時期を窓口で確認。",
+        "office": "小値賀町 福祉事務所（0959-56-3111）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.town.ojika.lg.jp/kurashi_joho/2/504.html",
+        "linkLabel": "小値賀町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "町内に定住する意思を持ち、子どもを養育する父母が対象です。"
+      }
+    ]
+  },
+  "423912": {
+    "overview": {
+      "title": "佐々町の妊娠・出産・子育て案内",
+      "url": "https://www.sazacho-nagasaki.jp/list00301.html"
+    },
+    "links": {
+      "allowance": "https://www.sazacho-nagasaki.jp/kiji003385/index.html"
+    },
+    "cards": [
+      {
+        "title": "誕生祝い金（2026年4月以降の出生児）",
+        "summary": "2026年4月1日以降に生まれ、最初の住民登録が佐々町にある子ども1人につき、一律6万円を支給します。",
+        "timing": "出生届を提出した後、出生から1年以内に福祉班で申請。",
+        "office": "佐々町の子育て支援担当窓口",
+        "documents": [
+          "申請書兼請求書",
+          "印鑑",
+          "父または母名義の振込口座が分かるもの"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.sazacho-nagasaki.jp/kiji003370/index.html",
+        "linkLabel": "佐々町の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "424111": {
+    "overview": {
+      "title": "新上五島町の妊娠・出産・子育て案内",
+      "url": "https://official.shinkamigoto.net/goto_kurashi.php?wcid=i00004"
+    },
+    "links": {
+      "pregnancyGrant": "https://official.shinkamigoto.net/goto_kurashi_full.php?eid=05945&wcid=i00004x1",
+      "medical": "https://official.shinkamigoto.net/goto_kurashi_full.php?eid=06514&wcid=i00004x6"
+    },
+    "cards": []
+  },
+  "431001": {
+    "overview": {
+      "title": "熊本市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kumamoto.jp/list04005.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "432024": {
+    "overview": {
+      "title": "八代市の公式サイト",
+      "url": "https://www.city.yatsushiro.lg.jp/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出産祝い金",
+        "summary": "第1子3万円、第2子5万円、第3子以降10万円を支給します。",
+        "timing": "出生日の翌日から起算して6か月以内に申請。",
+        "office": "八代市の子育て支援担当窓口",
+        "documents": [
+          "申請書",
+          "母子健康手帳など親子関係が分かる書類の写し"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://attaka.city.yatsushiro.kumamoto.jp/navi/navi-5583",
+        "linkLabel": "八代市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "出生日から申請日まで親子が市内同一世帯に住民登録し、申請後も1年以上居住する意思があることなどが条件です。",
+        "additionalSource": {
+          "title": "八代市の出産祝い金支給要綱",
+          "url": "https://www.city.yatsushiro.lg.jp/reiki/reiki_honbun/r371RG00001353.html"
+        }
+      }
+    ]
+  },
+  "432032": {
+    "overview": {
+      "title": "人吉市の妊娠・出産・子育て案内",
+      "url": "https://www.city.hitoyoshi.lg.jp/toppage/kurashi_nav/nav_kosodate"
+    },
+    "links": {},
+    "cards": []
+  },
+  "432041": {
+    "overview": {
+      "title": "荒尾市の妊娠・出産・子育て案内",
+      "url": "https://www.city.arao.lg.jp/riyoshabetsu/kodomo.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "432059": {
+    "overview": {
+      "title": "水俣市の公式サイト",
+      "url": "https://www.city.minamata.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "432067": {
+    "overview": {
+      "title": "玉名市の妊娠・出産・子育て案内",
+      "url": "https://www.city.tamana.lg.jp/q/list/483.html"
+    },
+    "links": {
+      "handbook": "https://www.city.tamana.lg.jp/q/aview/483/21615.html",
+      "birth": "https://www.city.tamana.lg.jp/q/aview/483/1480.html"
+    },
+    "cards": []
+  },
+  "432083": {
+    "overview": {
+      "title": "山鹿市の妊娠・出産・子育て案内",
+      "url": "https://www.city.yamaga.kumamoto.jp/list00693.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "432105": {
+    "overview": {
+      "title": "菊池市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kikuchi.lg.jp/category/list/1132.html"
+    },
+    "links": {
+      "handbook": "https://www.city.kikuchi.lg.jp/article/list/1134.html",
+      "birth": "https://www.city.kikuchi.lg.jp/article/list/1136.html",
+      "allowance": "https://www.city.kikuchi.lg.jp/article/list/1153.html"
+    },
+    "cards": []
+  },
+  "432113": {
+    "overview": {
+      "title": "宇土市の妊娠・出産・子育て案内",
+      "url": "https://www.city.uto.lg.jp/category/list/1186.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "432121": {
+    "overview": {
+      "title": "上天草市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kamiamakusa.kumamoto.jp/q/list/235.html"
+    },
+    "links": {
+      "handbook": "https://www.city.kamiamakusa.kumamoto.jp/q/aview/236/22563.html",
+      "birth": "https://www.city.kamiamakusa.kumamoto.jp/q/aview/238/15150.html",
+      "allowance": "https://www.city.kamiamakusa.kumamoto.jp/q/list/240.html"
+    },
+    "cards": []
+  },
+  "432130": {
+    "overview": {
+      "title": "宇城市の妊娠・出産・子育て案内",
+      "url": "https://www.city.uki.kumamoto.jp/kurashi/ninshin"
+    },
+    "links": {
+      "handbook": "https://www.city.uki.kumamoto.jp/kurashi/ninshin/2281414"
+    },
+    "cards": []
+  },
+  "432148": {
+    "overview": {
+      "title": "阿蘇市の妊娠・出産・子育て案内",
+      "url": "https://www.city.aso.kumamoto.jp/scene/pregnancy_childbirth/"
+    },
+    "links": {
+      "handbook": "https://www.city.aso.kumamoto.jp/citizens/health_medical_welfare/insurance_of_children/maternity_health-recordbook/maternity_record/",
+      "pregnancyGrant": "https://www.city.aso.kumamoto.jp/citizens/health_medical_welfare/insurance_of_children/allowances/asoninpu/",
+      "birth": "https://www.city.aso.kumamoto.jp/citizens/certificate/family_register_certificate/register/birth_registration/"
+    },
+    "cards": []
+  },
+  "432156": {
+    "overview": {
+      "title": "天草市の公式サイト",
+      "url": "https://www.city.amakusa.kumamoto.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "432164": {
+    "overview": {
+      "title": "合志市の妊娠・出産・子育て案内",
+      "url": "https://www.city.koshi.lg.jp/list00800.html"
+    },
+    "links": {
+      "handbook": "https://www.city.koshi.lg.jp/kiji00319957/index.html",
+      "pregnancyGrant": "https://www.city.koshi.lg.jp/kiji00324443/index.html",
+      "allowance": "https://www.city.koshi.lg.jp/kiji00317626/index.html",
+      "medical": "https://www.city.koshi.lg.jp/kiji00317627/index.html"
+    },
+    "cards": []
+  },
+  "433489": {
+    "overview": {
+      "title": "美里町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kumamoto-misato.lg.jp/scene/ninshin_shussan/index.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "子育て家庭おむつ支給事業",
+        "summary": "満1歳の誕生月までの乳児と同居する町内の保護者へ、紙おむつを計5回支給します。",
+        "timing": "2か月児訪問、3〜4か月児健診、6〜8か月児健診、10か月児相談、1歳児相談の機会に受取。",
+        "office": "美里町 こども応援課（0964-42-6550）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.town.kumamoto-misato.lg.jp/soshiki/kodomo_1/1/9/3093.html",
+        "linkLabel": "美里町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "町からの個別連絡に沿って、希望するサイズ・メーカー等を回答します。"
+      }
+    ]
+  },
+  "433641": {
+    "overview": {
+      "title": "玉東町の妊娠・出産・子育て案内",
+      "url": "https://www.town.gyokuto.kumamoto.jp/list00356.html"
+    },
+    "links": {
+      "handbook": "https://www.town.gyokuto.kumamoto.jp/kiji0031239/index.html",
+      "medical": "https://www.town.gyokuto.kumamoto.jp/list00376.html"
+    },
+    "cards": [
+      {
+        "title": "出生祝金",
+        "summary": "出生児1人につき5万円。親子が引き続き3年以上町内に住む意思があることなどが条件です。",
+        "timing": "出生後6か月以内に申請。",
+        "office": "玉東町の子育て支援担当窓口",
+        "documents": [
+          "申請書",
+          "振込口座番号が分かるものの写し",
+          "印鑑"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.gyokuto.kumamoto.jp/kiji0031270/index.html",
+        "linkLabel": "玉東町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "町税等に未納がある場合の充当承諾など、支給条件があります。3年以内の転出は返還対象となる場合があります。"
+      }
+    ]
+  },
+  "433675": {
+    "overview": {
+      "title": "南関町の妊娠・出産・子育て案内",
+      "url": "https://www.town.nankan.lg.jp/mokutekibetsu/kosodatejoho.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "433683": {
+    "overview": {
+      "title": "長洲町の妊娠・出産・子育て案内",
+      "url": "https://www.town.nagasu.lg.jp/soshiki/machizukuri/kikaku/174367649723394/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "433691": {
+    "overview": {
+      "title": "和水町の妊娠・出産・子育て案内",
+      "url": "https://www.town.nagomi.lg.jp/iju/teijyuu/ouen/"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.nagomi.lg.jp/soshiki/hoken/kurashi/3_4060/",
+      "medical": "https://www.town.nagomi.lg.jp/soshiki/hoken/kurashi/3_98/"
+    },
+    "cards": []
+  },
+  "434035": {
+    "overview": {
+      "title": "大津町の妊娠・出産・子育て案内",
+      "url": "https://www.town.ozu.kumamoto.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434043": {
+    "overview": {
+      "title": "菊陽町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kikuyo.lg.jp/kosodate/default.html"
+    },
+    "links": {
+      "handbook": "https://www.town.kikuyo.lg.jp/list00195.html",
+      "medical": "https://www.town.kikuyo.lg.jp/list00197.html"
+    },
+    "cards": []
+  },
+  "434230": {
+    "overview": {
+      "title": "南小国町の妊娠・出産・子育て案内",
+      "url": "https://www.town.minamioguni.lg.jp/kosodate/"
+    },
+    "links": {
+      "allowance": "https://www.town.minamioguni.lg.jp/kosodate/josei/jidou-teate.html"
+    },
+    "cards": []
+  },
+  "434248": {
+    "overview": {
+      "title": "小国町の公式サイト",
+      "url": "https://www.town.kumamoto-oguni.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434256": {
+    "overview": {
+      "title": "産山村の妊娠・出産・子育て案内",
+      "url": "https://www.ubuyama-v.jp/kurashinojoho/ninshin_shussan/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434281": {
+    "overview": {
+      "title": "高森町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kumamoto-takamori.lg.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434329": {
+    "overview": {
+      "title": "西原村の公式サイト",
+      "url": "https://www.vill.nishihara.kumamoto.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434337": {
+    "overview": {
+      "title": "南阿蘇村の公式サイト",
+      "url": "https://www.vill.minamiaso.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434418": {
+    "overview": {
+      "title": "御船町の妊娠・出産・子育て案内",
+      "url": "https://www.town.mifune.kumamoto.jp/hpkiji/pub/List.aspx?c_id=3&class_set_id=1&class_id=1047"
+    },
+    "links": {
+      "handbook": "https://www.town.mifune.kumamoto.jp/page5712.html",
+      "allowance": "https://www.town.mifune.kumamoto.jp/page8674.html",
+      "medical": "https://www.town.mifune.kumamoto.jp/page7591.html"
+    },
+    "cards": []
+  },
+  "434426": {
+    "overview": {
+      "title": "嘉島町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kumamoto-kashima.lg.jp/q/list/102.html"
+    },
+    "links": {
+      "handbook": "https://www.town.kumamoto-kashima.lg.jp/q/aview/102/2050.html"
+    },
+    "cards": []
+  },
+  "434434": {
+    "overview": {
+      "title": "益城町の妊娠・出産・子育て案内",
+      "url": "https://www.town.mashiki.lg.jp/list00300.html"
+    },
+    "links": {
+      "handbook": "https://www.town.mashiki.lg.jp/kiji0035047/index.html",
+      "pregnancyGrant": "https://www.town.mashiki.lg.jp/kiji0035500/index.html",
+      "birth": "https://www.town.mashiki.lg.jp/kiji0037098/index.html",
+      "allowance": "https://www.town.mashiki.lg.jp/kiji0037312/index.html",
+      "insurance": "https://www.town.mashiki.lg.jp/kiji0032142/index.html",
+      "medical": "https://www.town.mashiki.lg.jp/kiji003590/index.html"
+    },
+    "cards": []
+  },
+  "434442": {
+    "overview": {
+      "title": "甲佐町の公式サイト",
+      "url": "https://www.town.kosa.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434477": {
+    "overview": {
+      "title": "山都町の公式サイト",
+      "url": "https://www.town.kumamoto-yamato.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434680": {
+    "overview": {
+      "title": "氷川町の妊娠・出産・子育て案内",
+      "url": "https://www.town.hikawa.kumamoto.jp/list00840.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.hikawa.kumamoto.jp/kiji0035580/index.html"
+    },
+    "cards": []
+  },
+  "434825": {
+    "overview": {
+      "title": "芦北町の妊娠・出産・子育て案内",
+      "url": "https://www.town.ashikita.lg.jp/kosodate_site/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "434841": {
+    "overview": {
+      "title": "津奈木町の妊娠・出産・子育て案内",
+      "url": "https://www.town.tsunagi.lg.jp/hpkiji/pub/List.aspx?c_id=3&class_set_id=3&class_id=1"
+    },
+    "links": {
+      "birth": "https://www.town.tsunagi.lg.jp/page4408.html",
+      "insurance": "https://www.town.tsunagi.lg.jp/page933.html"
+    },
+    "cards": [
+      {
+        "title": "出生祝金",
+        "summary": "第1子10万円、第2子20万円、第3子以降30万円を支給します。",
+        "timing": "原則、出生から1年以内に申請。",
+        "office": "津奈木町 ほけん福祉課 福祉班（0966-78-5555）",
+        "documents": [
+          "申請書",
+          "印鑑"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.tsunagi.lg.jp/page1963.html",
+        "linkLabel": "津奈木町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "町内に6か月以上住所があり、引き続き居住する意思、町税等の滞納がないことなどが条件です。"
+      }
+    ]
+  },
+  "435015": {
+    "overview": {
+      "title": "錦町の公式サイト",
+      "url": "https://www.town.kumamoto-nishiki.lg.jp/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "435058": {
+    "overview": {
+      "title": "多良木町の公式サイト",
+      "url": "https://www.town.taragi.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "435066": {
+    "overview": {
+      "title": "湯前町の妊娠・出産・子育て案内",
+      "url": "https://www.town.yunomae.lg.jp/list00101.html"
+    },
+    "links": {
+      "birth": "https://www.town.yunomae.lg.jp/kiji0032838/index.html"
+    },
+    "cards": []
+  },
+  "435074": {
+    "overview": {
+      "title": "水上村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.mizukami.lg.jp/list00111.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出産祝金",
+        "summary": "第1子20万円、第2子30万円、第3子以降50万円。第3子以降は希望により、出生時30万円・1歳時20万円に分けて受け取れます。",
+        "timing": "出生後、村の窓口で申請期限・受取方法を確認。",
+        "office": "水上村の子育て支援担当窓口",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.vill.mizukami.lg.jp/kiji00350/index.html",
+        "linkLabel": "水上村の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "親子が村内に居住し、出産後3年以上、村を生活の本拠とすることなどが条件です。"
+      }
+    ]
+  },
+  "435104": {
+    "overview": {
+      "title": "相良村の公式サイト",
+      "url": "https://www.vill.sagara.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "435112": {
+    "overview": {
+      "title": "五木村の公式サイト",
+      "url": "https://www.vill.itsuki.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "435121": {
+    "overview": {
+      "title": "山江村の公式サイト",
+      "url": "https://www.vill.yamae.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "435139": {
+    "overview": {
+      "title": "球磨村の公式サイト",
+      "url": "https://www.kumamura.com/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "435147": {
+    "overview": {
+      "title": "あさぎり町の妊娠・出産・子育て案内",
+      "url": "https://www.town.asagiri.lg.jp/list00174.html"
+    },
+    "links": {
+      "birth": "https://www.town.asagiri.lg.jp/kiji00313/index.html"
+    },
+    "cards": [
+      {
+        "title": "出生祝い金",
+        "summary": "子ども1人につき10万円。出生日に町内在住で、納税義務を履行している養育者などが対象です。",
+        "timing": "出生日から1年以内に申請。",
+        "office": "あさぎり町の子育て支援担当窓口",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.town.asagiri.lg.jp/kiji0033177/index.html",
+        "linkLabel": "あさぎり町の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "435317": {
+    "overview": {
+      "title": "苓北町の公式サイト",
+      "url": "https://reihoku-kumamoto.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "442011": {
+    "overview": {
+      "title": "大分市の妊娠・出産・子育て案内",
+      "url": "https://www.naana-oita.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "442020": {
+    "overview": {
+      "title": "別府市の妊娠・出産・子育て案内",
+      "url": "https://www.city.beppu.oita.jp/kosodate/ninshin_shussan/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.beppu.oita.jp/kosodate/ninshin_shussan/boshitecho.html",
+      "pregnancyGrant": "https://www.city.beppu.oita.jp/kosodate/ninshin_shussan/ninpusien.html",
+      "allowance": "https://www.city.beppu.oita.jp/kosodate/teatejyosei/jidouteate.html",
+      "medical": "https://www.city.beppu.oita.jp/kosodate/teatejyosei/detail16.html"
+    },
+    "cards": []
+  },
+  "442038": {
+    "overview": {
+      "title": "中津市の妊娠・出産・子育て案内",
+      "url": "https://www.city-nakatsu.jp/categories/lifeevent/ninshinshussan/"
+    },
+    "links": {
+      "handbook": "https://www.city-nakatsu.jp/doc/2015031100016/",
+      "allowance": "https://www.city-nakatsu.jp/doc/2021011900057/"
+    },
+    "cards": []
+  },
+  "442046": {
+    "overview": {
+      "title": "日田市の妊娠・出産・子育て案内",
+      "url": "https://www.city.hita.oita.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "442054": {
+    "overview": {
+      "title": "佐伯市の妊娠・出産・子育て案内",
+      "url": "https://www.city.saiki.oita.jp/list00250.html"
+    },
+    "links": {
+      "handbook": "https://www.city.saiki.oita.jp/kiji00310067/index.html",
+      "pregnancyGrant": "https://www.city.saiki.oita.jp/kiji00310308/index.html",
+      "birth": "https://www.city.saiki.oita.jp/kiji0032280/index.html",
+      "insurance": "https://www.city.saiki.oita.jp/kiji00310315/index.html"
+    },
+    "cards": []
+  },
+  "442062": {
+    "overview": {
+      "title": "臼杵市の公式サイト",
+      "url": "https://www.city.usuki.oita.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "442071": {
+    "overview": {
+      "title": "津久見市の妊娠・出産・子育て案内",
+      "url": "https://www.city.tsukumi.oita.jp/life/1/1/1/"
+    },
+    "links": {
+      "handbook": "https://www.city.tsukumi.oita.jp/site/kosodate/77.html",
+      "pregnancyGrant": "https://www.city.tsukumi.oita.jp/site/kosodate/23567.html",
+      "birth": "https://www.city.tsukumi.oita.jp/soshiki/2/3213.html",
+      "allowance": "https://www.city.tsukumi.oita.jp/soshiki/20/27857.html",
+      "medical": "https://www.city.tsukumi.oita.jp/site/kosodate/76.html"
+    },
+    "cards": []
+  },
+  "442089": {
+    "overview": {
+      "title": "竹田市の妊娠・出産・子育て案内",
+      "url": "https://www.city.taketa.oita.jp/life_scene/ninshin/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.taketa.oita.jp/life_scene/ninshin/2990.html"
+    },
+    "cards": []
+  },
+  "442097": {
+    "overview": {
+      "title": "豊後高田市の妊娠・出産・子育て案内",
+      "url": "https://www.city.bungotakada.oita.jp/adv/ba.php?id=8"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "子育て応援誕生祝い金（市独自・1歳以降）",
+        "summary": "第3子は1・2歳に各20万円（計40万円）、第4子は1〜3歳に各30万円（計90万円）、第5子以降は1〜5歳に各30万円・6歳に40万円（計190万円）を支給します。",
+        "timing": "各誕生日から次の誕生日の前日までに申請。誕生月に届く案内のQRコード等で手続き。",
+        "office": "豊後高田市の子育て支援担当窓口",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.bungotakada.oita.jp/site/kosodate-kyoiku/2383.html",
+        "linkLabel": "豊後高田市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "妊娠・出産時の国の妊婦支援給付（5万円ずつ）は共通手続きに掲載しています。このカードの金額は、それを含めない市独自分です。出生から引き続き親子の市内住民登録などが条件。出生順位は18歳に達した年度末までの監護する子どもの人数で判定します。"
+      }
+    ]
+  },
+  "442101": {
+    "overview": {
+      "title": "杵築市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kitsuki.lg.jp/konnatokiniha/01/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.kitsuki.lg.jp/soshiki/1/fukusi/kodomo/7019.html"
+    },
+    "cards": []
+  },
+  "442119": {
+    "overview": {
+      "title": "宇佐市の妊娠・出産・子育て案内",
+      "url": "https://www.city.usa.oita.jp/usacoco/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "442127": {
+    "overview": {
+      "title": "豊後大野市の妊娠・出産・子育て案内",
+      "url": "https://bungoono-iju.com/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "442135": {
+    "overview": {
+      "title": "由布市の妊娠・出産・子育て案内",
+      "url": "https://www.city.yufu.oita.jp/kosodate/le_ninshinsyussan"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "すくすくおむつクーポン（2026年度）",
+        "summary": "2024年4月2日から2027年4月1日生まれで、申請時に市内に住民票がある子どもへ、2万円分のクーポン（1,000円券20枚）を交付します。",
+        "timing": "原則2027年3月31日までに申請。2027年3月の転入や3月1日〜4月1日の出生等は4月30日までの特例があります。",
+        "office": "由布市 子育て支援課（097-582-1262）または挾間・湯布院振興局",
+        "documents": [
+          "申請書",
+          "窓口で本人確認できるもの"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.city.yufu.oita.jp/cate_5/article_81848",
+        "linkLabel": "由布市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "利用期限は発行から1年間。対象の育児用品を指定取扱店で購入できます。"
+      }
+    ]
+  },
+  "442143": {
+    "overview": {
+      "title": "国東市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kunisaki.oita.jp/life/1/11/74/"
+    },
+    "links": {
+      "handbook": "https://www.city.kunisaki.oita.jp/site/kosodate/boshikenkoutetyou.html",
+      "birth": "https://www.city.kunisaki.oita.jp/soshiki/shimin-kenko/syussyoutodoke.html"
+    },
+    "cards": []
+  },
+  "443221": {
+    "overview": {
+      "title": "姫島村の妊娠・出産・子育て案内",
+      "url": "https://www.himeshima.jp/kurashi/%e5%a6%8a%e5%a8%a0%e3%83%bb%e5%87%ba%e7%94%a3/"
+    },
+    "links": {
+      "allowance": "https://www.himeshima.jp/kurashi/jidouteate/",
+      "medical": "https://www.himeshima.jp/kurashi/ikuji-hoken-kodomoiryou/"
+    },
+    "cards": [
+      {
+        "title": "出産祝金",
+        "summary": "第1子20万円、第2子30万円、第3子以降50万円。引き続き村内に定住する対象の保護者へ支給します。",
+        "timing": "出生後、住民福祉課で申請。期限は窓口で確認。",
+        "office": "姫島村 住民福祉課",
+        "documents": [
+          "申請書",
+          "住民票記載事項証明書"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.himeshima.jp/kurashi/shussan-iwaikin/",
+        "linkLabel": "姫島村の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "支給決定通知の受領後5年間の定住などが条件です。"
+      }
+    ]
+  },
+  "443417": {
+    "overview": {
+      "title": "日出町の妊娠・出産・子育て案内",
+      "url": "https://www.town.hiji.lg.jp/lifestagekarasagasu/ninshin_shussan/index.html"
+    },
+    "links": {
+      "birth": "https://www.town.hiji.lg.jp/lifestagekarasagasu/ninshin_shussan/1998.html"
+    },
+    "cards": [
+      {
+        "title": "プレママ応援給付金（町独自）",
+        "summary": "母子健康手帳の交付を受けた町内の妊婦へ、妊娠1回につき1万円。所得制限はありません。",
+        "timing": "母子健康手帳の交付日から出産予定日までに申請。",
+        "office": "日出町 こども家庭センター（0977-73-3232）",
+        "documents": [
+          "申請書",
+          "顔写真付き本人確認書類",
+          "振込口座が分かるもの"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.hiji.lg.jp/kosodate_kyoiku/ninshin_shussan/3776.html",
+        "linkLabel": "日出町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "申請時に日出町の住民登録があることなどが条件です。国の妊婦支援給付とは別の町独自給付です。"
+      }
+    ]
+  },
+  "444618": {
+    "overview": {
+      "title": "九重町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kokonoe.oita.jp/categories/kosodate/ninshin/"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.kokonoe.oita.jp/docs/2023020200029/"
+    },
+    "cards": []
+  },
+  "444626": {
+    "overview": {
+      "title": "玖珠町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kusu.oita.jp/mokuteki/ninshin_shussan/index.html"
+    },
+    "links": {
+      "handbook": "https://www.town.kusu.oita.jp/mokuteki/ninshin_shussan/2061.html",
+      "pregnancyGrant": "https://www.town.kusu.oita.jp/mokuteki/ninshin_shussan/2061.html",
+      "birth": "https://www.town.kusu.oita.jp/mokuteki/ninshin_shussan/2135.html"
+    },
+    "cards": [
+      {
+        "title": "出産祝品等",
+        "summary": "第1子・第2子は5万円分の商品券、第3子以降は10万円の現金を交付します。",
+        "timing": "出生後、窓口で申請方法と期限を確認。",
+        "office": "玖珠町の子育て支援担当窓口",
+        "documents": [
+          "本人確認書類",
+          "その他の申請書類は町の窓口で確認"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.kusu.oita.jp/kosodate/mokuteki/teate/2516.html",
+        "linkLabel": "玖珠町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "出生前3か月以上の継続居住や、子どもの出生時の住所が玖珠町にあることなどが条件です。"
+      }
+    ]
+  },
+  "452017": {
+    "overview": {
+      "title": "宮崎市の妊娠・出産・子育て案内",
+      "url": "https://www.city.miyazaki.miyazaki.jp/search_life/pregnancy/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "452025": {
+    "overview": {
+      "title": "都城市の妊娠・出産・子育て案内",
+      "url": "https://www.city.miyakonojo.miyazaki.jp/soshiki/0/32745.html"
+    },
+    "links": {
+      "handbook": "https://www.city.miyakonojo.miyazaki.jp/soshiki/35/4216.html"
+    },
+    "cards": []
+  },
+  "452033": {
+    "overview": {
+      "title": "延岡市の妊娠・出産・子育て案内",
+      "url": "https://www.city.nobeoka.miyazaki.jp/life/1/1/1/"
+    },
+    "links": {
+      "allowance": "https://www.city.nobeoka.miyazaki.jp/soshiki/32/1069.html"
+    },
+    "cards": []
+  },
+  "452041": {
+    "overview": {
+      "title": "日南市の妊娠・出産・子育て案内",
+      "url": "https://www.city.nichinan.lg.jp/kurashinonavigation/687.html"
+    },
+    "links": {
+      "handbook": "https://www.city.nichinan.lg.jp/iryo_kenko_fukushi/ninshin_shussan/3103.html",
+      "pregnancyGrant": "https://www.city.nichinan.lg.jp/iryo_kenko_fukushi/ninshin_shussan/3087.html",
+      "birth": "https://www.city.nichinan.lg.jp/iryo_kenko_fukushi/ninshin_shussan/3644.html"
+    },
+    "cards": []
+  },
+  "452050": {
+    "overview": {
+      "title": "小林市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kobayashi.lg.jp/kosodate_kyoiku/ninshin_shussan/index.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.kobayashi.lg.jp/kosodate_kyoiku/ninshin_shussan/10076.html"
+    },
+    "cards": [
+      {
+        "title": "おめでとう赤ちゃん祝品",
+        "summary": "2025年4月1日以降に生まれた対象の赤ちゃんへ、おむつ・おしりふき・歯ブラシセット・離乳食カップ・木工玩具等を贈呈。1人1回で、品物は時期により変わります。",
+        "timing": "出生届の後、こども課または須木・野尻庁舎で受取方法を確認。",
+        "office": "小林市 こども課（0984-23-1278）または須木・野尻庁舎",
+        "documents": [
+          "母子健康手帳または子ども医療費受給資格証",
+          "保護者の住所が確認できる本人確認書類"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.city.kobayashi.lg.jp/kosodate_kyoiku/ninshin_shussan/6204.html",
+        "linkLabel": "小林市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "出生届提出時から子どもに小林市の住民登録があり、父母にも市の住民登録があることなどが条件です。"
+      }
+    ]
+  },
+  "452068": {
+    "overview": {
+      "title": "日向市の妊娠・出産・子育て案内",
+      "url": "https://www.hyugacity.jp/display.php?clist=0130"
+    },
+    "links": {},
+    "cards": []
+  },
+  "452076": {
+    "overview": {
+      "title": "串間市の公式サイト",
+      "url": "https://www.city.kushima.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "452084": {
+    "overview": {
+      "title": "西都市の公式サイト",
+      "url": "https://www.city.saito.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "452092": {
+    "overview": {
+      "title": "えびの市の妊娠・出産・子育て案内",
+      "url": "https://www.city.ebino.lg.jp/life_scene/ninshin_shussan/index.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.ebino.lg.jp/life_scene/ninshin_shussan/6899.html",
+      "birth": "https://www.city.ebino.lg.jp/life_scene/ninshin_shussan/2945.html"
+    },
+    "cards": []
+  },
+  "453412": {
+    "overview": {
+      "title": "三股町の公式サイト",
+      "url": "https://www.town.mimata.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "453617": {
+    "overview": {
+      "title": "高原町の妊娠・出産・子育て案内",
+      "url": "https://www.town.takaharu.lg.jp/life/1/6/24/"
+    },
+    "links": {
+      "handbook": "https://www.town.takaharu.lg.jp/soshiki/202304004/1184.html"
+    },
+    "cards": []
+  },
+  "453820": {
+    "overview": {
+      "title": "国富町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kunitomi.miyazaki.jp/main/health/cat/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "453838": {
+    "overview": {
+      "title": "綾町の妊娠・出産・子育て案内",
+      "url": "https://www.town.aya.miyazaki.jp/site/kenkoucenter/list65-181.html"
+    },
+    "links": {
+      "handbook": "https://www.town.aya.miyazaki.jp/site/kenkoucenter/7469.html",
+      "pregnancyGrant": "https://www.town.aya.miyazaki.jp/site/kenkoucenter/7470.html"
+    },
+    "cards": []
+  },
+  "454010": {
+    "overview": {
+      "title": "高鍋町の妊娠・出産・子育て案内",
+      "url": "https://www.town.takanabe.lg.jp/lifeevent/ninshin_shussan_kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "454028": {
+    "overview": {
+      "title": "新富町の妊娠・出産・子育て案内",
+      "url": "https://www.town.shintomi.lg.jp/life_scene/ninshin_shussan/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "454036": {
+    "overview": {
+      "title": "西米良村の公式サイト",
+      "url": "https://www.vill.nishimera.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "454044": {
+    "overview": {
+      "title": "木城町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kijo.lg.jp/life_scene/825.html"
+    },
+    "links": {
+      "handbook": "https://www.town.kijo.lg.jp/kosodate_kyouiku/ninsin_syussan/1921.html",
+      "pregnancyGrant": "https://www.town.kijo.lg.jp/kosodate_kyouiku/ninsin_syussan/2576.html"
+    },
+    "cards": []
+  },
+  "454052": {
+    "overview": {
+      "title": "川南町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kawaminami.miyazaki.jp/soshiki/6/1184.html"
+    },
+    "links": {
+      "handbook": "https://www.town.kawaminami.miyazaki.jp/soshiki/6/1306.html",
+      "pregnancyGrant": "https://www.town.kawaminami.miyazaki.jp/soshiki/4/13919.html"
+    },
+    "cards": []
+  },
+  "454061": {
+    "overview": {
+      "title": "都農町の公式サイト",
+      "url": "https://www.town.tsuno.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "454214": {
+    "overview": {
+      "title": "門川町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kadogawa.lg.jp/learn/pregnancy/"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.kadogawa.lg.jp/learn/pregnancy/page005182.html",
+      "insurance": "https://www.town.kadogawa.lg.jp/live/insurance/page002371.html"
+    },
+    "cards": []
+  },
+  "454290": {
+    "overview": {
+      "title": "諸塚村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.morotsuka.miyazaki.jp/life-scene/ninshin-shussan/index.html"
+    },
+    "links": {
+      "birth": "https://www.vill.morotsuka.miyazaki.jp/life-scene/ninshin-shussan/742.html"
+    },
+    "cards": []
+  },
+  "454303": {
+    "overview": {
+      "title": "椎葉村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.shiiba.miyazaki.jp/welfare/matanity/"
+    },
+    "links": {
+      "handbook": "https://www.vill.shiiba.miyazaki.jp/welfare/medical/conceive.php",
+      "pregnancyGrant": "https://www.vill.shiiba.miyazaki.jp/welfare/post_5.php"
+    },
+    "cards": [
+      {
+        "title": "すこやか祝金",
+        "summary": "子ども1人につき20万円。父母または母が村内に住所を有し、出生児が村に住民登録されていることなどが条件です。",
+        "timing": "出生後、福祉保健課で申請方法・期限を確認。",
+        "office": "椎葉村 福祉保健課（0982-68-7510）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.vill.shiiba.miyazaki.jp/welfare/growth/supportprojects.php",
+        "linkLabel": "椎葉村の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "454311": {
+    "overview": {
+      "title": "美郷町の妊娠・出産・子育て案内",
+      "url": "https://www.town.miyazaki-misato.lg.jp/list00424.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.miyazaki-misato.lg.jp/kiji003855/index.html"
+    },
+    "cards": []
+  },
+  "454419": {
+    "overview": {
+      "title": "高千穂町の公式サイト",
+      "url": "https://www.town-takachiho.jp/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "子育て支援金（出生時）",
+        "summary": "第1子・第2子5万円、第3子10万円、第4子15万円、第5子20万円。第3子以降は出生順位が1人増えるごとに5万円加算。小・中学校入学時にも別途支給があります。",
+        "timing": "原則、出生届を提出してから3か月以内に申請。",
+        "office": "高千穂町 福祉保険課（0982-73-1202）",
+        "documents": [
+          "申請書",
+          "父または母名義の口座が分かるもの",
+          "印鑑"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town-takachiho.jp/top/kosodate_kyoiku/teate/851.html",
+        "linkLabel": "高千穂町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "町内在住で、定住が見込まれる保護者などが対象です。"
+      }
+    ]
+  },
+  "454427": {
+    "overview": {
+      "title": "日之影町の妊娠・出産・子育て案内",
+      "url": "https://www.town.hinokage.lg.jp/categories/lifeevent/ninshin-shussan/"
+    },
+    "links": {
+      "handbook": "https://www.town.hinokage.lg.jp/docs/2016020500015/",
+      "birth": "https://www.town.hinokage.lg.jp/docs/2016020500022/"
+    },
+    "cards": [
+      {
+        "title": "ひのかげベビー応援金（妊娠時）",
+        "summary": "妊娠中の通院等を支援するため、妊娠届・母子健康手帳受取時に3万円を支給します。",
+        "timing": "妊娠届を提出し、母子健康手帳を受け取る際に申請。",
+        "office": "日之影町 保健センター（0982-73-7533）",
+        "documents": [
+          "印鑑",
+          "振込口座が分かるもの",
+          "本人確認書類"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.hinokage.lg.jp/docs/2016052700025/",
+        "linkLabel": "日之影町の公式案内",
+        "checkedOn": "2026-11-11"
+      },
+      {
+        "title": "出産祝い金",
+        "summary": "町内への定住が見込まれる家庭は第1子・第2子5万円、第3子10万円、第4子以降20万円。定住が見込まれない場合は1万円です。",
+        "timing": "出生届とあわせて申請。",
+        "office": "日之影町 町民福祉課（0982-87-3802）",
+        "documents": [
+          "印鑑",
+          "その他の申請書類は窓口で確認"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.hinokage.lg.jp/docs/2016052700049/",
+        "linkLabel": "日之影町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "定住を申告して受給した後に転出する場合、月割りで返還が必要となることがあります。"
+      }
+    ]
+  },
+  "454435": {
+    "overview": {
+      "title": "五ヶ瀬町の公式サイト",
+      "url": "https://www.town.gokase.miyazaki.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462012": {
+    "overview": {
+      "title": "鹿児島市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kagoshima.lg.jp/kosodate/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.kagoshima.lg.jp/boshihoken/magumakkoapuri.html",
+      "allowance": "https://www.city.kagoshima.lg.jp/kosodate/kodomofuku/kosodate/kosodate/teate/jido.html",
+      "medical": "https://www.city.kagoshima.lg.jp/kosodate/kodomofuku/kosodate/kosodate/teate/sedo/index.html"
+    },
+    "cards": []
+  },
+  "462039": {
+    "overview": {
+      "title": "鹿屋市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kanoya.lg.jp/kouhou/lifescene/ninhsin/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.kanoya.lg.jp/boshishien/boshitetyou.html",
+      "birth": "https://www.city.kanoya.lg.jp/koseki/kurashi/koseki/todokede/todokede.html"
+    },
+    "cards": []
+  },
+  "462047": {
+    "overview": {
+      "title": "枕崎市の妊娠・出産・子育て案内",
+      "url": "https://www.city.makurazaki.lg.jp/life/1/1/1/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462063": {
+    "overview": {
+      "title": "阿久根市の妊娠・出産・子育て案内",
+      "url": "https://www.city.akune.lg.jp/mokuteki/ninshin_shussan/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.akune.lg.jp/mokuteki/ninshin_shussan/2054.html",
+      "birth": "https://www.city.akune.lg.jp/mokuteki/ninshin_shussan/2059.html",
+      "allowance": "https://www.city.akune.lg.jp/mokuteki/ninshin_shussan/2064.html"
+    },
+    "cards": []
+  },
+  "462080": {
+    "overview": {
+      "title": "出水市の妊娠・出産・子育て案内",
+      "url": "https://www.city.kagoshima-izumi.lg.jp/kosodate/index.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "にこやか赤ちゃん応援券",
+        "summary": "出生時に1万円分（1,000円券10枚）、第3子以降は2万円分（20枚）の応援券を交付。おむつや授乳・離乳食関連の用品などに使えます。",
+        "timing": "出生後に申請。利用は子どもが1歳になる誕生月まで。",
+        "office": "出水市 こども課（0996-63-4047）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.kagoshima-izumi.lg.jp/page/page_02200.html",
+        "linkLabel": "出水市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "申請時と購入時に、親子が市内に住所を有することなどが条件です。"
+      }
+    ]
+  },
+  "462101": {
+    "overview": {
+      "title": "指宿市の公式サイト",
+      "url": "https://www.city.ibusuki.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462136": {
+    "overview": {
+      "title": "西之表市の公式サイト",
+      "url": "https://www.city.nishinoomote.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462144": {
+    "overview": {
+      "title": "垂水市の妊娠・出産・子育て案内",
+      "url": "https://www.city.tarumizu.lg.jp/lifescene/ninshin.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462152": {
+    "overview": {
+      "title": "薩摩川内市の妊娠・出産・子育て案内",
+      "url": "https://www.city.satsumasendai.lg.jp/kosodate_kyoiku/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462161": {
+    "overview": {
+      "title": "日置市の妊娠・出産・子育て案内",
+      "url": "https://www.city.hioki.kagoshima.jp/kouho/home/ninshin-shussan/index.html"
+    },
+    "links": {
+      "birth": "https://www.city.hioki.kagoshima.jp/koseki/kurashi/tetsuzuki/koseki-jumin/shusse.html"
+    },
+    "cards": [
+      {
+        "title": "ひおきコウノトリ便",
+        "summary": "市内に住所がある赤ちゃんと家族へ、育児用品のギフトを贈呈します。おくるみ・玩具・食器等があり、内容は変わる場合があります。",
+        "timing": "出生届の際に、市役所または支所で受取方法を確認。",
+        "office": "日置市の子育て支援担当窓口",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.hioki.kagoshima.jp/boshi/kurashi/kosodate-kyoiku/kosodate/ninkatsu/matanithi-box.html",
+        "linkLabel": "日置市の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "462179": {
+    "overview": {
+      "title": "曽於市の妊娠・出産・子育て案内",
+      "url": "https://www.city.soo.kagoshima.jp/kurashi/kosodatekyouiku/index.html"
+    },
+    "links": {
+      "allowance": "https://www.city.soo.kagoshima.jp/kurashi/kosodatekyouiku/zidouhukusi/zidouteate.html",
+      "medical": "https://www.city.soo.kagoshima.jp/kurashi/kosodatekyouiku/zidouhukusi/kodomoiryouhi.html"
+    },
+    "cards": []
+  },
+  "462187": {
+    "overview": {
+      "title": "霧島市の妊娠・出産・子育て案内",
+      "url": "https://www.city-kirishima.jp/hisyokouhou/kosodate/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462195": {
+    "overview": {
+      "title": "いちき串木野市の妊娠・出産・子育て案内",
+      "url": "https://www.city.ichikikushikino.lg.jp/kodomo1/kosodate_ouen_top.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462209": {
+    "overview": {
+      "title": "南さつま市の妊娠・出産・子育て案内",
+      "url": "https://www.city.minamisatsuma.lg.jp/child/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462217": {
+    "overview": {
+      "title": "志布志市の妊娠・出産・子育て案内",
+      "url": "https://www.city.shibushi.lg.jp/site/kosodate/"
+    },
+    "links": {
+      "handbook": "https://www.city.shibushi.lg.jp/soshiki/8/2267.html",
+      "pregnancyGrant": "https://www.city.shibushi.lg.jp/soshiki/8/29467.html",
+      "allowance": "https://www.city.shibushi.lg.jp/soshiki/8/2202.html",
+      "medical": "https://www.city.shibushi.lg.jp/soshiki/8/2206.html"
+    },
+    "cards": []
+  },
+  "462225": {
+    "overview": {
+      "title": "奄美市の妊娠・出産・子育て案内",
+      "url": "https://www.city.amami.lg.jp/wpm/kosodate.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462233": {
+    "overview": {
+      "title": "南九州市の妊娠・出産・子育て案内",
+      "url": "https://www.city.minamikyushu.lg.jp/kurashinoguide/2578.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.minamikyushu.lg.jp/kosodatesite/ninshin_shussan_sango/4415.html"
+    },
+    "cards": [
+      {
+        "title": "出生祝金・記念品",
+        "summary": "第1子・第2子は5万円、第3子以降は10万円。あわせて命名プレートを贈呈します。",
+        "timing": "出生月の翌月から起算して6か月以内に申請。",
+        "office": "南九州市 こども未来課 こども家庭係（0993-58-7221）または頴娃・川辺支所",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.minamikyushu.lg.jp/kosodatesite/ninshin_shussan_sango/3854.html",
+        "linkLabel": "南九州市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "親子が出生時から市に住所を有することなどが条件です。"
+      },
+      {
+        "title": "ウエルカムベビーチケット",
+        "summary": "満1歳未満の乳児を同居して養育する対象者へ、育児用品に使える4万8,000円分（4,000円券12枚）のチケットを一括交付します。",
+        "timing": "出生・転入時に案内。指定取扱店で使用でき、有効期間は発行から1年間。",
+        "office": "南九州市 こども未来課 こども家庭係（0993-58-7221）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.city.minamikyushu.lg.jp/kosodatesite/ninshin_shussan_sango/9031.html",
+        "linkLabel": "南九州市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "市内の住民登録などの条件があります。紛失時の再発行はできません。"
+      }
+    ]
+  },
+  "462241": {
+    "overview": {
+      "title": "伊佐市の妊娠・出産・子育て案内",
+      "url": "https://www.city.isa.kagoshima.jp/lifecycle/cycle-child/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "462250": {
+    "overview": {
+      "title": "姶良市の妊娠・出産・子育て案内",
+      "url": "https://www.city.aira.lg.jp/ninshin/index.html"
+    },
+    "links": {
+      "handbook": "https://www.city.aira.lg.jp/kenko/kurashi/nishin/nishin/boshitecho.html",
+      "birth": "https://www.city.aira.lg.jp/koseki/kurashi/koseki/koseki.html",
+      "allowance": "https://www.city.aira.lg.jp/kosodate/kurashi/ikuji/teate/jidoteate.html",
+      "medical": "https://www.city.aira.lg.jp/kyufu/kurasi/ikuji/teate_josei/kodomoiryohijose.html"
+    },
+    "cards": []
+  },
+  "463035": {
+    "overview": {
+      "title": "三島村の公式サイト",
+      "url": "https://mishimamura.com/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "463043": {
+    "overview": {
+      "title": "十島村の妊娠・出産・子育て案内",
+      "url": "https://www.tokara.jp/health/ninshin/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "ミルク・紙オムツ支給事業",
+        "summary": "村内に住所がある対象児について、ミルクは1歳到達月まで月上限2,000円、紙オムツは2歳到達月まで月上限5,000円の購入実費を支給します。",
+        "timing": "事前に資格登録を申請。購入後6か月以内に、領収書を添えて請求。",
+        "office": "十島村 住民課",
+        "documents": [
+          "資格登録の申請書",
+          "購入後の請求書",
+          "購入した品物の領収書"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.tokara.jp/health/ninshin/#009",
+        "linkLabel": "十島村の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "463922": {
+    "overview": {
+      "title": "さつま町の妊娠・出産・子育て案内",
+      "url": "https://www.satsuma-net.jp/life_guide/ninshin_shussan/index.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出産準備応援給付金",
+        "summary": "町内に住民登録がある妊娠7か月以降の対象者に、町独自の3万円を支給します。",
+        "timing": "妊娠7か月頃から産後8週以内に申請。妊娠7〜8か月頃に個別案内。",
+        "office": "さつま町 こども課 こども健康係（0996-24-8941）",
+        "documents": [
+          "申請書",
+          "本人確認書類の写し",
+          "振込口座が分かるものの写し",
+          "アンケート"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.satsuma-net.jp/soshiki/yakuba/1009/1/ninshin_shussan/ninshi_wakattara/6645.html",
+        "linkLabel": "さつま町の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "464040": {
+    "overview": {
+      "title": "長島町の妊娠・出産・子育て案内",
+      "url": "https://www.town.nagashima.lg.jp/livelihood/li0001/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "464520": {
+    "overview": {
+      "title": "湧水町の妊娠・出産・子育て案内",
+      "url": "https://www.town.yusui.kagoshima.jp/life/1/1/4/"
+    },
+    "links": {
+      "handbook": "https://www.town.yusui.kagoshima.jp/soshiki/30/9041.html",
+      "pregnancyGrant": "https://www.town.yusui.kagoshima.jp/soshiki/30/9059.html"
+    },
+    "cards": []
+  },
+  "464686": {
+    "overview": {
+      "title": "大崎町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kagoshima-osaki.lg.jp/so_densan/ninshin.html"
+    },
+    "links": {
+      "handbook": "https://www.town.kagoshima-osaki.lg.jp/hf_kenkouzoshin/bositetyou2.html"
+    },
+    "cards": []
+  },
+  "464821": {
+    "overview": {
+      "title": "東串良町の妊娠・出産・子育て案内",
+      "url": "https://www.higashikushira.com/categories/lifeevent/ninshin/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "464902": {
+    "overview": {
+      "title": "錦江町の公式サイト",
+      "url": "https://www.town.kinko.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "464911": {
+    "overview": {
+      "title": "南大隅町の妊娠・出産・子育て案内",
+      "url": "https://www.town.minamiosumi.lg.jp/kurashi/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "464929": {
+    "overview": {
+      "title": "肝付町の公式サイト",
+      "url": "https://www.kimotsuki-town.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "465011": {
+    "overview": {
+      "title": "中種子町の妊娠・出産・子育て案内",
+      "url": "https://town.nakatane.kagoshima.jp/koho/kenko-fukushi/index.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出産祝金",
+        "summary": "第1子5万円、第2子10万円、第3子20万円、第4子以降30万円。2026年1月以降は、全額現金または全額町商工会商品券を選べます。",
+        "timing": "出生から1年以内に申請。",
+        "office": "中種子町 こども家庭センター（0997-27-1111 内線254・292）",
+        "documents": [
+          "申請書",
+          "本人確認書類",
+          "振込口座が分かるもの"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://town.nakatane.kagoshima.jp/fukushi/kenko-fukushi/ninshin-shussan/shussan/iwaikinsedo.html",
+        "linkLabel": "中種子町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "出生前3か月以上の町内住所などが条件です。"
+      }
+    ]
+  },
+  "465020": {
+    "overview": {
+      "title": "南種子町の公式サイト",
+      "url": "http://www.town.minamitane.kagoshima.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "465054": {
+    "overview": {
+      "title": "屋久島町の妊娠・出産・子育て案内",
+      "url": "https://www.town.yakushima.kagoshima.jp/kosodate_kyoiku/kosodate/3/index.html"
+    },
+    "links": {
+      "handbook": "https://www.town.yakushima.kagoshima.jp/kosodate_kyoiku/kosodate/3/2332.html"
+    },
+    "cards": []
+  },
+  "465232": {
+    "overview": {
+      "title": "大和村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.yamato.lg.jp/kikaku/ninshin.html"
+    },
+    "links": {
+      "birth": "https://www.vill.yamato.lg.jp/jumin/kurashi/todokede/kakushu/shussho.html",
+      "allowance": "https://www.vill.yamato.lg.jp/hoken/kurashi/jidouteate/jidouteate.html"
+    },
+    "cards": [
+      {
+        "title": "出産祝金",
+        "summary": "第1子20万円、第2子30万円、第3子以降50万円。村内に居住して出産した対象者へ支給します。",
+        "timing": "出生から1か月以内に申請。",
+        "office": "大和村 保健福祉課（0997-57-2218）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.vill.yamato.lg.jp/hoken/kurashi/shussan/josesedo/iwaikin.html",
+        "linkLabel": "大和村の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "465241": {
+    "overview": {
+      "title": "宇検村の公式サイト",
+      "url": "https://www.uken.net/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "465259": {
+    "overview": {
+      "title": "瀬戸内町の妊娠・出産・子育て案内",
+      "url": "https://www.town.setouchi.lg.jp/cho/kenko/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "465275": {
+    "overview": {
+      "title": "龍郷町の妊娠・出産・子育て案内",
+      "url": "https://www.town.tatsugo.lg.jp/kikakukanko/kurashi/kenko/index.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.town.tatsugo.lg.jp/hokenfukushi/kosodatekyuuhukin.html"
+    },
+    "cards": []
+  },
+  "465291": {
+    "overview": {
+      "title": "喜界町の公式サイト",
+      "url": "https://www.town.kikai.lg.jp/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出産祝金",
+        "summary": "第1子10万円、第2子20万円、第3子30万円、第4子40万円、第5子以降50万円を支給します。",
+        "timing": "出産の翌日から1年以内に申請。出生時に居住1年未満の場合は、1年経過後の手続きも確認。",
+        "office": "喜界町の子育て支援担当窓口",
+        "documents": [
+          "申請書",
+          "本人確認書類の写し",
+          "世帯の住民票",
+          "振込口座が分かるもの"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.kikai.lg.jp/fukushi/syussaniwaikin.html",
+        "linkLabel": "喜界町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "子どもの最初の住所が喜界町であること、保護者の居住期間、支給後6か月以上の定住などが条件です。"
+      },
+      {
+        "title": "乳児紙おむつ等購入費助成",
+        "summary": "町内に住所がある対象の乳児へ、紙おむつ・おしりふきの購入に使える月5,000円分の助成券を交付します。",
+        "timing": "出生から1歳到達月まで、最大12か月。申請し、決定後に助成券を受取。",
+        "office": "喜界町の子育て支援担当窓口",
+        "documents": [
+          "申請書",
+          "本人確認書類の写し"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.kikai.lg.jp/fukushi/syussaniwaikin.html",
+        "linkLabel": "喜界町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "保護者と子どもの町内住所などの条件があります。"
+      }
+    ]
+  },
+  "465305": {
+    "overview": {
+      "title": "徳之島町の妊娠・出産・子育て案内",
+      "url": "https://www.tokunoshima-town.org/scene/ninshin.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "465313": {
+    "overview": {
+      "title": "天城町の妊娠・出産・子育て案内",
+      "url": "https://www.town.amagi.lg.jp/kosodate/ninshin/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "465321": {
+    "overview": {
+      "title": "伊仙町の妊娠・出産・子育て案内",
+      "url": "https://www.town.isen.kagoshima.jp/mirai/search-idx/ninshin-shussan.html"
+    },
+    "links": {
+      "handbook": "https://www.town.isen.kagoshima.jp/kosodate/bositecho.html"
+    },
+    "cards": []
+  },
+  "465330": {
+    "overview": {
+      "title": "和泊町の公式サイト",
+      "url": "https://www.town.wadomari.lg.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "465348": {
+    "overview": {
+      "title": "知名町の妊娠・出産・子育て案内",
+      "url": "https://www.town.china.lg.jp/guide/ninshin-shussan-kosodate/index.html"
+    },
+    "links": {
+      "allowance": "https://www.town.china.lg.jp/guide/ninshin-shussan-kosodate/4/1668.html"
+    },
+    "cards": []
+  },
+  "465356": {
+    "overview": {
+      "title": "与論町の公式サイト",
+      "url": "https://www.yoron.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "472018": {
+    "overview": {
+      "title": "那覇市の妊娠・出産・子育て案内",
+      "url": "https://www.city.naha.okinawa.jp/child/ninsin-syussan/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "472051": {
+    "overview": {
+      "title": "宜野湾市の妊娠・出産・子育て案内",
+      "url": "https://www.city.ginowan.lg.jp/life_scene/5160.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "472077": {
+    "overview": {
+      "title": "石垣市の妊娠・出産・子育て案内",
+      "url": "https://www.city.ishigaki.okinawa.jp/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "すくすく応援クーポン",
+        "summary": "出生の翌月から1歳の誕生月までの対象児へ、育児用品に使える計2万4,000円分のクーポンを3回に分けて交付します。転入の場合は枚数が変わります。",
+        "timing": "1歳の誕生日の前日までに申請。産後面談、3〜4か月児健診、9〜10か月児健診等で各8枚ずつ交付。",
+        "office": "石垣市の子育て支援担当窓口",
+        "documents": [
+          "母子健康手帳",
+          "申請・委任・同意書"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.city.ishigaki.okinawa.jp/kurashi_gyosei/kosodate_kyoiku/kosodate/12519.html",
+        "linkLabel": "石垣市の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "市内住民登録などが条件。クーポンの有効期間は交付から1年間です。"
+      }
+    ]
+  },
+  "472085": {
+    "overview": {
+      "title": "浦添市の妊娠・出産・子育て案内",
+      "url": "https://www.city.urasoe.lg.jp/category/lifescene/ninshin/"
+    },
+    "links": {
+      "medical": "https://www.city.urasoe.lg.jp/doc/6248f14273fe266fe59a99e2/"
+    },
+    "cards": []
+  },
+  "472093": {
+    "overview": {
+      "title": "名護市の妊娠・出産・子育て案内",
+      "url": "https://www.city.nago.okinawa.jp/category/guide/kosodate/"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.nago.okinawa.jp/kurashi/2025080100028/",
+      "allowance": "https://www.city.nago.okinawa.jp/kurashi/2018071900967/",
+      "medical": "https://www.city.nago.okinawa.jp/kurashi/2025091200014/"
+    },
+    "cards": []
+  },
+  "472107": {
+    "overview": {
+      "title": "糸満市の妊娠・出産・子育て案内",
+      "url": "https://www.city.itoman.lg.jp/site/kosodate/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "472115": {
+    "overview": {
+      "title": "沖縄市の妊娠・出産・子育て案内",
+      "url": "https://www.city.okinawa.okinawa.jp/k026/kosodate/kosodateshien/kodomo/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "472123": {
+    "overview": {
+      "title": "豊見城市の妊娠・出産・子育て案内",
+      "url": "https://www.city.tomigusuku.lg.jp/life_vent/ninshin_shussan/index.html"
+    },
+    "links": {
+      "pregnancyGrant": "https://www.city.tomigusuku.lg.jp/life_vent/ninshin_shussan/5856.html",
+      "birth": "https://www.city.tomigusuku.lg.jp/life_vent/ninshin_shussan/4804.html"
+    },
+    "cards": []
+  },
+  "472131": {
+    "overview": {
+      "title": "うるま市の妊娠・出産・子育て案内",
+      "url": "https://www.city.uruma.lg.jp/kosodatekyouiku/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "472140": {
+    "overview": {
+      "title": "宮古島市の妊娠・出産・子育て案内",
+      "url": "https://www.city.miyakojima.lg.jp/kurashi/lifeevent/ninshin.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "472158": {
+    "overview": {
+      "title": "南城市の公式サイト",
+      "url": "https://www.city.nanjo.okinawa.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473014": {
+    "overview": {
+      "title": "国頭村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.kunigami.okinawa.jp/kosodate_kyouiku/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出産祝金",
+        "summary": "第1子5万円、第2子10万円、第3子以降20万円を支給します。",
+        "timing": "出生の日から90日以降、1年以内に申請。対象者には村から申請案内を送付。",
+        "office": "国頭村 福祉課（0980-41-2765）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.vill.kunigami.okinawa.jp/birth/childbirth/",
+        "linkLabel": "国頭村の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "保護者が出生90日以上前から村内に住所を有すること、出生後も親子が90日以上居住すること、村の料金等に未納がないことなどが条件です。"
+      }
+    ]
+  },
+  "473022": {
+    "overview": {
+      "title": "大宜味村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.ogimi.okinawa.jp/kosodate_kyoiku/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473031": {
+    "overview": {
+      "title": "東村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.higashi.okinawa.jp/lifescene/ninshin_shussan/index.html"
+    },
+    "links": {
+      "handbook": "https://www.vill.higashi.okinawa.jp/lifescene/ninshin_shussan/1020.html",
+      "pregnancyGrant": "https://www.vill.higashi.okinawa.jp/lifescene/ninshin_shussan/3046.html",
+      "birth": "https://www.vill.higashi.okinawa.jp/lifescene/ninshin_shussan/1250.html"
+    },
+    "cards": []
+  },
+  "473065": {
+    "overview": {
+      "title": "今帰仁村の公式サイト",
+      "url": "https://www.nakijin.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473081": {
+    "overview": {
+      "title": "本部町の妊娠・出産・子育て案内",
+      "url": "https://www.town.motobu.okinawa.jp/doc/2024091800019/"
+    },
+    "links": {
+      "handbook": "https://www.town.motobu.okinawa.jp/doc/2024060500018/",
+      "birth": "https://www.town.motobu.okinawa.jp/doc/2023112100145/"
+    },
+    "cards": []
+  },
+  "473111": {
+    "overview": {
+      "title": "恩納村の公式サイト",
+      "url": "https://www.vill.onna.okinawa.jp/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "子育て用品支援事業（レンタル）",
+        "summary": "ベビーベッド・ベビーカー・チャイルドシート・ベビーバス等の指定用品レンタルについて、子ども1人あたり上限10万円を村が委託業者へ支払います。",
+        "timing": "貸出開始希望日の1か月前までに交付申請。妊婦は出産予定日の2か月前から申請できます。",
+        "office": "恩納村 健康保険課（098-966-1217）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.vill.onna.okinawa.jp/living/birth/1484705419/1728354533/",
+        "linkLabel": "恩納村の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "村内在住の妊婦、または1歳未満の乳児と村に住所がある保護者などが対象です。現金の給付や用品購入費の助成ではありません。"
+      }
+    ]
+  },
+  "473138": {
+    "overview": {
+      "title": "宜野座村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.ginoza.okinawa.jp/tetsuzuki/64.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473146": {
+    "overview": {
+      "title": "金武町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kin.okinawa.jp/lifescene/887.html"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "子育て激励金（1歳以降）",
+        "summary": "対象の子ども1人につき10万円。乳児の前期・後期健診を受けた後、1歳以降に申請する制度です。",
+        "timing": "1歳の誕生日から2歳の誕生日の前日までに申請。",
+        "office": "金武町 保健福祉センター（098-968-5932）",
+        "documents": [
+          "申請書",
+          "住民票",
+          "納税証明書",
+          "水道検針票等の居住確認資料",
+          "印鑑",
+          "保護者の口座が分かるもの"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://www.town.kin.okinawa.jp/soshiki/hokenfukushika/gyomuannai/6/477.html",
+        "linkLabel": "金武町の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "両親または片親等が出生90日前から町内に居住し、その後も親子が継続居住していること、乳児健診の受診、世帯の税等に未納がないことなどが条件です。",
+        "additionalSource": {
+          "title": "金武町の子育て激励金案内",
+          "url": "https://www.town.kin.okinawa.jp/material/files/group/5/38593346.pdf"
+        }
+      }
+    ]
+  },
+  "473154": {
+    "overview": {
+      "title": "伊江村の妊娠・出産・子育て案内",
+      "url": "https://www.iejima.org/category/live_event/ninshin/"
+    },
+    "links": {
+      "handbook": "https://www.iejima.org/document/2020122400029/",
+      "allowance": "https://www.iejima.org/document/2020101900014/"
+    },
+    "cards": []
+  },
+  "473243": {
+    "overview": {
+      "title": "読谷村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.yomitan.okinawa.jp/life_scene/ninshin.html"
+    },
+    "links": {
+      "handbook": "https://www.vill.yomitan.okinawa.jp/kosodate_kyoiku/ninshin_shussan/2093.html",
+      "pregnancyGrant": "https://www.vill.yomitan.okinawa.jp/kosodate_kyoiku/ninshin_shussan/6300.html"
+    },
+    "cards": []
+  },
+  "473251": {
+    "overview": {
+      "title": "嘉手納町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kadena.okinawa.jp/life/lif198.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473260": {
+    "overview": {
+      "title": "北谷町の妊娠・出産・子育て案内",
+      "url": "https://www.chatan.jp/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473278": {
+    "overview": {
+      "title": "北中城村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.kitanakagusuku.lg.jp/bamen/ninshinsyusan/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473286": {
+    "overview": {
+      "title": "中城村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.nakagusuku.okinawa.jp/pages/label:%E5%A6%8A%E5%A8%A0%E3%83%BB%E5%87%BA%E7%94%A3/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473294": {
+    "overview": {
+      "title": "西原町の妊娠・出産・子育て案内",
+      "url": "https://www.town.nishihara.okinawa.jp/site/kosodate-sabu/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473481": {
+    "overview": {
+      "title": "与那原町の妊娠・出産・子育て案内",
+      "url": "https://www.town.yonabaru.okinawa.jp/life/sub/12/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473502": {
+    "overview": {
+      "title": "南風原町の妊娠・出産・子育て案内",
+      "url": "https://www.town.haebaru.lg.jp/life/2/11/"
+    },
+    "links": {
+      "handbook": "https://www.town.haebaru.lg.jp/life/2/11/58/",
+      "pregnancyGrant": "https://www.town.haebaru.lg.jp/soshiki/11/9703.html",
+      "birth": "https://www.town.haebaru.lg.jp/soshiki/7/14294.html"
+    },
+    "cards": []
+  },
+  "473537": {
+    "overview": {
+      "title": "渡嘉敷村の公式サイト",
+      "url": "https://www.vill.tokashiki.okinawa.jp/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473545": {
+    "overview": {
+      "title": "座間味村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.zamami.okinawa.jp/pages/label:%E5%A6%8A%E5%A8%A0%E3%83%BB%E5%87%BA%E7%94%A3/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473553": {
+    "overview": {
+      "title": "粟国村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.aguni.okinawa.jp/kosodate/index.html"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473561": {
+    "overview": {
+      "title": "渡名喜村の妊娠・出産・子育て案内",
+      "url": "http://www.vill.tonaki.okinawa.jp/detail.jsp?id=57502&menuid=12283&funcid=1"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473570": {
+    "overview": {
+      "title": "南大東村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.minamidaito.okinawa.jp/life/1/3/13/"
+    },
+    "links": {},
+    "cards": []
+  },
+  "473588": {
+    "overview": {
+      "title": "北大東村の妊娠・出産・子育て案内",
+      "url": "https://vill.kitadaito.okinawa.jp/life_event/ninsin_syussan/"
+    },
+    "links": {
+      "handbook": "https://vill.kitadaito.okinawa.jp/life_event/ninsin_syussan/ninshin/index.html",
+      "birth": "https://vill.kitadaito.okinawa.jp/life_event/ninsin_syussan/kodomo/index.html",
+      "medical": "https://vill.kitadaito.okinawa.jp/life_event/ninsin_syussan/kodomo/kodomo_iryouhi.html"
+    },
+    "cards": [
+      {
+        "title": "出産お祝い金",
+        "summary": "第1子10万円、第2子15万円、第3子20万円、第4子以降35万円。村内住民または定住予定者などが対象です。",
+        "timing": "出生後、保健センターで申請。審査会で支給を決定します。",
+        "office": "北大東村 保健センター（09802-3-4567）",
+        "documents": [
+          "申請書",
+          "印鑑",
+          "振込口座の通帳"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://vill.kitadaito.okinawa.jp/life_event/ninsin_syussan/kodomo/oiwaikin.html",
+        "linkLabel": "北大東村の公式案内",
+        "checkedOn": "2026-11-11",
+        "note": "納税状況等を確認します。申請期限や定住要件は村の窓口で確認してください。"
+      }
+    ]
+  },
+  "473596": {
+    "overview": {
+      "title": "伊平屋村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.iheya.okinawa.jp/life/1/4/18/"
+    },
+    "links": {
+      "medical": "https://www.vill.iheya.okinawa.jp/site/nabi/1113.html"
+    },
+    "cards": []
+  },
+  "473600": {
+    "overview": {
+      "title": "伊是名村の妊娠・出産・子育て案内",
+      "url": "https://vill.izena.okinawa.jp/lifeevent/ninshin/"
+    },
+    "links": {
+      "handbook": "https://vill.izena.okinawa.jp/lifeevent/ninshin/1539762747/1547637131/"
+    },
+    "cards": [
+      {
+        "title": "出産祝い金",
+        "summary": "対象の子ども1人につき20万円。申請書類の確認・審査を経て支給します。",
+        "timing": "出生後、企画政策課で対象条件・申請期限を確認。",
+        "office": "伊是名村 企画政策課",
+        "documents": [
+          "申請書",
+          "出生届証明の写し",
+          "振込口座が分かるものの写し",
+          "チェックリスト",
+          "公共料金納付済証明書"
+        ],
+        "documentsAreTypical": false,
+        "url": "https://vill.izena.okinawa.jp/lifeevent/ninshin/1612779115/",
+        "linkLabel": "伊是名村の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "473618": {
+    "overview": {
+      "title": "久米島町の妊娠・出産・子育て案内",
+      "url": "https://www.town.kumejima.okinawa.jp/categories/lifestage/ninshin/"
+    },
+    "links": {},
+    "cards": [
+      {
+        "title": "出産祝品（おむつ券）",
+        "summary": "町内の対象となる出産家庭へ、おむつ・おしりふき・ミルク・離乳食・哺乳瓶などの育児用品に使えるおむつ券を交付します。",
+        "timing": "出生後、こども未来課で対象条件・申請期限・交付内容を確認。",
+        "office": "久米島町 こども未来課（098-985-7115）",
+        "documents": [
+          "申請書類・申込み方法は公式案内または担当窓口で確認"
+        ],
+        "documentsAreTypical": true,
+        "url": "https://www.town.kumejima.okinawa.jp/docs/2024083000045/",
+        "linkLabel": "久米島町の公式案内",
+        "checkedOn": "2026-11-11"
+      }
+    ]
+  },
+  "473626": {
+    "overview": {
+      "title": "八重瀬町の妊娠・出産・子育て案内",
+      "url": "https://www.town.yaese.lg.jp/docs/2014030800170/"
+    },
+    "links": {
+      "handbook": "https://www.town.yaese.lg.jp/docs/2022091500021/",
+      "birth": "https://www.town.yaese.lg.jp/docs/2014030600183/",
+      "insurance": "https://www.town.yaese.lg.jp/docs/2020092900017/",
+      "medical": "https://www.town.yaese.lg.jp/docs/2014030900276/"
+    },
+    "cards": []
+  },
+  "473758": {
+    "overview": {
+      "title": "多良間村の妊娠・出産・子育て案内",
+      "url": "https://www.vill.tarama.okinawa.jp/kurashi/lifestage/ninshin_syussan/"
+    },
+    "links": {
+      "birth": "https://www.vill.tarama.okinawa.jp/kurashi/todokede_syoumei/syussei/"
+    },
+    "cards": []
+  },
+  "473812": {
+    "overview": {
+      "title": "竹富町の妊娠・出産・子育て案内",
+      "url": "https://www.town.taketomi.lg.jp/lifeevent/ninshin/"
+    },
+    "links": {
+      "birth": "https://www.town.taketomi.lg.jp/guide/todokede/koseki/1531188509/",
+      "allowance": "https://www.town.taketomi.lg.jp/guide/kosodate/kosodateshien/1531281167/",
+      "medical": "https://www.town.taketomi.lg.jp/guide/kosodate/kodomo_kenkou/1531276571/"
+    },
+    "cards": []
+  },
+  "473821": {
+    "overview": {
+      "title": "与那国町の妊娠・出産・子育て案内",
+      "url": "https://www.town.yonaguni.okinawa.jp/category/bunya/kyoiku/ninshin/"
+    },
+    "links": {},
+    "cards": []
   }
 };
 
@@ -14486,8 +17816,28 @@ const careProcedureMunicipalitySourceParents = {
   "341053": "341002",
   "341061": "341002",
   "341070": "341002",
-  "341088": "341002"
+  "341088": "341002",
+  "401013": "401005",
+  "401030": "401005",
+  "401056": "401005",
+  "401064": "401005",
+  "401072": "401005",
+  "401081": "401005",
+  "401099": "401005",
+  "401315": "401307",
+  "401323": "401307",
+  "401331": "401307",
+  "401340": "401307",
+  "401358": "401307",
+  "401366": "401307",
+  "401374": "401307",
+  "431010": "431001",
+  "431028": "431001",
+  "431036": "431001",
+  "431044": "431001",
+  "431052": "431001"
 };
+
 const careProcedurePrefectureSources = {
   "31": {
     "title": "鳥取県の市町村相談窓口",
@@ -14522,6 +17872,46 @@ const careProcedurePrefectureSources = {
         "checkedOn": "2026-11-10"
       }
     ]
+  },
+  "40": {
+    "title": "福岡県の市町村公式サイト一覧",
+    "url": "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html",
+    "cards": []
+  },
+  "41": {
+    "title": "佐賀県の市町村公式サイト一覧",
+    "url": "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166769149.html",
+    "cards": []
+  },
+  "42": {
+    "title": "長崎県の市町村公式サイト一覧",
+    "url": "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html",
+    "cards": []
+  },
+  "43": {
+    "title": "熊本県の市町村公式サイト一覧",
+    "url": "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166969149.html",
+    "cards": []
+  },
+  "44": {
+    "title": "大分県の市町村公式サイト一覧",
+    "url": "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167069149.html",
+    "cards": []
+  },
+  "45": {
+    "title": "宮崎県の市町村公式サイト一覧",
+    "url": "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+    "cards": []
+  },
+  "46": {
+    "title": "鹿児島県の市町村公式サイト一覧",
+    "url": "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+    "cards": []
+  },
+  "47": {
+    "title": "沖縄県の市町村公式サイト一覧",
+    "url": "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+    "cards": []
   }
 };
 
