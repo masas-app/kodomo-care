@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.16.25"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.16.26"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
 
 :root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#20342c;background:#f2f7f3}*{box-sizing:border-box}body{margin:0}.app{max-width:480px;margin:auto;min-height:100dvh;position:relative;overflow:hidden;background:linear-gradient(145deg,#eaf8eb,#faf9ee)}.photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.95;pointer-events:none}.wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.20),rgba(255,255,255,.08) 32%,rgba(255,255,255,.44) 85%);pointer-events:none}.content{position:relative;padding:20px 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-size:24px;font-weight:850;color:white;text-shadow:0 2px 7px #253d3b88}.switch{border:0;border-radius:22px;background:#ffffffed;padding:12px 15px;font-weight:750;color:#234437;max-width:50%}h1{color:white;text-shadow:0 2px 8px #203c3488;font-size:31px;margin:0}h2{font-size:20px;margin:10px 0}p{margin:5px 0}.sub{color:#f9fffc;text-shadow:0 1px 6px #2448;font-weight:600}.hero{margin-top:20px;background:linear-gradient(115deg,#16a977,#0c9870);border-radius:20px;padding:20px;color:white;box-shadow:0 7px 18px #154d3326}.hero small{font-weight:750}.hero strong{display:block;font-size:20px;margin:8px 0}.hero button{float:right;border:0;background:transparent;color:white;font-size:22px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.tile{background:#ffffffed;border:0;border-radius:17px;padding:15px 5px;text-align:center;box-shadow:0 5px 15px #344b2518;cursor:pointer}.tile b{display:block;font-size:25px}.tile small{font-weight:700}.white{background:#fffffff0;border-radius:18px;padding:16px;margin:11px 0;box-shadow:0 5px 15px #334b2515}.action{width:100%;border:0;background:#fffffff0;padding:16px;text-align:left;border-radius:15px;margin:7px 0;font-weight:750;font-size:16px;cursor:pointer}.action span{float:right;color:#748780}.action .action-icon{float:none;display:inline-flex;align-items:center;justify-content:center;width:24px;margin-right:7px;vertical-align:middle;color:#d18a26}.btn{border:0;border-radius:11px;background:#0e9e72;color:white;padding:11px 14px;font-weight:700;cursor:pointer}.btn.alt{background:#e7f3ee;color:#196d52}.btn.warn{background:#c65b55}.small{font-size:12px;color:#64766b}.row{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{background:#e5f5ee;padding:6px 9px;border-radius:30px;font-size:12px;font-weight:700}.field{width:100%;border:1px solid #cadbd0;border-radius:10px;padding:12px;font:inherit;background:white;margin:5px 0 10px}label{display:block;font-size:13px;font-weight:700;margin-top:9px}.hide{display:none!important}.item{border-bottom:1px solid #e5ebe6;padding:12px 0}.item:last-child{border:0}.muted{color:#64766b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.day{text-align:center;border:0;border-radius:9px;background:#f0f5f0;padding:9px 2px;min-height:43px;font-size:13px}.day.has{background:#d7efe4}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin:2px}.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}.sheet{background:#fff;border-radius:20px;padding:20px;width:min(440px,100%);max-height:88dvh;overflow:auto}.error{color:#a23d3d;white-space:pre-wrap}.note{padding:10px;background:#fff7db;border-radius:10px;font-size:12px;color:#5b512a}.empty{padding:15px;color:#687d70;text-align:center}.footer{font-size:11px;color:#52675b;text-align:center;margin-top:24px}
 
@@ -190,7 +190,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSideMenu
 const APP_PREF_KEY='kodomo-care-preferences-v1';
 function getAppPrefs(){let raw={};try{raw=JSON.parse(localStorage.getItem(APP_PREF_KEY)||'{}')||{}}catch{}let days=Array.isArray(raw.reminderDaysSelected)?raw.reminderDaysSelected:(Number.isInteger(raw.reminderDays)?[raw.reminderDays]:[1]);return {fontSize:['small','normal','large'].includes(raw.fontSize)?raw.fontSize:'normal',reminderDaysSelected:[...new Set(days.map(Number).filter(n=>[0,1,3,7].includes(n)))],reminderHour:Number.isInteger(raw.reminderHour)&&raw.reminderHour>=0&&raw.reminderHour<=23?raw.reminderHour:8,reminderMinute:Number.isInteger(raw.reminderMinute)&&raw.reminderMinute>=0&&raw.reminderMinute<=59?raw.reminderMinute:0}}
 function applyAppPrefs(){let p=getAppPrefs();document.documentElement.dataset.fontSize=p.fontSize;document.documentElement.style.fontSize=p.fontSize==='large'?'19px':p.fontSize==='small'?'14px':'16px';}
-function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.16.25</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
+function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.16.26</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
 function refreshPushPermissionStatus(){
   const status=document.getElementById('pushPermissionStatus');
   const enable=document.getElementById('pushEnableButton');
@@ -97729,14 +97729,39 @@ const careProcedureMunicipalitySources = {
   },
   "013919": {
     "overview": {
-      "title": "北海道の市町村公式サイト案内",
-      "url": "https://www.pref.hokkaido.lg.jp/link/shichoson/aiueo.html"
+      "title": "島牧村の公式サイト",
+      "url": "https://www.vill.shimamaki.lg.jp/"
     },
     "links": {},
-    "cards": [],
+    "cards": [
+      {
+        "title": "出産祝いの贈呈（額・品目は村に確認）",
+        "url": "https://houmu.h-chosonkai.gr.jp/~reikidb/data/90/45/reiki_honbun/a066RG00000213.html",
+        "summary": "村の出産祝金贈呈規則には、対象の出生について祝い金を贈呈し、必要に応じて物品でも贈呈できると定めています。",
+        "timing": "出生届の際に村の担当窓口へ確認。規則の「出生届後20日以内」は贈呈時期で、申請期限とは断定していません。",
+        "office": "島牧村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を確認"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "島牧村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "needs_confirmation",
+        "note": "規則本文は取得できましたが、額は「別に村長が定める」とあり、現在の金額・品目・手続きを確定できていません。規則では出生児の日本国籍、出生時と贈呈時に夫婦とも村内住所等が条件です。村に現在の扱いを確認してください。",
+        "kind": "goods",
+        "research_id": "c461ca76ae856b82",
+        "verificationMethod": "official-current-page-or-rule-body",
+        "supportingEvidence": [
+          {
+            "url": "https://houmu.h-chosonkai.gr.jp/~reikidb/top/detail/4139138",
+            "finding": "公式例規DBの検索・個別規則から新しい本文の所在を特定。規則の存在・条件は確認できるが額・品目は本文にない。"
+          }
+        ]
+      }
+    ],
     "reviewedOn": "2026-11-16",
     "reviewStatus": "needs_confirmation",
-    "reviewNote": "再確認：公式サイトは一時停止。北海道の2025年支援一覧には出産祝い品・産後ケア・支援米等があるが、現年度の具体的条件・申請方法は確認できない。 制度がないという意味ではありません。現在の詳細は担当窓口で確認してください。"
+    "reviewNote": "公式の現在の掲載先・条例等を再調査して追記・更新しました。現在の額・品目・受付が確定していない制度は、各カードに確認事項を明記しています。"
   },
   "013927": {
     "overview": {
@@ -97761,9 +97786,9 @@ const careProcedureMunicipalitySources = {
     "cards": [
       {
         "title": "出産祝い金",
-        "url": "https://kuromatsunai.sakura.ne.jp/sblo_files/kuromatsunai-news/image/E4BA88E7AE97E381AEE38182E38289E381BEE38197E58D98E3839AE383BCE382B8.pdf",
-        "summary": "2025年度の町の資料に、第1子5万円、第2子10万円、第3子以降20万円の出産祝い金を掲載しています。",
-        "timing": "出産前後に町の担当窓口で当年度の条件を確認。",
+        "url": "https://houmu.h-chosonkai.gr.jp/~reikidb/data/73/6/H417901010007/H417901010007_j.html",
+        "summary": "町に住所があり、現に子を養育する保護者へ、第1子5万円、第2子10万円、第3子以降20万円の出産祝い金を支給します。",
+        "timing": "出生後に町から届く書類で申請。条例に出産から3か月の申請時期があるため、出生届時に日程を確認。",
         "office": "黒松内町 公式案内に記載の担当窓口",
         "documents": [
           "公式案内に記載された申請書・確認書類を確認"
@@ -97771,12 +97796,17 @@ const careProcedureMunicipalitySources = {
         "documentsAreTypical": true,
         "linkLabel": "黒松内町の公式案内",
         "checkedOn": "2026-11-16",
-        "verificationStatus": "needs_confirmation",
-        "note": "2026年度の支給額・受付状況は窓口で確認してください。過年度資料の確認として表示しています。 再確認：現行サイトから令和8年度予算概要と2026年3月広報も確認したが、予算概要は大分類のみで、二つの制度の現年度の額・品目・条件までは確定できない。",
+        "verificationStatus": "confirmed",
+        "note": "令和8年3月31日施行の改正を含む現行条例で、金額・対象を確認しました。条例の効力期限は令和11年3月31日です。予算の範囲内で支給し、申請・子の数え方等は町の案内も確認してください。",
         "kind": "cash",
-        "research_id": "8f8d48298a984d42",
-        "verificationMethod": "official-recheck-unresolved",
-        "recheckedOn": "2026-11-16"
+        "research_id": "9e13b738cbfefe2d",
+        "verificationMethod": "official-current-page-or-rule-body",
+        "supportingEvidence": [
+          {
+            "url": "https://houmu.h-chosonkai.gr.jp/~reikidb/top/detail/4191643",
+            "finding": "公式DB検索から現行条例本文へ到達。令和7年度の広報だけに依存せず、令和8年改正後の金額と効力期限を確認。"
+          }
+        ]
       },
       {
         "title": "ママ＆ベビ応援ギフト",
@@ -97799,8 +97829,8 @@ const careProcedureMunicipalitySources = {
       }
     ],
     "reviewedOn": "2026-11-16",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "公式の案内・資料は見つかりましたが、現在の金額・対象・受付を確定できない制度を含みます。各カードの確認事項を参照してください。"
+    "reviewStatus": "listed",
+    "reviewNote": "公式の現在の掲載先・条例等を再調査して追記・更新しました。現在の額・品目・受付が確定していない制度は、各カードに確認事項を明記しています。"
   },
   "013943": {
     "overview": {
@@ -98741,10 +98771,72 @@ const careProcedureMunicipalitySources = {
       "url": "http://www.town.toyako.hokkaido.jp/town_guide/parenting_and_education/"
     },
     "links": {},
-    "cards": [],
+    "cards": [
+      {
+        "title": "出産祝金（とうやコイン）",
+        "url": "http://www.town.toyako.hokkaido.jp/town_guide/parenting_and_education/pae001/1796",
+        "summary": "第1子10万円、第2子15万円、第3子以降20万円分の町の地域通貨「とうやコイン」を交付します。",
+        "timing": "出生届の際に申請。居住1年未満の場合は1年経過後に申請。町外で出生届を出した場合も担当窓口で手続き。",
+        "office": "洞爺湖町 健康福祉課子育て支援係・各支所",
+        "documents": [
+          "とうやコインID（事前登録）",
+          "その他の申請書類は担当窓口で確認"
+        ],
+        "documentsAreTypical": false,
+        "linkLabel": "洞爺湖町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産した方または配偶者が、申請時に町に住民登録して1年以上経過し、実際に居住していること等が条件です。出産後の転入は対象外。令和7年4月から商品券に代わる地域通貨となり、有効期限は付与日から3年間です。",
+        "kind": "cash",
+        "research_id": "eafeb502b24082aa",
+        "verificationMethod": "official-current-page-or-rule-body"
+      },
+      {
+        "title": "育児用品購入費の支給（とうやコイン）",
+        "url": "http://www.town.toyako.hokkaido.jp/town_guide/health/hem15/",
+        "summary": "0歳児を育てる対象家庭へ、子ども1人あたり5万円分の「とうやコイン」を支給し、紙おむつ・ミルク等の育児用品の購入を支援します。",
+        "timing": "出生・転入手続きの際に申請。決定通知の発送後、1～2週間ほどでポイント付与。",
+        "office": "洞爺湖町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を確認"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "洞爺湖町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子どもと保護者の住民票が町にあり、施設等に入所していないことが条件です。おしりふき・母乳パッド・ベビーフード等も対象。地域通貨の有効期限は付与日から3年間で、現金給付ではありません。",
+        "kind": "diapers",
+        "research_id": "40991f1e26d0a660",
+        "verificationMethod": "official-current-page-or-rule-body"
+      },
+      {
+        "title": "産後ケア事業",
+        "url": "http://www.town.toyako.hokkaido.jp/town_guide/health/hem17/",
+        "summary": "町に住民票がある産後1年未満の母子等へ、宿泊・日帰り・訪問で、授乳や育児の相談・乳房ケア・休息を支援します。",
+        "timing": "原則、事前に電子申請・電話・来所で申請。利用決定通知と利用券が届いてから施設を予約。",
+        "office": "洞爺湖町 こども家庭センター",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を確認"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "洞爺湖町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "町の現行掲載チラシでは通算6日以内（日帰り・訪問は2回で1日）。課税世帯は宿泊1泊2日4,600円、日帰り1,000円、訪問2,000円で、非課税・生活保護世帯は各半額です。施設ごとの月齢制限、食費・キャンセル料等は事前に確認してください。",
+        "kind": "care",
+        "research_id": "23bec6e3e975481b",
+        "verificationMethod": "official-current-page-or-rule-body",
+        "supportingEvidence": [
+          {
+            "url": "http://www.town.toyako.hokkaido.jp/file/contents/4116/31312/sanngokeaannnai.pdf",
+            "finding": "現在の町の制度ページからリンクされた案内本文で、対象・3形態・料金・通算日数・利用券の手続きを確認。"
+          }
+        ]
+      }
+    ],
     "reviewedOn": "2026-11-16",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "再確認：町公式の旧詳細URLは404。北海道一覧や移住案内には祝い金等があるが、現年度の金額・申請条件の町の本文は確認できない。 制度がないという意味ではありません。現在の詳細は担当窓口で確認してください。"
+    "reviewStatus": "listed",
+    "reviewNote": "公式の現在の掲載先・条例等を再調査して追記・更新しました。現在の額・品目・受付が確定していない制度は、各カードに確認事項を明記しています。"
   },
   "015857": {
     "overview": {
@@ -99789,27 +99881,39 @@ const careProcedureMunicipalitySources = {
         ]
       },
       {
-        "title": "乳児栄養強化給付金（金額等は要確認）",
-        "url": "https://www.town.okushiri.lg.jp/hotnews/files/00001300/00001387/20240801151749.pdf",
-        "summary": "町が現在リンクしている2024年の出生案内には、町在住の妊婦が出産した場合、出生児1人につき3万円の乳児栄養強化給付金を支給するとあります。",
-        "timing": "出生届後、役場・青苗支所・保健福祉センターで現在の受付を確認。",
+        "title": "乳児栄養強化給付金",
+        "url": "https://houmu.h-chosonkai.gr.jp/~reikidb/data/39/52/H416902100021/H416902100021_j.html",
+        "summary": "奥尻町に住所がある方が出産した場合、出産した方または新生児の保護者へ、新生児1人につき3万円を支給します。",
+        "timing": "出生届の後、役場・青苗支所・保健福祉センターで申請。早めに手続き。",
         "office": "奥尻町 公式案内に記載の担当窓口",
         "documents": [
-          "公式案内に記載された申請書・確認書類を確認"
+          "町所定の乳児栄養強化給付金支給申請書",
+          "町で出産を確認できない場合は医師・助産師の証明書",
+          "振込口座等の書類は町の案内で確認"
         ],
-        "documentsAreTypical": true,
+        "documentsAreTypical": false,
         "linkLabel": "奥尻町の公式案内",
         "checkedOn": "2026-11-16",
-        "verificationStatus": "needs_confirmation",
-        "note": "北海道の2025年支援一覧にも制度名がありますが、令和8年度の金額・条件を確認できていません。3万円を現在の確定額としては扱わず、町の窓口で確認してください。",
+        "verificationStatus": "confirmed",
+        "note": "令和8年4月1日施行の改正を含む現行規則で、金額・対象・申請を確認しました。町が出産を確認できない場合は医師・助産師の証明書が必要です。国の妊婦支援給付とは別の町の給付です。",
         "kind": "cash",
-        "research_id": "4aa9bf0a78baec08",
-        "verificationMethod": "official-guide-current-amount-unconfirmed"
+        "research_id": "909c32cfc1d854e6",
+        "verificationMethod": "official-current-page-or-rule-body",
+        "supportingEvidence": [
+          {
+            "url": "https://houmu.h-chosonkai.gr.jp/~reikidb/top/detail/4192858",
+            "finding": "公式例規DBの検索から個別規則のiframeリンクをたどり本文を取得。旧索引の404とは区別。"
+          },
+          {
+            "url": "https://www.town.okushiri.lg.jp/hotnews/files/00001300/00001387/20240801151749.pdf",
+            "finding": "町の現在掲載している出生手続き案内でも金額3万円と窓口を照合。"
+          }
+        ]
       }
     ],
     "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "見つかった公式の制度・資料を追記・更新しました。現在の条件が未確認の制度は各カードに明記しています。全制度の網羅を意味するものではありません。"
+    "reviewNote": "公式の現在の掲載先・条例等を再調査して追記・更新しました。現在の額・品目・受付が確定していない制度は、各カードに確認事項を明記しています。"
   },
   "013706": {
     "overview": {
