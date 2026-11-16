@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.14.23"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.16.24"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
 
 :root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#20342c;background:#f2f7f3}*{box-sizing:border-box}body{margin:0}.app{max-width:480px;margin:auto;min-height:100dvh;position:relative;overflow:hidden;background:linear-gradient(145deg,#eaf8eb,#faf9ee)}.photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.95;pointer-events:none}.wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.20),rgba(255,255,255,.08) 32%,rgba(255,255,255,.44) 85%);pointer-events:none}.content{position:relative;padding:20px 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-size:24px;font-weight:850;color:white;text-shadow:0 2px 7px #253d3b88}.switch{border:0;border-radius:22px;background:#ffffffed;padding:12px 15px;font-weight:750;color:#234437;max-width:50%}h1{color:white;text-shadow:0 2px 8px #203c3488;font-size:31px;margin:0}h2{font-size:20px;margin:10px 0}p{margin:5px 0}.sub{color:#f9fffc;text-shadow:0 1px 6px #2448;font-weight:600}.hero{margin-top:20px;background:linear-gradient(115deg,#16a977,#0c9870);border-radius:20px;padding:20px;color:white;box-shadow:0 7px 18px #154d3326}.hero small{font-weight:750}.hero strong{display:block;font-size:20px;margin:8px 0}.hero button{float:right;border:0;background:transparent;color:white;font-size:22px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.tile{background:#ffffffed;border:0;border-radius:17px;padding:15px 5px;text-align:center;box-shadow:0 5px 15px #344b2518;cursor:pointer}.tile b{display:block;font-size:25px}.tile small{font-weight:700}.white{background:#fffffff0;border-radius:18px;padding:16px;margin:11px 0;box-shadow:0 5px 15px #334b2515}.action{width:100%;border:0;background:#fffffff0;padding:16px;text-align:left;border-radius:15px;margin:7px 0;font-weight:750;font-size:16px;cursor:pointer}.action span{float:right;color:#748780}.action .action-icon{float:none;display:inline-flex;align-items:center;justify-content:center;width:24px;margin-right:7px;vertical-align:middle;color:#d18a26}.btn{border:0;border-radius:11px;background:#0e9e72;color:white;padding:11px 14px;font-weight:700;cursor:pointer}.btn.alt{background:#e7f3ee;color:#196d52}.btn.warn{background:#c65b55}.small{font-size:12px;color:#64766b}.row{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{background:#e5f5ee;padding:6px 9px;border-radius:30px;font-size:12px;font-weight:700}.field{width:100%;border:1px solid #cadbd0;border-radius:10px;padding:12px;font:inherit;background:white;margin:5px 0 10px}label{display:block;font-size:13px;font-weight:700;margin-top:9px}.hide{display:none!important}.item{border-bottom:1px solid #e5ebe6;padding:12px 0}.item:last-child{border:0}.muted{color:#64766b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.day{text-align:center;border:0;border-radius:9px;background:#f0f5f0;padding:9px 2px;min-height:43px;font-size:13px}.day.has{background:#d7efe4}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin:2px}.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}.sheet{background:#fff;border-radius:20px;padding:20px;width:min(440px,100%);max-height:88dvh;overflow:auto}.error{color:#a23d3d;white-space:pre-wrap}.note{padding:10px;background:#fff7db;border-radius:10px;font-size:12px;color:#5b512a}.empty{padding:15px;color:#687d70;text-align:center}.footer{font-size:11px;color:#52675b;text-align:center;margin-top:24px}
 
@@ -190,7 +190,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSideMenu
 const APP_PREF_KEY='kodomo-care-preferences-v1';
 function getAppPrefs(){let raw={};try{raw=JSON.parse(localStorage.getItem(APP_PREF_KEY)||'{}')||{}}catch{}let days=Array.isArray(raw.reminderDaysSelected)?raw.reminderDaysSelected:(Number.isInteger(raw.reminderDays)?[raw.reminderDays]:[1]);return {fontSize:['small','normal','large'].includes(raw.fontSize)?raw.fontSize:'normal',reminderDaysSelected:[...new Set(days.map(Number).filter(n=>[0,1,3,7].includes(n)))],reminderHour:Number.isInteger(raw.reminderHour)&&raw.reminderHour>=0&&raw.reminderHour<=23?raw.reminderHour:8,reminderMinute:Number.isInteger(raw.reminderMinute)&&raw.reminderMinute>=0&&raw.reminderMinute<=59?raw.reminderMinute:0}}
 function applyAppPrefs(){let p=getAppPrefs();document.documentElement.dataset.fontSize=p.fontSize;document.documentElement.style.fontSize=p.fontSize==='large'?'19px':p.fontSize==='small'?'14px':'16px';}
-function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.14.23</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
+function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.16.24</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
 function refreshPushPermissionStatus(){
   const status=document.getElementById('pushPermissionStatus');
   const enable=document.getElementById('pushEnableButton');
@@ -29650,11 +29650,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "出生届の時から継続して村民であること等が条件です。出生時の一括給付ではありません。",
         "kind": "cash"
+      },
+      {
+        "title": "チャイルドシート購入費補助",
+        "url": "https://www.uenomura.jp/admin/education/kosodate/childseat.html",
+        "summary": "購入時に満6歳未満の子のチャイルドシート購入費を、2分の1・上限2万円まで補助します。",
+        "timing": "購入後60日以内に申請。",
+        "office": "上野村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "上野村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入時・申請時の親子の村内住所、村税滞納なし、安全基準適合等が条件です。子ども1人につき1台・1回。",
+        "kind": "goods",
+        "research_id": "9c04d8b8e1e77f1e",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "103675": {
     "overview": {
@@ -30042,11 +30060,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て支援金（出生時）",
+        "url": "https://www.vill.kawaba.gunma.jp/kurashi/fukushi/kosodate/kosodate.html",
+        "summary": "令和8年4月改正後の出生時支給額は、第1子・第2子20万円、第3子・第4子30万円、第5子以降50万円です。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "川場村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "川場村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "養育する父母等が村に居住して6か月以上経過し、村税等に滞納がないこと等が条件です。就学時の別給付を出生時の金額に加えて表示していません。",
+        "kind": "cash",
+        "research_id": "58f4eda6d7336380",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "104485": {
     "overview": {
@@ -30747,11 +30783,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て支援金（誕生時）",
+        "url": "https://www.city.honjo.lg.jp/kosodate/nenreidesagasu/akachan_kodomo/josei_teate/16619.html",
+        "summary": "第1子・第2子に2万円、第3子以降に3万円を支給します。",
+        "timing": "出生日から1年以内に申請。赤ちゃん訪問時に申請書を受取り、里帰り先で訪問を受ける方は郵送申請も可。",
+        "office": "本庄市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "本庄市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子の出生後最初の住民登録が市で、保護者が出生日・申請時とも市に住所を有し、現に養育していること等が条件です。第3子は18歳年度末までの子で数えます。",
+        "kind": "cash",
+        "research_id": "c5ad913d0c8da873",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "112127": {
     "overview": {
@@ -31127,11 +31181,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "産前産後支援ヘルプサービス",
+        "url": "https://www.city.toda.saitama.jp/site/dacco/kodomokatei-sanzensango-help.html",
+        "summary": "妊娠中から産後1年未満の方へ、家事・育児を支援するヘルパーを派遣します。通常は月12日以内、多胎児は15日以内、1日2～4時間です。",
+        "timing": "初回利用希望日の3週間前を目安に市へ登録申請。登録後に事業者へ予約。",
+        "office": "戸田市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "戸田市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "課税世帯は1時間1,000円、非課税世帯は550円等の自己負担があり、交通費・沐浴代は別途有料です。在宅中の妊産婦が対象で、就労・就職活動目的は対象外です。",
+        "kind": "home_help",
+        "research_id": "67451557ced5c1c6",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "112259": {
     "overview": {
@@ -31931,11 +32003,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "チャイルドシート購入費助成",
+        "url": "https://www.town.ogose.saitama.jp/kyoiku/jyosei_teate/2803.html",
+        "summary": "6歳未満の子のチャイルドシート購入費を、2分の1・上限1万円まで助成します。",
+        "timing": "購入日から6か月以内に申請。",
+        "office": "越生町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "越生町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入時・申請時に親子が町内在住で、町税滞納がないこと等が条件です。子ども1人につき2回まで。出生前の申請はできません。",
+        "kind": "goods",
+        "research_id": "e3bcf7681a6d0c16",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "113417": {
     "overview": {
@@ -32215,11 +32305,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "遠方出産の交通費・宿泊費助成",
+        "url": "https://www.town.yokoze.saitama.jp/kosodate-kyoiku/ninshin-syusan/58883",
+        "summary": "最寄りの分娩施設等までおおむね60分以上（30km以上）の移動が必要な対象妊婦へ、出産時の交通費・待機宿泊費の一部を助成します。",
+        "timing": "出産日から1年以内に申請。領収書・母子健康手帳等を保管。",
+        "office": "横瀬町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "横瀬町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産時の町内住所等が条件です。交通費は所定経費の8割、待機宿泊は上限14泊で日額の上限・自己負担があります。全額無料ではありません。",
+        "kind": "transport",
+        "research_id": "17e50a8971f945ab",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "113620": {
     "overview": {
@@ -32326,11 +32434,47 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "遠方出産の交通費・宿泊費助成",
+        "url": "https://www.town.nagatoro.saitama.jp/life/%e9%81%a0%e6%96%b9%e5%87%ba%e7%94%a3%e4%ba%a4%e9%80%9a%e8%b2%bb%e5%8f%8a%e3%81%b3%e5%ae%bf%e6%b3%8a%e8%b2%bb%e6%94%af%e6%8f%b4%e5%8a%a9%e6%88%90%e9%87%91/",
+        "summary": "最寄りの分娩施設等までおおむね60分以上（30km以上）の移動が必要な対象妊婦へ、出産時の交通費・待機宿泊費の一部を助成します。",
+        "timing": "出産日から1年以内に申請。領収書・母子健康手帳等を保管。",
+        "office": "長瀞町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "長瀞町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産時の町内住所等が条件です。交通費は所定経費の8割、待機宿泊は上限14泊で日額の上限・自己負担があります。",
+        "kind": "transport",
+        "research_id": "adf682e931a4d9ef",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "子育て支援金（出生時）",
+        "url": "https://www.town.nagatoro.saitama.jp/life/%e5%ad%90%e8%82%b2%e3%81%a6%e6%94%af%e6%8f%b4%e9%87%91-2/",
+        "summary": "令和8年度の出生から、子ども1人につき10万円の子育て支援金を支給します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "長瀞町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "長瀞町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出生日に子が町の住民基本台帳に記録され、保護者も町に住所があり、申請時に町税の滞納がないこと等が条件です。",
+        "kind": "cash",
+        "research_id": "e6fa64abfd3d4b32",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "113654": {
     "overview": {
@@ -32622,11 +32766,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "産前産後の家事・育児サービス利用補助",
+        "url": "https://www.town.miyashiro.lg.jp/0000021857.html",
+        "summary": "妊娠中から子が生後1年までの家事・育児サービス費を、1回・1事業者につき上限2,000円、子ども1人につき計4万8,000円まで助成します。",
+        "timing": "子育て支援課へ申請するとともに、利用する事業者へ予約。",
+        "office": "宮代町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "宮代町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "サービスの内容が補助対象になるか事前に相談してください。利用後は領収書等を添えた実績報告と請求が必要です。",
+        "kind": "home_help",
+        "research_id": "24deebcec0148c77",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "114642": {
     "overview": {
@@ -34069,11 +34231,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て応援祝金（出産祝金）",
+        "url": "https://www.town.tohnosho.chiba.jp/life_scene/kosodate/kosodatejyoho/3476.html",
+        "summary": "対象の出生児について10万円の出産祝金を支給します。",
+        "timing": "出生の日から3か月以内に申請。",
+        "office": "東庄町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "東庄町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子と保護者の町内住民登録、引き続き居住する意思等が条件です。町税等の滞納や申請時の転出等で支給できない場合があります。",
+        "kind": "cash",
+        "research_id": "b7a7ec34459dfc25",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "124036": {
     "overview": {
@@ -34212,11 +34392,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "おむつ用ごみ袋の無料配布",
+        "url": "https://www.town.ichinomiya.chiba.jp/kosodate/kosodate/2226.html",
+        "summary": "町に住民登録がある乳幼児の世帯へ、可燃ごみ袋20Lを各対象時期に20枚ずつ配布します。",
+        "timing": "出生届時と、2歳に達する日以後最初の3月31日までの対象時期に窓口へ確認。",
+        "office": "一宮町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "一宮町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "紙おむつの購入代の補助ではありません。出生届出時など、町が案内する配布時期に母子手帳を持参してください。",
+        "kind": "waste",
+        "research_id": "be1c989bc56f67db",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "124222": {
     "overview": {
@@ -34322,11 +34520,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "乳幼児おむつ用ごみ袋の無料配布",
+        "url": "https://www.town.shirako.lg.jp/0000001377.html",
+        "summary": "町内在住の2歳未満の子がいる家庭へ、子ども1人につき20Lのごみ袋を年間50枚配布します。",
+        "timing": "新生児訪問・健診の案内で受取方法を確認。",
+        "office": "白子町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "白子町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "紙おむつの購入支援とは別です。新生児訪問や乳幼児健診等で配布されます。",
+        "kind": "waste",
+        "research_id": "09d2111cc5f657d7",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "124265": {
     "overview": {
@@ -35216,11 +35432,47 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "多胎児家庭の産前産後ヘルパー派遣",
+        "url": "https://www.city.arakawa.tokyo.jp/a035/kosodate/kosodateshien/twins_helper_r7.html",
+        "summary": "多胎妊婦や3歳未満の多胎児がいる区内家庭へ、家事・育児を手伝うヘルパーを派遣します。",
+        "timing": "区へ事前申請し利用券を受取り、原則1週間前までに指定事業者へ予約。",
+        "office": "荒川区 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "荒川区の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "利用料は1人1時間300円（非課税等の軽減あり）。妊娠～1歳前240時間、1～2歳前180時間、2～3歳前120時間が上限です。交通費等は別途で、保護者不在時は使えません。",
+        "kind": "home_help",
+        "research_id": "70ac73ec70c1fa96",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "多胎児家庭のタクシー・一時保育利用料助成",
+        "url": "https://www.city.arakawa.tokyo.jp/a035/kosodate/teate/twinssupport_takushi_r7.html",
+        "summary": "対象の0～5歳の多胎児を養育する区内家庭へ、タクシー料金を上限2万3,000円、一時保育等の利用料を2分の1・上限2万円まで助成します。",
+        "timing": "令和8年度の支払分は令和9年4月5日までに申請。",
+        "office": "荒川区 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "荒川区の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "年度途中の出生・転入は時期に応じて上限が下がります。同学年のきょうだいでも多胎児でない場合は対象外です。領収書等を保管してください。",
+        "kind": "transport",
+        "research_id": "4205832075b22b14",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "131199": {
     "overview": {
@@ -37066,11 +37318,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "自治体の公式実施案内で確認。対象月齢・利用形態・回数・自己負担や現在の受入状況は、自治体・実施施設の案内で確認してください。",
         "kind": "care"
+      },
+      {
+        "title": "子育て応援・育児用品の支給",
+        "url": "https://www.city.miura.kanagawa.jp/soshiki/kodomoka/kodomoka_kodomoshien/3008.html",
+        "summary": "市に住民登録がある0歳児の保護者へ、紙おむつ・おしりふき等をカタログから選んで、子ども1人につき1回・上限1万円分支給します。",
+        "timing": "令和8年度の申請期限は令和9年2月末。",
+        "office": "三浦市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "三浦市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "現金支給ではありません。過去に同事業の用品を受け取った保護者は対象外です。認定後にカタログで注文します。",
+        "kind": "diapers",
+        "research_id": "fe8da764095fabd5",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "142115": {
     "overview": {
@@ -37138,11 +37408,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "誕生祝い品「あつ木のおもちゃ」",
+        "url": "https://www.city.atsugi.kanagawa.jp/soshiki/nogyoseisakuka/12/33143.html",
+        "summary": "市内に住民登録がある対象の赤ちゃんへ、市内産ヒノキの積み木「あつ木のおもちゃ」を1人1点贈ります。",
+        "timing": "満1歳を迎える日までに引換券で受け取り。",
+        "office": "厚木市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "厚木市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "産婦・新生児訪問時に配布される引換券を指定店舗へ持参します。紙おむつ等の支給とは別の記念品です。",
+        "kind": "goods",
+        "research_id": "92f2ecb7353a9f5c",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "142131": {
     "overview": {
@@ -37431,11 +37719,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "乳幼児紙おむつ用ごみ袋の無償配布",
+        "url": "https://www.town.ninomiya.kanagawa.jp/0000002168.html",
+        "summary": "出生または転入した2歳未満の子がいる世帯へ、30Lのおむつ用ごみ袋を申請時の月齢に応じて配布します。",
+        "timing": "出生・転入届の際、子育て担当窓口で申請。",
+        "office": "二宮町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "二宮町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "満2か月未満は240枚、その後は月齢に応じて減ります。おむつ購入の補助ではありません。転出等で対象の子が町内にいなくなる場合は未使用分を返却します。",
+        "kind": "waste",
+        "research_id": "e9d515cf58a27097",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "143618": {
     "overview": {
@@ -37504,11 +37810,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "県の2025年4月時点の実施状況一覧で確認。対象月齢・利用回数・自己負担、現在の申請方法は町の担当窓口へ確認してください。",
         "kind": "care"
+      },
+      {
+        "title": "第3子以降の出産祝い金",
+        "url": "https://www.town.oi.kanagawa.jp/soshiki/8/shusaniwai.html",
+        "summary": "第3子以降の新生児1人につき5万円の出産祝い金を支給します。",
+        "timing": "出産日から2か月以内に電子申請または窓口申請。",
+        "office": "大井町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "大井町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産の日まで引き続き6か月以上町に住所があり、2児を養育し第3子以降も養育する方が対象です。出生順位は18歳年度末までの子で数えます。",
+        "kind": "cash",
+        "research_id": "6f6f39322fd1c54f",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "143634": {
     "overview": {
@@ -38476,11 +38800,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "多子世帯出産成長祝金（第3子以降・分割）",
+        "url": "https://www.city.sado.niigata.jp/soshiki/2010/70660.html",
+        "summary": "対象の第3子以降に、出生時20万円、満6歳40万円、満12歳50万円、満15歳80万円の計190万円を、成長段階ごとに支給します。",
+        "timing": "出生届時に申請案内を確認。以後も各支給時点の要件を確認。",
+        "office": "佐渡市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "佐渡市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出生時に190万円を一括で受け取る制度ではありません。既掲載の出生祝金10万円は別制度で、同じ金額を重ねて加算しないでください。市内住所・同一世帯・養育する子の人数等が条件です。",
+        "kind": "cash",
+        "research_id": "5a94400abd6cd0d3",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "152251": {
     "overview": {
@@ -38505,11 +38847,47 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "すこやか子育て応援給付金",
+        "url": "https://www.city.uonuma.lg.jp/site/mamenko/2705.html",
+        "summary": "第1子10万円、第2子15万円、第3子以降20万円を支給します。",
+        "timing": "原則出生から6か月以内。出生時の市内住民登録が1年未満の場合は、居住1年経過後、子の1歳誕生月の翌月末まで。",
+        "office": "魚沼市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "魚沼市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "親子の継続した市内住民登録・同居・居住意思、申請者の1年以上の住民登録等が条件です。出生順位は同居する18歳年度末までの兄姉で数えるなどの基準があります。",
+        "kind": "cash",
+        "research_id": "f38fbd69b08aceac",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "出産費用の自己負担分助成",
+        "url": "https://www.city.uonuma.lg.jp/site/mamenko/1037566.html",
+        "summary": "令和8年4月以降の出産で、出産育児一時金等を上回った対象出産費用を上限30万円助成します。",
+        "timing": "出産日から6か月以内に、領収書・明細書等を添えて申請。",
+        "office": "魚沼市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "魚沼市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産日・申請時の市内住民登録と、引き続き1年以上の居住等が条件です。一時金・付加給付・高額療養費等を差し引き、個室代や無痛分娩等のオプション費用は対象外です。",
+        "kind": "cash",
+        "research_id": "87d8385fa9dd7339",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "152269": {
     "overview": {
@@ -38905,10 +39283,29 @@ const careProcedureMunicipalitySources = {
       "url": "https://www.vill.kariwa.niigata.jp/"
     },
     "links": {},
-    "cards": [],
-    "reviewedOn": "2026-11-13",
-    "reviewStatus": "not_confirmed",
-    "reviewNote": "市町村独自の支援は、現在掲載できる制度を確認できていません。制度がないという意味ではありません。公式案内・窓口でも確認してください。"
+    "cards": [
+      {
+        "title": "チャイルドシート購入・レンタル費補助",
+        "url": "https://www.vill.kariwa.niigata.jp/www/service/detail.jsp?id=459",
+        "summary": "村内在住の6歳未満の子と同一世帯の方へ、購入費の3分の2（上限2万円）またはレンタル料（上限2万円）を補助します。",
+        "timing": "購入から6か月以内に申請。レンタルの場合の期限は総務課へ確認。",
+        "office": "刈羽村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "刈羽村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "発育に合わせ原則3回まで。購入・レンタルを合算し、2回目以降は前回と同じタイプは対象外です。",
+        "kind": "goods",
+        "research_id": "18a3064b96f0e504",
+        "verificationMethod": "official-page-body"
+      }
+    ],
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "155811": {
     "overview": {
@@ -39220,11 +39617,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "「地域の宝」誕生祝訪問・お祝い品",
+        "url": "https://www.city.kurobe.toyama.jp/child/category/page.aspx?servno=34551",
+        "summary": "市内に住所がある生後6か月ごろの子の家庭へ、地区の民生児童委員等が情報提供とお祝い品を届けます。",
+        "timing": "出生届・転入時にこども支援課で受付。生後6か月ごろに地区から連絡。",
+        "office": "黒部市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "黒部市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "市と地区社会福祉協議会による見守り事業です。品物・時期は地区で異なります。訪問を希望しない場合は公民館等での受取りも可能です。",
+        "kind": "goods",
+        "research_id": "5f9e5001e0a4e5be",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "162086": {
     "overview": {
@@ -40199,11 +40614,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。",
         "kind": "goods"
+      },
+      {
+        "title": "チャイルドシート購入費補助",
+        "url": "https://www.town.kawakita.ishikawa.jp/gyosei1/soumu/entry-42.html",
+        "summary": "町に住所がある6歳未満の子のチャイルドシート購入費を、上限2万円まで補助します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "川北町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "川北町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子ども1人につき1台。町内に住所がある時点での購入・申請が対象です。領収書・保証書または取扱説明書等が必要です。",
+        "kind": "goods",
+        "research_id": "9180541658cb261b",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "173614": {
     "overview": {
@@ -40232,11 +40665,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "町から2万円分、スタンプ会から1,000円分を合わせた祝い品です。利用できる加盟店・期限を確認してください。",
         "kind": "cash"
+      },
+      {
+        "title": "チャイルドシート購入補助",
+        "url": "https://www.town.tsubata.lg.jp/page/1437.html",
+        "summary": "6歳未満の子の安全基準に適合したチャイルドシート購入費を、2分の1・上限1万円まで助成します。",
+        "timing": "出生届提出後に電子申請または窓口で申請。",
+        "office": "津幡町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "津幡町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入日・申請日の親子の町内住所等が条件です。子ども1人につき1台。中古品・転売品・部品のみは対象外です。",
+        "kind": "goods",
+        "research_id": "d2f5e401794aaf05",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "173657": {
     "overview": {
@@ -40278,11 +40729,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "チャイルドシート購入費助成",
+        "url": "https://www.town.uchinada.lg.jp/soshiki/kosodatesien/24489.html",
+        "summary": "令和8年4月から、対象の6歳未満の子のチャイルドシート購入費を、2分の1・上限1万円まで助成します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "内灘町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "内灘町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子ども1人につき1台。購入時の保護者の町内住所等が条件です。出生前に買った場合の申請は出生後。中古品・転売品等は対象外です。",
+        "kind": "goods",
+        "research_id": "d1e01c58162533ec",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "173843": {
     "overview": {
@@ -40385,11 +40854,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "親子の町内住所、定住意思等が条件。出生順位は同一世帯の対象年齢の子の数で判定します。",
         "kind": "cash"
+      },
+      {
+        "title": "チャイルドシート購入費補助",
+        "url": "https://www.town.nakanoto.ishikawa.jp/childcare_education_culturalproperty/4/3/5429.html",
+        "summary": "町内で同一世帯に住民登録する6歳未満の子の保護者へ、チャイルドシート購入費の2分の1、上限1万円を補助します。",
+        "timing": "購入日から1年以内に、出生届出後に申請。",
+        "office": "中能登町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "中能登町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入日・申請日の町内住民登録、世帯の町税滞納なし等が条件です。子ども1人につき1回。中古品・転売品・部品のみは対象外です。",
+        "kind": "goods",
+        "research_id": "39edb656015bd2af",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "174611": {
     "overview": {
@@ -40415,11 +40902,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "出産祝金",
+        "url": "https://www.town.anamizu.lg.jp/page/100187.html",
+        "summary": "町に住所がある方またはその配偶者の出産について、出生児を町に住民登録し、親子で引き続き町に居住する意思がある方へ出産祝金を支給します。",
+        "timing": "出生の日から1年以内に申請。",
+        "office": "穴水町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "穴水町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "金額・必要書類は町の支給要綱と窓口で確認してください。",
+        "kind": "cash",
+        "research_id": "c15c6a52243210a6",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "174637": {
     "overview": {
@@ -40600,11 +41105,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "チャイルドシート・ジュニアシート購入補助",
+        "url": "https://www.city.ono.fukui.jp/kurashi/sonota-kurashi/anzen.html",
+        "summary": "6歳未満の子のチャイルドシート・ジュニアシート購入費を、2分の1・上限1万円まで補助します。",
+        "timing": "出生後に、市民生活・統計課へ申請。領収書等を保管。",
+        "office": "大野市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "大野市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "市内住所・市税完納・安全基準適合等が条件です。2歳未満で1台、2歳以上6歳未満で1台の最大2台まで、年度につき1台です。",
+        "kind": "goods",
+        "research_id": "b942e52dddf5f5da",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "182061": {
     "overview": {
@@ -41745,11 +42268,47 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "乳児用チャイルドシートの無料貸与",
+        "url": "https://www.city.chuo.yamanashi.jp/parenting/kosodatesien/teatejyosei/1565.html",
+        "summary": "市に住民登録がある1歳未満の子の保護者へ、原則1歳の誕生日前日まで乳児用チャイルドシートを無料で貸し出します。",
+        "timing": "出産予定日が分かり次第、危機管理課へ申請可能。",
+        "office": "中央市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "中央市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "おおむね身長66cm以下・体重9kg未満の乳児向けです。申請して即日の貸出ではありません。破損・紛失等では弁償となる場合があります。",
+        "kind": "goods",
+        "research_id": "370464d9ed2e6f67",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "幼児用チャイルドシート購入助成",
+        "url": "https://www.city.chuo.yamanashi.jp/parenting/kosodatesien/teatejyosei/11819.html",
+        "summary": "1歳以上3歳未満の子を養育する市内住民登録の保護者へ、幼児用チャイルドシート購入費の2分の1、上限1万円を助成します。",
+        "timing": "購入日から1年を経過する前日までに申請。",
+        "office": "中央市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "中央市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "世帯の市税滞納なし、新品・安全基準適合等が条件です。購入は1歳到達の90日前から3歳になる前まで。乳児用・学童用は対象外で、子ども1人1回です。",
+        "kind": "goods",
+        "research_id": "39debc92f31567a8",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "193461": {
     "overview": {
@@ -41924,11 +42483,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "親子の住民登録・同居、居住期間、定住意思、納税等の条件を確認してください。",
         "kind": "cash"
+      },
+      {
+        "title": "新生児おむつ無料引換券",
+        "url": "https://www.town.fujikawa.yamanashi.jp/docs/2026030500011/",
+        "summary": "赤ちゃんが誕生した世帯へ、新生児用またはSサイズのおむつと交換できる無料引換券を贈ります。",
+        "timing": "出生届時に受取り。令和8年分は12月末までに指定店で引換。",
+        "office": "富士川町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "富士川町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "指定店でのおむつ引換で、現金給付ではありません。対象商品・数量は交付時の案内で確認してください。",
+        "kind": "diapers",
+        "research_id": "3f89c959d45e52cb",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "193844": {
     "overview": {
@@ -41953,11 +42530,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て支援応援クーポン（おむつ用品）",
+        "url": "https://www.town.showa.yamanashi.jp/soshiki/13/14218.html",
+        "summary": "令和8年度は、対象の3歳未満の子の保護者へ、おむつ・おしりふき等に使える月1,500円分のクーポンを郵送します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "昭和町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "昭和町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "町内住民登録等が条件です。年度途中の出生・転入は住民登録の翌月分から対象。衣類・食料・医薬品には使えず、各月の券は当該月のみ有効です。",
+        "kind": "diapers",
+        "research_id": "f9b95e71fe246397",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "194221": {
     "overview": {
@@ -43142,11 +43737,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。",
         "kind": "cash"
+      },
+      {
+        "title": "産前産後の家事代行サービス費助成",
+        "url": "https://www.town.sakuho.nagano.jp/kyoiku_bunka/kosodate/teate_josei_shien/kodomo_7596.html",
+        "summary": "対象の妊婦や満1歳未満の子を養育する町民へ、家事代行サービス費の2分の1以内、1回上限3,000円を年12回まで助成します。",
+        "timing": "対象となるか事前にこども課へ確認し、利用後は領収書を添えて請求。",
+        "office": "佐久穂町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "佐久穂町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "家族から十分な援助を受けられない方、体調不良で家事が難しい方等が対象です。専門清掃や屋外作業等は対象外です。",
+        "kind": "home_help",
+        "research_id": "4a42f14110b2c4a8",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "203211": {
     "overview": {
@@ -44081,11 +44694,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "支給後3年以内に村外へ転出する場合は返還があります。",
         "kind": "cash"
+      },
+      {
+        "title": "産前産後の家事・育児支援券",
+        "url": "https://www.vill.takagi.lg.jp/doc/2026013000019/",
+        "summary": "令和8年度から、対象の妊婦や1歳未満の子を養育する家庭へ、家事・育児支援に使える1万円分の利用補助券を交付します。",
+        "timing": "利用可能事業者へ補助券を使うことを伝えて予約。利用期間は村の案内で確認。",
+        "office": "喬木村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "喬木村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "村内住所が必要です。対象事業者へ直接予約し、超過額・交通費・食材費等は自己負担。母子手帳交付後の流産・死産にも所定の期間内で支援があります。",
+        "kind": "home_help",
+        "research_id": "cc4292d7793ce461",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "204161": {
     "overview": {
@@ -44914,11 +45545,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "出産祝い金",
+        "url": "https://www.town.shinano.lg.jp/kosodate/shien/keizaisien/iwaikin.html",
+        "summary": "第1子5万円、第2子7万円、第3子以降10万円を、育児用品等購入の負担軽減のため支給します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "信濃町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "信濃町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "令和4年4月以降に出生した子の保護者で、出生時に町の住民基本台帳に記載されていることが条件です。必要書類・申請期限は町へ確認してください。",
+        "kind": "cash",
+        "research_id": "b968c70368a45ee2",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "205885": {
     "overview": {
@@ -84477,11 +85126,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て3step応援金（出産お祝い金）",
+        "url": "https://www.city.sakuragawa.lg.jp/kosodate_kyouiku/kosodate/page006564.html",
+        "summary": "児童1人あたり10万円の出産お祝い金を支給します。",
+        "timing": "オンライン・窓口・郵送で申請。本人確認書類と申請者名義の口座情報等を用意。",
+        "office": "桜川市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "桜川市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出生後最初の住民登録が桜川市で、出産した方または配偶者が市に住民登録し、子と同一世帯であることが条件です。",
+        "kind": "cash",
+        "research_id": "766e114b13ac193b",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "082325": {
     "overview": {
@@ -84712,11 +85379,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "ファーストバースデイ祝金",
+        "url": "https://www.town.ibaraki.lg.jp/gyousei/kosodate/teate/003513.html",
+        "summary": "令和8年4月1日以降に1歳を迎える子の家庭へ、子育てアンケートへの回答後、子ども1人あたり1万円を支給します。",
+        "timing": "郵送された案内の期限までに、アンケートと口座情報を入力。",
+        "office": "茨城町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "茨城町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "アンケート回答時の町内住民登録が必要です。誕生月の翌月上旬ごろに案内が郵送されます。",
+        "kind": "cash",
+        "research_id": "2fc1d63fc55c07ee",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "083097": {
     "overview": {
@@ -84871,11 +85556,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "チャイルドシート購入補助",
+        "url": "https://www.vill.miho.lg.jp/kosodate-kyouiku/kosodateshien/teate-hojyokin/page002259.html",
+        "summary": "チャイルドシートの購入費の2分の1、上限5,000円を補助します。",
+        "timing": "購入後1年以内に、子の住民登録を済ませて申請。",
+        "office": "美浦村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "美浦村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子ども1人につき1回。購入時の保護者の村内住所と、申請時の親子の村内住所、安全基準適合・村税完納等が条件です。",
+        "kind": "goods",
+        "research_id": "25847f4b9ffef51e",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "084433": {
     "overview": {
@@ -85412,11 +86115,65 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "乳児紙おむつ・ごみ袋購入助成券",
+        "url": "https://www.city.moka.lg.jp/kosodate_kyoiku/kosodate/kodomo_teate/15843.html",
+        "summary": "2歳未満の子の保護者へ、紙おむつ券を最大3万6,000円分、ごみ袋券を最大2,000円分交付します。",
+        "timing": "出生時はこども家庭課へ申請。2年目の券は誕生月に郵送。",
+        "office": "真岡市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "真岡市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "おむつ券は0歳時月2,000円・1歳時月1,000円相当。協定店舗で対象品のみ購入でき、転入時の月齢等により交付枚数が変わります。",
+        "kind": "diapers",
+        "research_id": "a5e5113e37e80580",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "赤ちゃん誕生祝金",
+        "url": "https://www.city.moka.lg.jp/kosodate_kyoiku/kosodate/kodomo_teate/18884.html",
+        "summary": "市に住所がある対象の出生児について、第1子・第2子は2万円、第3子は3万円の誕生祝金を支給します。",
+        "timing": "出産した日から6か月以内に申請。",
+        "office": "真岡市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "真岡市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "第3子の加算は第1子・第2子を出産した場合に限る等の条件があります。親子の市内住所・養育、市税等の滞納なし等を確認してください。",
+        "kind": "cash",
+        "research_id": "4d828066196203c0",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "チャイルドシート等購入費補助",
+        "url": "https://www.city.moka.lg.jp/kosodate_kyoiku/kosodate/kodomo_teate/17474.html",
+        "summary": "6歳未満の子のチャイルドシート等の購入費を、2分の1・上限1万円まで補助します。",
+        "timing": "購入日から1年以内に申請。出産前に買った場合も申請は出生後。",
+        "office": "真岡市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "真岡市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子ども1人につき1台・1回。親子の市内住所、市税完納、安全基準適合等が必要です。中古品は対象外です。",
+        "kind": "goods",
+        "research_id": "573804d3d6d47c3a",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "092100": {
     "overview": {
@@ -85696,11 +86453,65 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "紙おむつ等購入助成（地域通貨）",
+        "url": "https://www.town.mashiko.lg.jp/page/page002287.html",
+        "summary": "対象の0歳児1人につき計2万4,000円相当のましこスマイル通貨を、4か月・9か月健診、12か月健康相談時に各8,000円分交付します。",
+        "timing": "出生時面接で申請し、対象の健診・健康相談で受け取り。",
+        "office": "益子町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "益子町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "健診等の受診時には可燃ごみ袋も配布されます。町が実施する出生時面接で申請書を提出してください。",
+        "kind": "diapers",
+        "research_id": "62555c7f80624559",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "出産準備手当（ウェルカムベビー手当）",
+        "url": "https://www.town.mashiko.lg.jp/page/page000158.html",
+        "summary": "妊娠22週を経過した対象妊婦へ、胎児1人につき3万円を一括支給します。",
+        "timing": "妊娠22週経過後、出産前に申請。出産後の申請は原則できません。",
+        "office": "益子町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "益子町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "申請から認定まで町に住所があり、町税等を完納していることが条件です。国の妊婦支援給付とは別の町の手当です。",
+        "kind": "cash",
+        "research_id": "bdd513043091162e",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "誕生祝い・木のおもちゃや食器の贈呈",
+        "url": "https://www.town.mashiko.lg.jp/page/page003982.html",
+        "summary": "令和5年4月以降に生まれ、町に住所があり実際に居住する子へ、県産材を使い町の職人が作る木のおもちゃや食器を贈呈します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "益子町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "益子町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "現金給付ではありません。選べる品物、申請・受取方法は農政課の案内で確認してください。",
+        "kind": "goods",
+        "research_id": "1723b099bb1896ec",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "093432": {
     "overview": {
@@ -85756,11 +86567,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "いちかいベビーファースト祝金（町独自分）",
+        "url": "https://www.town.ichikai.tochigi.jp/info/2014",
+        "summary": "令和8年4月以降の対象出産に対し、国の給付を除く町独自分は第1子20万円・第2子25万円・第3子以降40万円です。",
+        "timing": "原則出生日から1年以内。出生時の居住1年未満の場合は例外があるため窓口へ確認。",
+        "office": "市貝町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "市貝町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "公式の総額30万・35万・50万円には、国の妊婦支援給付計10万円を含みます。基本手続きの国給付と重ねて足さないでください。1年以上の町内住所・居住、町税滞納なし等が条件です。",
+        "kind": "cash",
+        "research_id": "b750ed37ab956689",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "093459": {
     "overview": {
@@ -85801,11 +86630,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "チャイルドシート購入費補助",
+        "url": "https://www.town.tochigi-haga.lg.jp/kurashi/kenkou/sonota/cyairudosi-to.html",
+        "summary": "6歳未満の子のチャイルドシート・ジュニアシート購入費を、2分の1・上限1万円まで補助します。",
+        "timing": "購入日から1年以内に申請。",
+        "office": "芳賀町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "芳賀町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入時・申請時の保護者の町内住所、子の町内住所、町税滞納なし等が条件です。子ども1人につき1台・1回。",
+        "kind": "goods",
+        "research_id": "17ba53d08cd6ec6f",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "093611": {
     "overview": {
@@ -85913,11 +86760,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "第3子以降の計25万円は出生時と入学時の分割給付です。居住・養育・申請期限、転出時の返還等の条件を確認してください。",
         "kind": "cash"
+      },
+      {
+        "title": "チャイルドシート購入助成",
+        "url": "https://www.town.shioya.tochigi.jp/info/849",
+        "summary": "町に住所があり6歳以下の子を養育する保護者へ、チャイルドシート購入価格の半額、上限2万円を助成します。",
+        "timing": "購入から1年以内に申請。",
+        "office": "塩谷町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "塩谷町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子ども1人につき1回。出生前に購入したものも対象ですが、申請は出生後です。",
+        "kind": "goods",
+        "research_id": "f5f8390f5f08cdad",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "093866": {
     "overview": {
@@ -86457,11 +87322,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "新生児誕生記念品の贈呈",
+        "url": "https://www.town.imabetsu.lg.jp/kurashi/kosodate/2020-0617-1615-1.html",
+        "summary": "町に初めて住民登録する新生児へ、1万円以内のカタログ記念品を贈呈します。",
+        "timing": "出生の日の翌日から1か月以内に申請。",
+        "office": "今別町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "今別町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "保護者が1年以上町に住所を置き、居住していることが条件です。出産祝金・おむつ助成とは別の記念品です。",
+        "kind": "goods",
+        "research_id": "e8c1e4f9e8b03e5a",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "023043": {
     "overview": {
@@ -86707,10 +87590,29 @@ const careProcedureMunicipalitySources = {
       "url": "https://www.vill.inakadate.lg.jp/"
     },
     "links": {},
-    "cards": [],
-    "reviewedOn": "2026-11-13",
-    "reviewStatus": "not_confirmed",
-    "reviewNote": "市町村独自の支援は、現在掲載できる制度を確認できていません。制度がないという意味ではありません。公式案内・窓口でも確認してください。"
+    "cards": [
+      {
+        "title": "第3子以降の出産祝金",
+        "url": "https://www.aomori-life.jp/information/shisaku.php?area=&city=20&large=&middle=&pageID=3",
+        "summary": "第3子以降の出生児を現に監護し、生計を一つにする方へ、30万円の出産祝金を支給します。",
+        "timing": "厚生課健康推進係へ申請時期・必要書類を確認。",
+        "office": "田舎館村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "田舎館村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "監護者が村に引き続き3年以上住所を有していることが条件です。県の公式移住・交流ポータルの村の案内で確認しました。",
+        "kind": "cash",
+        "research_id": "7620c6ff6bcee66e",
+        "verificationMethod": "official-page-body"
+      }
+    ],
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "023817": {
     "overview": {
@@ -86735,11 +87637,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "チャイルドシート購入費の助成",
+        "url": "https://www.town.itayanagi.aomori.jp/life/child/childseat_josei.html",
+        "summary": "町内で同居・生計を同じくする6歳未満の子のチャイルドシート購入費を、2分の1・上限1万円まで補助します。",
+        "timing": "購入後1年以内に申請。",
+        "office": "板柳町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "板柳町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入時・申請時とも町内住所が必要です。子ども1人につき1台。領収書・保証書・通帳等を用意してください。",
+        "kind": "goods",
+        "research_id": "29a41c90c500d0ff",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "023841": {
     "overview": {
@@ -86751,10 +87671,47 @@ const careProcedureMunicipalitySources = {
       "allowance": "https://www.town.tsuruta.lg.jp/kurashi/kurashi-hoken/post-982.html ",
       "medical": "https://www.town.tsuruta.lg.jp/kurashi/kurashi-hoken/post-704.html"
     },
-    "cards": [],
-    "reviewedOn": "2026-11-13",
-    "reviewStatus": "not_confirmed",
-    "reviewNote": "市町村独自の支援は、現在掲載できる制度を確認できていません。制度がないという意味ではありません。公式案内・窓口でも確認してください。"
+    "cards": [
+      {
+        "title": "誕生祝金",
+        "url": "https://www.town.tsuruta.lg.jp/syoukai/syoukai-kouhou/document/20256_24.pdf",
+        "summary": "新生児1人につき10万円の誕生祝金を支給します。",
+        "timing": "出生後、住民環境課戸籍住民係へ申請方法・期限を確認。",
+        "office": "鶴田町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "鶴田町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出生時に子どもと保護者の町内住所が必要です。令和8年度の県移住・交流ポータル掲載でも照合し、世帯の町税・公課金の滞納がないこと等が条件です。",
+        "kind": "cash",
+        "research_id": "4ad1929faa17b70f",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "産後ケア事業（訪問）",
+        "url": "https://www.town.tsuruta.lg.jp/syoukai/syoukai-kouhou/document/20256_24.pdf",
+        "summary": "町に住所がある産後1年未満の母親・乳児へ、助産師による訪問で母乳・乳房ケアや沐浴指導等を行います。",
+        "timing": "利用前に子ども健康課へ相談。",
+        "office": "鶴田町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "鶴田町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "町の案内では2回まで、1回500円。現在の利用可能回数・自己負担・受入状況を申込時に確認してください。",
+        "kind": "care",
+        "research_id": "4ad1929faa17b70f",
+        "verificationMethod": "official-page-body"
+      }
+    ],
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "023876": {
     "overview": {
@@ -87130,10 +88087,29 @@ const careProcedureMunicipalitySources = {
       "url": "https://www.town.sannohe.aomori.jp/index.html"
     },
     "links": {},
-    "cards": [],
-    "reviewedOn": "2026-11-13",
-    "reviewStatus": "not_confirmed",
-    "reviewNote": "市町村独自の支援は、現在掲載できる制度を確認できていません。制度がないという意味ではありません。公式案内・窓口でも確認してください。"
+    "cards": [
+      {
+        "title": "妊婦健診・出産時の交通費・宿泊費助成",
+        "url": "https://www.town.sannohe.aomori.jp/lifescene/shussan/shussan/5379.html",
+        "summary": "町に住民登録がある対象妊産婦へ、妊婦健診・分娩取扱施設への移動、ハイリスク妊産婦の通院等に係る交通費・宿泊費の一部を助成します。",
+        "timing": "受診記録・領収書等を保管し、申請期限と対象を健康長寿課へ確認。",
+        "office": "三戸町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "三戸町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "各事業に対象となる距離・時間・受診先などの条件があります。全ての交通費・宿泊費が無料になる制度ではありません。",
+        "kind": "transport",
+        "research_id": "a9499f7c60d29a1b",
+        "verificationMethod": "official-page-body"
+      }
+    ],
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "024422": {
     "overview": {
@@ -87186,10 +88162,29 @@ const careProcedureMunicipalitySources = {
     "links": {
       "pregnancyGrant": "https://www.town.aomori-nanbu.lg.jp/page/8801.html"
     },
-    "cards": [],
-    "reviewedOn": "2026-11-13",
-    "reviewStatus": "not_confirmed",
-    "reviewNote": "市町村独自の支援は、現在掲載できる制度を確認できていません。制度がないという意味ではありません。公式案内・窓口でも確認してください。"
+    "cards": [
+      {
+        "title": "南部町ぴよすくーぽん（育児用品券）",
+        "url": "https://www.town.aomori-nanbu.lg.jp/site/kosodate/",
+        "summary": "0歳から満3歳の前日までの子を養育する保護者へ、紙おむつ・粉ミルク等と交換できる助成券を月5,000円分支給します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "南部町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "南部町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "町内の取扱店で利用します。所得制限なし。生活保護世帯は対象外で、転入者は翌月から対象です。詳細ページで申請方法を確認してください。",
+        "kind": "diapers",
+        "research_id": "e13b2e2dd25bd339",
+        "verificationMethod": "official-page-body"
+      }
+    ],
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "024465": {
     "overview": {
@@ -87536,11 +88531,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "わらすっこのおむつ支援事業",
+        "url": "https://www.city.tono.iwate.jp/index.cfm/47%2C68365%2C280%2Chtml",
+        "summary": "支給時点で市内に住所がある満1歳前の子へ、種類・サイズを選べる乳児用紙おむつを支給します。",
+        "timing": "乳幼児健診または新生児訪問時に受け取り。案内がない場合は子育て安心課へ確認。",
+        "office": "遠野市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "遠野市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "対象者へ個別通知・電話等で案内されます。現金や購入券の交付ではありません。",
+        "kind": "diapers",
+        "research_id": "e4c5ca27598705c7",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "032093": {
     "overview": {
@@ -87981,11 +88994,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て応援在宅育児支援金",
+        "url": "https://town.iwate.iwate.jp/town/life/zaitaku-ikuji-shienkin/?v=cat-lifeevent&w=kosodate&x=grant-ks",
+        "summary": "生後8週間を超えた満3歳未満の第2子以降を、保育所等を利用せず家庭で育てる世帯へ、対象児1人につき月1万円を給付します。",
+        "timing": "令和8年度分の最終申請期限は令和9年3月8日。",
+        "office": "岩手町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "岩手町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "町内住所・同居等が条件です。育児休業給付金等や生活保護を受けていないことが必要で、年度ごとに申請します。",
+        "kind": "home_care",
+        "research_id": "8eb613f18cb1d6ac",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "033219": {
     "overview": {
@@ -88348,11 +89379,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "親子の同居・町内住所、育休給付等を受けていないこと等が条件です。対象年齢、支給開始月と毎年度の申請期限を確認してください。",
         "kind": "home_care"
+      },
+      {
+        "title": "いわいずみっこ出産祝金",
+        "url": "https://www.town.iwaizumi.lg.jp/docs/2020062900023/",
+        "summary": "出生児1人につき10万円の出産祝金を支給します。",
+        "timing": "出産の日から2年以内に申請。",
+        "office": "岩泉町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "岩泉町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産時に町に住所がある母親が対象です。同一世帯等の町税滞納により不支給となる場合があり、申請時の転出・出生児の死亡では受給できません。",
+        "kind": "cash",
+        "research_id": "4131aa3ff7c84df9",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "034843": {
     "overview": {
@@ -89377,11 +90426,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "満1歳祝金（子育て支援金）",
+        "url": "https://www.town.murata.miyagi.jp/kosodate/teate/shienkin/index.html",
+        "summary": "満1歳の誕生日を迎えた対象児へ、第1子・第2子は5万円、第3子以降は10万円を支給します。",
+        "timing": "満1歳の誕生日から60日以内に申請。",
+        "office": "村田町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "村田町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出生後最初に町に住民登録し、満1歳まで継続して町内に住所がある子が対象です。対象者へ申請書類が送られます。",
+        "kind": "cash",
+        "research_id": "5cd2a3b90f4aabbf",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "043231": {
     "overview": {
@@ -89673,11 +90740,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "ベビー用品の無償レンタル",
+        "url": "https://www.town.rifu.miyagi.jp/kosodatesite/mokuteki/ninshin/7524.html",
+        "summary": "町内住所がある1歳未満の子の保護者、出産予定者・配偶者、里帰り中の子と同居する親族等へ、ベッド・バス・ベビーシートを貸し出します。",
+        "timing": "借りる前に子ども家庭センターへ連絡。",
+        "office": "利府町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "利府町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "貸出在庫の事前確認が必要です。ベッド・シートは1歳前日まで、バスは3か月前日まで。返却時の専門業者によるクリーニング代は自己負担です。",
+        "kind": "goods",
+        "research_id": "d9cd6e53643ebfc1",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "044211": {
     "overview": {
@@ -89922,11 +91007,47 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て応援出産祝金（現金・商品券）",
+        "url": "https://www.town.kami.miyagi.jp/kosodate_kyoiku/kosodate/1097.html",
+        "summary": "令和8年度から、第1子は計3万円、第2子は計5万円、第3子以降は計10万円の出産祝金を支給します。",
+        "timing": "出生届時に通帳等を添えて申請。",
+        "office": "加美町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "加美町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出生児を養育する町内住所の父母が対象。内訳は現金2万・3万・7万円と、町内商工会加盟店で使える商品券1万・2万・3万円です。",
+        "kind": "cash",
+        "research_id": "941f158afbb63fcc",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "出産・育児応援ギフト（金芽米）",
+        "url": "https://www.town.kami.miyagi.jp/kosodate_kyoiku/kosodate/1097.html",
+        "summary": "令和8年度から、出生児1人につき金芽米を計30kg贈ります。5kgずつ、2か月に1回・計6回に分けて配送されます。",
+        "timing": "出生届時に申請書を提出。",
+        "office": "加美町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "加美町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出生時から申請時まで保護者の町内住所があり、申請時に子と同居して養育していることが条件です。",
+        "kind": "goods",
+        "research_id": "941f158afbb63fcc",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "045012": {
     "overview": {
@@ -90030,11 +91151,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "町の公式ちらしを確認。利用できる施設・方法・対象月齢・回数や自己負担は担当窓口へ確認してください。",
         "kind": "care"
+      },
+      {
+        "title": "チャイルドシート購入設置費の助成",
+        "url": "https://www.town.onagawa.miyagi.jp/05_03_05_01.html",
+        "summary": "町内に住所があり居住する、満6歳未満の子を養育する方へ、所有車に設置するチャイルドシート購入費の2分の1、上限1万5,000円を助成します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "女川町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "女川町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入時に満6歳未満であること等が条件です。領収書・説明書・保証書・通帳等を用意してください。",
+        "kind": "goods",
+        "research_id": "e6eaa9b016b46c57",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "046060": {
     "overview": {
@@ -90355,11 +91494,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て支援金（第2子以降）",
+        "url": "https://www.city.yurihonjo.lg.jp/1000007/1002051/1002066/1003884.html",
+        "summary": "第2子に10万円、第3子以降に20万円の子育て支援金を支給します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "由利本荘市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "由利本荘市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産した方が出産まで1年以上市に住民登録し、引き続き居住することが条件です。本人が1年未満でも、配偶者が1年以上なら対象となる場合があります。",
+        "kind": "cash",
+        "research_id": "8eb9303786ff73e3",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "052116": {
     "overview": {
@@ -91860,11 +93017,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "出産支援給付金（町の支援）",
+        "url": "https://www.town.funagata.yamagata.jp/s015/kosodate/20220314160907.html",
+        "summary": "対象の新生児1人につき5万8,000円を支給します。さらに出産費用から出産育児一時金と同給付を差し引いた実費を、上限5万8,000円まで支給します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "舟形町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "舟形町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "県内の出生後最初の住民登録等が条件です。定額部分と実費補助の合計が常に11万6,000円になる制度ではありません。詳細な対象・必要書類は町へ確認してください。",
+        "kind": "cash",
+        "research_id": "78aa2a692e6db297",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "063649": {
     "overview": {
@@ -92997,11 +94172,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て家庭応援おむつ券",
+        "url": "https://www.city.motomiya.lg.jp/soshiki/8/ouen-omutsu.html",
+        "summary": "令和8年4月以降に満5か月を迎える対象児へ、家庭訪問時におむつ専用の購入券2万円分を配布します。",
+        "timing": "原則1歳の誕生日の前日までに利用。支援員から訪問日調整の連絡があります。",
+        "office": "本宮市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "本宮市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "市の住民基本台帳に記録されている子と養育者等が対象です。1歳未満の転入児も対象の場合があります。おむつ以外の関連用品には使えません。",
+        "kind": "diapers",
+        "research_id": "a3395a08dbddea43",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "073016": {
     "overview": {
@@ -93989,11 +95182,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "子育て応援クーポン（妊娠中・3歳・5歳）",
+        "url": "https://www.vill.nishigo.fukushima.jp/purpose/kosodate/5927.html",
+        "summary": "令和8年度は、プレママ面談を終えた妊婦に3万円分、3歳を迎えた子に2万円分、5歳を迎えた子に3万円分のこども商品券を交付します。",
+        "timing": "対象となる面談・誕生日は令和8年4月1日～令和9年3月31日。",
+        "office": "西郷村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "西郷村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "村内住民登録等が条件。おむつ・子ども服等に使え、対象の面談月・誕生月の翌月末ごろに郵送されます。券記載の期限内に利用してください。",
+        "kind": "goods",
+        "research_id": "69fa2c7fb902670e",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載しているのは確認できた制度です。未掲載の支援がないという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "074641": {
     "overview": {
@@ -94614,11 +95825,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "笑顔とがんばり子育て応援金",
+        "url": "https://www.town.ono.fukushima.jp/soshiki/21/kosodateouenkin.html",
+        "summary": "町に住民登録がある出生児を養育し、町内に居住している保護者へ、子ども1人あたり10万円を支給します。",
+        "timing": "出生の日から3か月以内に子育て支援課へ申請。",
+        "office": "小野町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "小野町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "申請者名義の口座が分かる書類が必要です。木製の記念品は育児教室で渡されます。",
+        "kind": "cash",
+        "research_id": "11e756b43ba05bd9",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "075418": {
     "overview": {
@@ -94772,11 +96001,29 @@ const careProcedureMunicipalitySources = {
         "checkedOn": "2026-11-13",
         "verificationStatus": "confirmed",
         "note": "住所・養育・対象年齢などの条件、利用料や申請期限は自治体の公式案内で確認してください。"
+      },
+      {
+        "title": "出産記念手当",
+        "url": "https://www.tomioka-town.jp/soshiki/fukushi/1097.html",
+        "summary": "第1子・第2子に各5万円、第3子以降に各20万円の出産記念手当を支給します。",
+        "timing": "出生届の際に申請。別の役所で届出した場合も町へ確認。",
+        "office": "富岡町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "富岡町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "保護者の町内住所が1年以上あり、家族全員に町税等の滞納がないことが条件です。避難先で出生届を出した場合は、後日町から申請案内が送付されます。",
+        "kind": "cash",
+        "research_id": "466cd50372653f08",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "075442": {
     "overview": {
@@ -95000,11 +96247,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "2026年度の県の広域産後ケア参加市町村一覧で、この自治体の実施を確認。利用できる方法・施設・月齢・回数・料金は居住地の担当窓口へ確認してください。",
         "kind": "care"
+      },
+      {
+        "title": "誕生記念品「君の椅子」",
+        "url": "https://www.katsurao.org/soshiki/2/kiminoisu.html",
+        "summary": "村に誕生する子どもへ、誕生を祝う木製の「君の椅子」を贈っています。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "葛尾村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "葛尾村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "現金給付ではありません。対象となる住民登録・受取り時期等は住民生活課へ確認してください。",
+        "kind": "goods",
+        "research_id": "d7d368add87ce8ec",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "075612": {
     "overview": {
@@ -95030,11 +96295,29 @@ const careProcedureMunicipalitySources = {
         "verificationStatus": "confirmed",
         "note": "2026年度の県の広域産後ケア参加市町村一覧で、この自治体の実施を確認。利用できる方法・施設・月齢・回数・料金は居住地の担当窓口へ確認してください。",
         "kind": "care"
+      },
+      {
+        "title": "出生児祝金",
+        "url": "https://www.shinchi-town.jp/site/kosodate/syussyouiwai.html",
+        "summary": "出生児1人につき3万円の祝金を交付します。",
+        "timing": "出生の日から1か月以内に申請。通常は出生届時に手続き。",
+        "office": "新地町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "新地町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "父母のいずれかが出生日からさかのぼって1年以上町に住所を有し、出生児を養育していることが条件です。受領には印鑑が必要です。",
+        "kind": "cash",
+        "research_id": "0326c85ff106fc37",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-13",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ券等は今回の調査では未確認です。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "075647": {
     "overview": {
@@ -95591,27 +96874,63 @@ const careProcedureMunicipalitySources = {
     "links": {},
     "cards": [
       {
-        "title": "出産祝金（少子化対策事業）",
-        "url": "https://www.maoi-net.jp/files/koho/pdf/1204_45999692.pdf",
-        "summary": "2026年度の町の資料に、第1子3万円、第2子5万円、第3子以降10万円の出産祝金を掲載しています。",
-        "timing": "出生届出時などに、町の税務住民担当へ手続きを確認。",
+        "title": "出産祝金制度",
+        "url": "https://www.maoi-net.jp/files/00002600/00002665/03_%E8%B5%A4%E3%81%A1%E3%82%83%E3%82%93%E3%81%8C%E7%94%9F%E3%81%BE%E3%82%8C%E3%81%9F%E3%82%89.pdf",
+        "summary": "第1子3万円、第2子5万円、第3子以降10万円の出産祝金を支給します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
         "office": "長沼町 公式案内に記載の担当窓口",
         "documents": [
-          "公式案内に記載された申請書・確認書類を確認"
+          "公式案内に記載された申請書・確認書類を用意"
         ],
         "documentsAreTypical": true,
         "linkLabel": "長沼町の公式案内",
-        "checkedOn": "2026-11-14",
-        "verificationStatus": "needs_confirmation",
-        "note": "当年度の予算説明で事業を確認しました。個別の居住要件・申請期限・必要書類は窓口で確認してください。",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産児の親権者が、出産日前から引き続き1年以上町に住所を有し、実際に居住していることが条件です。最新の町ガイドブックで確認しました。",
         "kind": "cash",
-        "research_id": "5a93a9d64281a2d6",
-        "verificationMethod": "official-document-current-intake-unconfirmed"
+        "research_id": "63e19ad0cea33b61",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "産後ケア利用費用の助成",
+        "url": "https://www.maoi-net.jp/files/00002600/00002665/03_%E8%B5%A4%E3%81%A1%E3%82%83%E3%82%93%E3%81%8C%E7%94%9F%E3%81%BE%E3%82%8C%E3%81%9F%E3%82%89.pdf",
+        "summary": "生後おおむね1年未満の赤ちゃんと母親へ、産後ケアの利用費用の一部を助成します。",
+        "timing": "利用する前に保健係へ相談・申請方法を確認。",
+        "office": "長沼町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "長沼町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "利用できる施設・形態・回数・自己負担は担当窓口で確認してください。",
+        "kind": "care",
+        "research_id": "63e19ad0cea33b61",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "妊産婦の健診・出産に伴う交通費助成",
+        "url": "https://www.maoi-net.jp/files/00002600/00002665/03_%E8%B5%A4%E3%81%A1%E3%82%83%E3%82%93%E3%81%8C%E7%94%9F%E3%81%BE%E3%82%8C%E3%81%9F%E3%82%89.pdf",
+        "summary": "町内に住民登録がある妊産婦へ、妊婦健診14回・産後おおむね1か月までの健診1回・出産時1回の交通費の一部を助成します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "長沼町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "長沼町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "自宅以外から通院した分は対象外です。領収書・受診記録等を保管し、申請期限と算定方法を確認してください。",
+        "kind": "transport",
+        "research_id": "63e19ad0cea33b61",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "公式資料に掲載の支援を案内していますが、当年度の受付・対象条件を確定できていません。各カードと担当窓口で確認してください。"
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "014290": {
     "overview": {
@@ -95637,11 +96956,29 @@ const careProcedureMunicipalitySources = {
         "kind": "goods",
         "research_id": "68a5e8f04a7f9e67",
         "verificationMethod": "official-document-current-intake-unconfirmed"
+      },
+      {
+        "title": "産後ケア事業（個別型）",
+        "url": "https://www.town.kuriyama.hokkaido.jp/uploaded/attachment/19030.pdf",
+        "summary": "町に住民票がある産後1年未満の母親と赤ちゃんへ、訪問・通所・宿泊による助産師のケアや授乳・育児の支援を行います。",
+        "timing": "町へ利用申請し、承認通知書が届いてから助産院へ予約。",
+        "office": "栗山町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "栗山町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "令和8年6月版の町ガイドでは利用料無料、3形態を合わせて5回まで。町内集団型「あつまろん」はこの5回に含まれません。対象・キャンセル等の取扱いを確認してください。",
+        "kind": "care",
+        "research_id": "846b1549c5192ee6",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "公式資料に掲載の支援を案内していますが、当年度の受付・対象条件を確定できていません。各カードと担当窓口で確認してください。"
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "014303": {
     "overview": {
@@ -95736,11 +97073,29 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "26061a44fadd0142",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "ベビー用品レンタル料金の助成",
+        "url": "https://www.town.urausu.hokkaido.jp/kosodate/shien/lease.html",
+        "summary": "2歳未満の子がいる家庭を対象に、ベビーベッド・ベビーバス・体重計・ベビーラック・チャイルドシートのレンタル料金を品目別の上限まで助成します。",
+        "timing": "事前に保健センターへ申請し、決定後に指定店と契約。",
+        "office": "浦臼町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "浦臼町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "各用品は子ども1人につき1回。期間・上限は品目ごとに異なり、2歳の誕生日前日で終了します。町税等の滞納がある場合は対象外です。",
+        "kind": "goods",
+        "research_id": "95c410dc45cf4af2",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載の地域支援を公式情報で確認しました。居住・養育・出生順位等の条件があります。未掲載の制度がないとは限りません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "014320": {
     "overview": {
@@ -96757,10 +98112,55 @@ const careProcedureMunicipalitySources = {
       "handbook": "https://www.town.furubira.lg.jp/rearing/detail.php?id=33",
       "medical": "https://www.town.furubira.lg.jp/rearing/detail.php?id=157"
     },
-    "cards": [],
-    "reviewedOn": "2026-11-14",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "今回の調査では掲載できる具体的な地域支援を確定できませんでした。制度がないとは断定せず、基本手続きと公式窓口を案内します。"
+    "cards": [
+      {
+        "title": "チャイルドシート購入助成",
+        "url": "https://www.town.furubira.lg.jp/rearing/detail.php?id=141",
+        "summary": "町内在住の1歳未満の子を養育する保護者へ、チャイルドシート購入費を上限1万円助成します。",
+        "timing": "購入する前に町民課へ申請方法を確認。",
+        "office": "古平町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "古平町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "乳幼児1人につき1台・1回。購入前の手続きが必要です。",
+        "kind": "goods",
+        "research_id": "d61eb6ddb0b61de5",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "産後ケア事業",
+        "url": "https://www.town.furubira.lg.jp/rearing/detail.php?id=350",
+        "summary": "町に住所がある産後1年未満の母親と赤ちゃんへ、訪問・通所・宿泊で授乳や育児の相談、母親の休養等を支援します。",
+        "timing": "利用前に保健師へ相談・申請し、決定後に施設と利用日を調整。",
+        "office": "古平町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "古平町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "1回上限1万円、1人2回まで助成。宿泊1泊2日は2回分で上限2万円です。医療機関の料金との差額は自己負担で、月齢制限等もあります。",
+        "kind": "care",
+        "research_id": "16ff1101f4354219",
+        "verificationMethod": "official-page-images-visually-read",
+        "supportingEvidence": {
+          "method": "official-page-images-visually-read",
+          "images": [
+            "https://www.town.furubira.lg.jp/common/img/content/cassette_0_img_20260414_183828.jpg",
+            "https://www.town.furubira.lg.jp/common/img/content/cassette_1_img_20260414_183848.jpg"
+          ],
+          "finding": "産後1年未満の母子、1回1万円上限・2回、宿泊1泊2日は2回分。画像2枚を目視確認。"
+        }
+      }
+    ],
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "014079": {
     "overview": {
@@ -97589,27 +98989,32 @@ const careProcedureMunicipalitySources = {
     "links": {},
     "cards": [
       {
-        "title": "松前っ子誕生祝金（商品券・分割）",
-        "url": "https://www.town.matsumae.hokkaido.jp/koho/pdf/2072_46631437.pdf",
-        "summary": "第1子は総額20万円、第2子30万円、第3子以降50万円を、出生時と満1歳時に分けて商品券で支給する制度の案内があります。",
-        "timing": "出生時と満1歳時、それぞれの申請期限を確認。",
+        "title": "松前っ子誕生祝金（商品券・2回に分割）",
+        "url": "https://houmu.h-chosonkai.gr.jp/~reikidb/data/183/83/reiki_honbun/a040RG00000703.html",
+        "summary": "第1子は計20万円、第2子は計30万円、第3子以降は計50万円を商品券で支給します。出生時と満1歳時の2回に分けて交付します。",
+        "timing": "第1回は出生から7か月以内、第2回は満1歳の誕生日から6か月以内に申請。",
         "office": "松前町 公式案内に記載の担当窓口",
         "documents": [
-          "公式案内に記載された申請書・確認書類を確認"
+          "公式案内に記載された申請書・確認書類を用意"
         ],
         "documentsAreTypical": true,
         "linkLabel": "松前町の公式案内",
-        "checkedOn": "2026-11-14",
-        "verificationStatus": "needs_confirmation",
-        "note": "町内住所6か月以上等の条件があります。案内冊子と現行の条例を確認しましたが、当年度の受付・支給条件は窓口で確認してください。",
-        "kind": "goods",
-        "research_id": "f620a3a4096767a8",
-        "verificationMethod": "official-document-current-intake-unconfirmed"
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "現金の一括給付ではありません。原則保護者の6か月以上の住所・居住等が条件。現行条例と令和8年度町予算の事業掲載を照合しました。",
+        "kind": "cash",
+        "research_id": "a8b5a92384981eb2",
+        "verificationMethod": "official-ordinance-and-current-budget",
+        "supportingEvidence": {
+          "method": "official-ordinance-and-current-budget",
+          "corroboratingSource": "https://www.town.matsumae.hokkaido.jp/hotnews/files/00000300/00000313/20260330083522.pdf",
+          "finding": "現行条例の額・分割・申請期限と、令和8年度予算の事業掲載を照合。"
+        }
       }
     ],
-    "reviewedOn": "2026-11-14",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "公式資料に掲載の支援を案内していますが、当年度の受付・対象条件を確定できていません。各カードと担当窓口で確認してください。"
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "013323": {
     "overview": {
@@ -97665,11 +99070,29 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "faa896f254eaa798",
         "verificationMethod": "official-document-current-intake-unconfirmed"
+      },
+      {
+        "title": "子育て支援交付金（町独自）",
+        "url": "https://www.town.shiriuchi.hokkaido.jp/kurashi/hoken_fukushi/seido/kosodateshien.html",
+        "summary": "出生児1人につき20万円を交付します。",
+        "timing": "出生後6か月以内に、生活福祉課福祉医療係へ申請。",
+        "office": "知内町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "知内町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "親子が町の住民基本台帳に記録され、出産時に保護者が引き続き3か月以上居住していることが条件です。国の妊婦支援給付とは別の町独自制度です。",
+        "kind": "cash",
+        "research_id": "97fc58b269a10d9e",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "公式資料に掲載の支援を案内していますが、当年度の受付・対象条件を確定できていません。各カードと担当窓口で確認してください。"
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "013340": {
     "overview": {
@@ -97901,11 +99324,29 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "080c4a87f3ee48a3",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "チャイルドシート購入費補助",
+        "url": "https://www.town.oshamambe.lg.jp/soshiki/2/393.html",
+        "summary": "町内に住所がある満6歳未満の子を養育する保護者へ、新規購入費の2分の1以内、上限1万円を補助します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "長万部町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "長万部町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "子ども1人につき1回。領収書・保証書・養育関係が分かる書類等が必要です。",
+        "kind": "goods",
+        "research_id": "25dd3c28f4d83fe2",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ購入支援等は、未確認または要確認の案内を含みます。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "013617": {
     "overview": {
@@ -98200,11 +99641,29 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "2e7cabae3ad22ca2",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "妊産婦交通費助成",
+        "url": "https://www.city.shibetsu.lg.jp/kosodatesaito/kosodate_mokutekibetsu/akatyangaumaretara/3878.html",
+        "summary": "市外の医療機関で妊産婦健診・出産をした市民へ、妊婦健診14回、出産直前・産後健診の交通費の一部を助成します。",
+        "timing": "産後健診の終了後、出生届出から6か月以内に申請。",
+        "office": "士別市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "士別市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "最寄りの分娩可能施設までの距離に応じ、所定の片道額で算定します。救急搬送や入院中の健診は対象外です。",
+        "kind": "transport",
+        "research_id": "17e914ecec2800f1",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ購入支援等は、未確認または要確認の案内を含みます。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "012211": {
     "overview": {
@@ -98526,11 +99985,29 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "d52f3a6dd1526136",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "出産祝品制度",
+        "url": "https://www.town.hokkaido-kamikawa.lg.jp/section/chs8120000001b75.html?cp=h8nafq0000000aa8&cs=c03_01s0",
+        "summary": "出生届により町の住民基本台帳に登録された赤ちゃんの保護者へ、写真立てと木の食器・積み木・絵本等の組合せから選ぶ出産祝品を贈ります。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "上川町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "上川町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産祝金とは別の記念品です。役場窓口で申込書の提出が必要です。",
+        "kind": "goods",
+        "research_id": "8c3de9e0d1b0b289",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載の地域支援を公式情報で確認しました。居住・養育・出生順位等の条件があります。未掲載の制度がないとは限りません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "014583": {
     "overview": {
@@ -98652,10 +100129,47 @@ const careProcedureMunicipalitySources = {
     "links": {
       "handbook": "https://www.town.nakafurano.lg.jp/hotnews/detail/00001622.html"
     },
-    "cards": [],
-    "reviewedOn": "2026-11-14",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "今回の調査では掲載できる具体的な地域支援を確定できませんでした。制度がないとは断定せず、基本手続きと公式窓口を案内します。"
+    "cards": [
+      {
+        "title": "チャイルドシート購入・リース費補助",
+        "url": "https://www.town.nakafurano.lg.jp/hotnews/detail/00000212.html",
+        "summary": "町内在住で運転免許証がある、満6歳未満の子の保護者へ、チャイルドシートの購入・リース費を上限1万円補助します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "中富良野町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "中富良野町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "乳幼児1人につき1台。個人間譲渡・中古販売・ネットオークション等は対象外です。領収書・説明書等を保管してください。",
+        "kind": "goods",
+        "research_id": "f9ba774389cbfd3e",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "産後ケア事業",
+        "url": "https://www.town.nakafurano.lg.jp/hotnews/files/00001200/00001202/20260611084010.pdf",
+        "summary": "2026年版の町の子育てガイドで、訪問・通所・宿泊による母親の休養、授乳や育児の相談・指導を案内しています。",
+        "timing": "利用する前に担当保健師へ相談・申請。",
+        "office": "中富良野町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "中富良野町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "一部自己負担があります。対象時期・回数・利用料は担当保健師に確認してください。",
+        "kind": "care",
+        "research_id": "ebe3c59da8c89ea2",
+        "verificationMethod": "official-page-body"
+      }
+    ],
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "014621": {
     "overview": {
@@ -98978,11 +100492,47 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "fe2ef7a3533b355a",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "チャイルドシート等購入費用の助成",
+        "url": "https://www.town.horokanai.hokkaido.jp/kosodate/%e5%87%ba%e7%94%a3%e3%81%97%e3%81%9f%e3%82%89%e2%91%a1",
+        "summary": "町内に住所がある新生児から6歳未満の子がいる家庭へ、チャイルドシート等の購入費を上限2万円助成します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "幌加内町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "幌加内町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "乳幼児1人につき1回。領収書の写しと保安基準への適合を確認できる書類が必要です。",
+        "kind": "goods",
+        "research_id": "c254831892fa61d8",
+        "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "ウェルカム赤ちゃん事業",
+        "url": "https://www.town.horokanai.hokkaido.jp/kosodate/%e5%87%ba%e7%94%a3%e3%81%97%e3%81%9f%e3%82%89%e2%91%a1",
+        "summary": "誕生した赤ちゃんへ、記念品の木製マグカップ「ククサ」を贈呈します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "幌加内町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "幌加内町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "対象となる住所・受取り方法は保健福祉総合センターへ確認してください。",
+        "kind": "goods",
+        "research_id": "c254831892fa61d8",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載の地域支援を公式情報で確認しました。居住・養育・出生順位等の条件があります。未掲載の制度がないとは限りません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "012122": {
     "overview": {
@@ -99548,10 +101098,29 @@ const careProcedureMunicipalitySources = {
       "url": "https://www.esashi.jp/childcare/"
     },
     "links": {},
-    "cards": [],
-    "reviewedOn": "2026-11-14",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "今回の調査では掲載できる具体的な地域支援を確定できませんでした。制度がないとは断定せず、基本手続きと公式窓口を案内します。"
+    "cards": [
+      {
+        "title": "出産交通費助成（町外病院への出産）",
+        "url": "https://www.esashi.jp/childcare/support/childbirth/syussankoutsuhi.html",
+        "summary": "町外の病院等での出産の交通費として、妊産婦1人に5万円を助成します。",
+        "timing": "母子手帳・振込口座情報等を用意し、町民課子育て支援係へ申請。",
+        "office": "枝幸町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "枝幸町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "妊娠32週以上の妊婦または出産した方が対象です。子どもの人数単位ではなく1回の妊娠・出産で算定し、双子でも金額は変わりません。",
+        "kind": "transport",
+        "research_id": "20e4c69b1f74e624",
+        "verificationMethod": "official-page-body"
+      }
+    ],
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "015164": {
     "overview": {
@@ -99689,11 +101258,29 @@ const careProcedureMunicipalitySources = {
         "kind": "transport",
         "research_id": "accad295d05b41ec",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "出産子育て安心支援金",
+        "url": "https://www.town.rishirifuji.hokkaido.jp/rishirifuji/1517.htm",
+        "summary": "出生児1人につき10万円の安心支援金を支給すると町が案内しています。",
+        "timing": "出生届のあった日から3か月以内に申請。",
+        "office": "利尻富士町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "利尻富士町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "既掲載の出産祝い金との現在の併給可否は窓口へ確認し、両方を受け取れる前提で合計しないでください。出生児を養育し、親子で引き続き3年以上の居住意思があり、町税等の滞納なし等が条件です。",
+        "kind": "cash",
+        "research_id": "56ee6e96a2f38141",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載の地域支援を公式情報で確認しました。居住・養育・出生順位等の条件があります。未掲載の制度がないとは限りません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "015202": {
     "overview": {
@@ -99769,11 +101356,29 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "2f64329542d98c52",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "使用済み紙おむつ類の無料収集",
+        "url": "https://www.city.kitami.lg.jp/administration/life/detail.php?content=3209",
+        "summary": "家庭で使用した紙おむつ・布おむつ・お尻拭き等を、透明・半透明の袋で無料収集します。",
+        "timing": "燃やすごみの収集日の指定時刻までに、ごみステーションへ。",
+        "office": "北見市 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "北見市の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入代の補助ではありません。他のごみやペット用おむつは混ぜず、45L・10kg以内の袋で指定の収集日に出してください。",
+        "kind": "waste",
+        "research_id": "573c797f21867ca2",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ購入支援等は、未確認または要確認の案内を含みます。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "012114": {
     "overview": {
@@ -100220,11 +101825,29 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "370966fd508e1d10",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "子育て応援祝金（3歳・6歳・15歳）",
+        "url": "https://www.town.yubetsu.lg.jp/administration/education/detail.html?content=1642",
+        "summary": "令和8年度から、満3歳3万円・満6歳5万円・満15歳10万円を、対象年齢を迎える年度に支給します。",
+        "timing": "案内を受け取ってから1か月以内に申請。",
+        "office": "湧別町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "湧別町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出生時の祝金ではありません。令和8年度は10月1日時点の町内住所等が条件です。対象者へ申請書が郵送されます。",
+        "kind": "cash",
+        "research_id": "b3756b2edf9ee832",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ購入支援等は、未確認または要確認の案内を含みます。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "015601": {
     "overview": {
@@ -100252,27 +101875,34 @@ const careProcedureMunicipalitySources = {
         "verificationMethod": "official-document-current-intake-unconfirmed"
       },
       {
-        "title": "子育て応援金（商品券）の案内",
-        "url": "https://www.town.takinoue.hokkaido.jp/shokai/machizukuri/20160831.html",
-        "summary": "町の子育て支援紹介に、3歳未満児の保護者への3万円分の商品券を掲載しています。",
-        "timing": "町の子育て担当へ、年度ごとの交付について確認。",
+        "title": "子育て応援金（商品券）",
+        "url": "https://www.town.takinoue.hokkaido.jp/kurashi/fukushikenko/ikuji/guide.html",
+        "summary": "対象の乳幼児を育てる保護者へ、町内で育児用品購入等に使える3万円分の商品券を支給します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
         "office": "滝上町 公式案内に記載の担当窓口",
         "documents": [
-          "公式案内に記載された申請書・確認書類を確認"
+          "公式案内に記載された申請書・確認書類を用意"
         ],
         "documentsAreTypical": true,
         "linkLabel": "滝上町の公式案内",
-        "checkedOn": "2026-11-14",
-        "verificationStatus": "needs_confirmation",
-        "note": "当年度の交付時期・受付・支給条件は窓口で確認してください。年度途中に対象となる方への額は月割りとする案内があります。",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "最新の町の子育てガイドでも掲載を確認。年齢の基準日、支給時期、年度途中の月割りはこども家庭センターで確認してください。",
         "kind": "goods",
-        "research_id": "1b66be2b7d4f8c7e",
-        "verificationMethod": "official-document-current-intake-unconfirmed"
+        "research_id": "f800abffd337cb61",
+        "verificationMethod": "official-guide-images-visually-read",
+        "supportingEvidence": {
+          "method": "official-guide-images-visually-read",
+          "images": [
+            "https://www.town.takinoue.hokkaido.jp/files/00017700/00017782/gattai_9.jpg"
+          ],
+          "finding": "乳幼児の保護者への3万円分の商品券を、現行の町ガイド画像8ページで確認。"
+        }
       }
     ],
-    "reviewedOn": "2026-11-14",
-    "reviewStatus": "needs_confirmation",
-    "reviewNote": "公式資料に掲載の支援を案内していますが、当年度の受付・対象条件を確定できていません。各カードと担当窓口で確認してください。"
+    "reviewedOn": "2026-11-16",
+    "reviewStatus": "listed",
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "015610": {
     "overview": {
@@ -100320,11 +101950,29 @@ const careProcedureMunicipalitySources = {
         "kind": "transport",
         "research_id": "cf320489fe06e428",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "使用済み紙おむつ類の無料回収",
+        "url": "https://www.town.okoppe.lg.jp/cms/section/fukusi/opbvt10000004buv.html?cp=nbm3tm0000001x9j&cs=life06s0",
+        "summary": "家庭から出る使用済みの紙おむつ・紙パンツ・お尻拭き等を無料で回収します。",
+        "timing": "燃やせるごみの収集日に、ごみステーションへ。",
+        "office": "興部町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "興部町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "購入支援ではありません。透明・半透明の45L以内・10kg以内の袋に「おむつ」と明記し、他のごみを混ぜずに出してください。",
+        "kind": "waste",
+        "research_id": "005523cf42853487",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載のケア・サービス等は確認しました。自治体独自の祝い金やおむつ購入支援等は、未確認または要確認の案内を含みます。未掲載は制度なしという意味ではありません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "015628": {
     "overview": {
@@ -100354,11 +102002,29 @@ const careProcedureMunicipalitySources = {
         "kind": "cash",
         "research_id": "6602e2279382e2a2",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "乳幼児紙おむつ等購入引換券",
+        "url": "https://www.vill.nishiokoppe.lg.jp/section/hokenfukushi/feeuub00000dh0xs.html",
+        "summary": "乳幼児の紙おむつ・おしりふき・粉ミルク等を村内取扱店で購入できる、5万円分の引換券を交付します。",
+        "timing": "対象期間・申請期限を公式案内で確認し、該当する場合は早めに手続き。",
+        "office": "西興部村 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "西興部村の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "助成期間は出生月から満1歳になる月までの1年間。転入者は転入月からの対象となるため、交付額・時期を窓口へ確認してください。",
+        "kind": "diapers",
+        "research_id": "7afc60ea32bba8cc",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載の地域支援を公式情報で確認しました。居住・養育・出生順位等の条件があります。未掲載の制度がないとは限りません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "015636": {
     "overview": {
@@ -100540,11 +102206,29 @@ const careProcedureMunicipalitySources = {
         "kind": "care",
         "research_id": "66f1dc2e1a887949",
         "verificationMethod": "official-page-body"
+      },
+      {
+        "title": "出産費用の自己負担分助成",
+        "url": "https://www.shihoro.jp/education/detail.php?content=1542",
+        "summary": "令和8年4月1日以降の出産について、出産育児一時金を差し引いた出産費用を上限10万円助成します。",
+        "timing": "出産日から1年以内に申請。",
+        "office": "士幌町 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "士幌町の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "出産日前から町内に住所があり、申請時に引き続き1年以上住所を有すること等が条件です。個室料・アメニティ等は対象外で、領収書・明細書等が必要です。",
+        "kind": "cash",
+        "research_id": "4ae41356ba6a479b",
+        "verificationMethod": "official-page-body"
       }
     ],
-    "reviewedOn": "2026-11-14",
+    "reviewedOn": "2026-11-16",
     "reviewStatus": "listed",
-    "reviewNote": "掲載の地域支援を公式情報で確認しました。居住・養育・出生順位等の条件があります。未掲載の制度がないとは限りません。"
+    "reviewNote": "掲載の支援と今回の追加・更新分を公式情報で確認しました。要確認の制度は各カードの表示を参照してください。未掲載は制度なしという意味ではありません。"
   },
   "016331": {
     "overview": {
@@ -102035,7 +103719,26 @@ const careProcedurePrefectureSources = {
   "18": {
     "title": "福井県の市町村公式サイト一覧",
     "url": "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164069145.html",
-    "cards": []
+    "cards": [
+      {
+        "title": "ふく育さん・ふく育タクシー共通利用券",
+        "url": "https://www.pref.fukui.lg.jp/doc/kodomo/fukuikupf.html",
+        "summary": "令和8年度の対象妊婦へ5,000円分、対象期間に生まれた子の家庭へ1,000円分の、家事・育児支援やタクシーに使える共通利用券を案内しています。",
+        "timing": "申請が必要な券は令和9年3月20日まで。出生家庭向け1,000円分は市町から生後4か月頃までに順次配付。",
+        "office": "福井県 公式案内に記載の担当窓口",
+        "documents": [
+          "公式案内に記載された申請書・確認書類を用意"
+        ],
+        "documentsAreTypical": true,
+        "linkLabel": "福井県の公式案内",
+        "checkedOn": "2026-11-16",
+        "verificationStatus": "confirmed",
+        "note": "別に、ひとり親・未就学の多胎児・医療的ケア児等の対象世帯へ4万8,000円分の券があります。全世帯が4万8,000円分を受け取れる制度ではありません。事前申請や予算上限があります。",
+        "kind": "service",
+        "research_id": "f48833eb0501229c",
+        "verificationMethod": "official-page-body"
+      }
+    ]
   },
   "19": {
     "title": "山梨県の市町村公式サイト一覧",
