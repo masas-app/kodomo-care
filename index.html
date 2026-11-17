@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.17.27"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.17.28"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
 
 :root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#20342c;background:#f2f7f3}*{box-sizing:border-box}body{margin:0}.app{max-width:480px;margin:auto;min-height:100dvh;position:relative;overflow:hidden;background:linear-gradient(145deg,#eaf8eb,#faf9ee)}.photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.95;pointer-events:none}.wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.20),rgba(255,255,255,.08) 32%,rgba(255,255,255,.44) 85%);pointer-events:none}.content{position:relative;padding:20px 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-size:24px;font-weight:850;color:white;text-shadow:0 2px 7px #253d3b88}.switch{border:0;border-radius:22px;background:#ffffffed;padding:12px 15px;font-weight:750;color:#234437;max-width:50%}h1{color:white;text-shadow:0 2px 8px #203c3488;font-size:31px;margin:0}h2{font-size:20px;margin:10px 0}p{margin:5px 0}.sub{color:#f9fffc;text-shadow:0 1px 6px #2448;font-weight:600}.hero{margin-top:20px;background:linear-gradient(115deg,#16a977,#0c9870);border-radius:20px;padding:20px;color:white;box-shadow:0 7px 18px #154d3326}.hero small{font-weight:750}.hero strong{display:block;font-size:20px;margin:8px 0}.hero button{float:right;border:0;background:transparent;color:white;font-size:22px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.tile{background:#ffffffed;border:0;border-radius:17px;padding:15px 5px;text-align:center;box-shadow:0 5px 15px #344b2518;cursor:pointer}.tile b{display:block;font-size:25px}.tile small{font-weight:700}.white{background:#fffffff0;border-radius:18px;padding:16px;margin:11px 0;box-shadow:0 5px 15px #334b2515}.action{width:100%;border:0;background:#fffffff0;padding:16px;text-align:left;border-radius:15px;margin:7px 0;font-weight:750;font-size:16px;cursor:pointer}.action span{float:right;color:#748780}.action .action-icon{float:none;display:inline-flex;align-items:center;justify-content:center;width:24px;margin-right:7px;vertical-align:middle;color:#d18a26}.btn{border:0;border-radius:11px;background:#0e9e72;color:white;padding:11px 14px;font-weight:700;cursor:pointer}.btn.alt{background:#e7f3ee;color:#196d52}.btn.warn{background:#c65b55}.small{font-size:12px;color:#64766b}.row{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{background:#e5f5ee;padding:6px 9px;border-radius:30px;font-size:12px;font-weight:700}.field{width:100%;border:1px solid #cadbd0;border-radius:10px;padding:12px;font:inherit;background:white;margin:5px 0 10px}label{display:block;font-size:13px;font-weight:700;margin-top:9px}.hide{display:none!important}.item{border-bottom:1px solid #e5ebe6;padding:12px 0}.item:last-child{border:0}.muted{color:#64766b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.day{text-align:center;border:0;border-radius:9px;background:#f0f5f0;padding:9px 2px;min-height:43px;font-size:13px}.day.has{background:#d7efe4}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin:2px}.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}.sheet{background:#fff;border-radius:20px;padding:20px;width:min(440px,100%);max-height:88dvh;overflow:auto}.error{color:#a23d3d;white-space:pre-wrap}.note{padding:10px;background:#fff7db;border-radius:10px;font-size:12px;color:#5b512a}.empty{padding:15px;color:#687d70;text-align:center}.footer{font-size:11px;color:#52675b;text-align:center;margin-top:24px}
 
@@ -228,6 +228,76 @@ body{background:#e7ece9}.app{max-width:430px;min-height:100dvh;background:linear
 @media(max-width:360px){.care-prep-page .care-pre-head{padding:19px 14px}.care-prep-page .care-pre-head h1{font-size:23px}.care-prep-group{padding-left:11px;padding-right:11px}.care-prep-group-head h2{font-size:14px}.care-prep-group-head p{font-size:10px}.care-prep-row label{font-size:13px;gap:8px}.care-prep-summary{padding:17px 14px}.care-prep-save-badge{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.care-prep-progress>span{transition:none}}
 
+/* 出産前の予定・スケジュール。既存の予防接種カレンダーと分離。 */
+.care-schedule-page{--schedule-accent:#8b4161}
+.care-schedule-page button,.care-schedule-page input,.care-schedule-page select,.care-schedule-editor input,.care-schedule-editor select,.care-schedule-editor textarea{font:inherit}
+.care-schedule-page button,.care-schedule-home button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.care-schedule-page button:focus-visible,.care-schedule-home button:focus-visible,.care-schedule-editor :is(input,select,textarea,button):focus-visible{outline:3px solid #8b4161;outline-offset:3px}
+.care-schedule-back{background:none;border:0;color:#8b4161;padding:0 0 15px;min-height:40px;font-size:13px!important;font-weight:700!important}
+.care-schedule-page .care-pre-head h1{font-size:26px;line-height:1.4;letter-spacing:-.4px}
+.care-schedule-page .care-kicker{color:#98536f}
+.care-schedule-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:17px 0 0}
+#careScheduleSaveBadge{font-size:11px;color:#527560}
+#careScheduleSaveBadge.is-unsaved{color:#a13449}
+.care-schedule-primary{border:0;border-radius:11px;padding:12px 14px;background:#8b4161;color:#fff;min-height:45px;font-size:13px!important;font-weight:700!important;cursor:pointer}
+.care-schedule-notice:empty,.care-schedule-form-error:empty{display:none}
+.care-schedule-notice,.care-schedule-form-error{font-size:13px;line-height:1.6;color:#a13449;background:#fff0f2;border-radius:9px;padding:10px 12px;margin:10px 0}
+.care-schedule-calendar{padding:15px 12px 11px;border:1px solid #e6e9e3}
+.care-schedule-month{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.care-schedule-month h2{font-size:19px;margin:0}
+.care-schedule-month>button{width:43px;min-height:44px;border:0;border-radius:10px;background:#fbf1f5;color:#8b4161;font-size:27px;line-height:1}
+.care-schedule-month>button:disabled{opacity:.3;cursor:default}
+.care-schedule-calendar-tools{display:flex;justify-content:space-between;align-items:center;margin:9px 5px 11px;font-size:11px;color:#7a887e}
+.care-schedule-calendar-tools>button{border:1px solid #dce4dc;border-radius:8px;background:#fff;color:#586e5c;padding:6px 14px;min-height:32px;font-size:12px}
+.care-schedule-week,.care-schedule-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center}
+.care-schedule-week{font-size:11px;color:#88948b;margin:0 0 6px}
+.care-schedule-week>span{padding:5px 0}
+.care-schedule-week>span:first-child{color:#ad6e78}.care-schedule-week>span:last-child{color:#668aab}
+.care-schedule-date{min-width:0;min-height:46px;border:1px solid transparent;border-radius:10px;background:transparent;color:#344c3b;padding:6px 0 3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.care-schedule-date>span{font-size:14px;font-weight:650;line-height:1.3}
+.care-schedule-date>small{height:12px;font-size:8px;line-height:12px;color:#ad6180}
+.care-schedule-date.is-sun>span{color:#b26f7b}.care-schedule-date.is-sat>span{color:#5d85a6}
+.care-schedule-date.is-today{border-color:#b9cdbd;background:#f0f7f1}
+.care-schedule-date[aria-pressed=true]{background:#8b4161;border-color:#8b4161}
+.care-schedule-date[aria-pressed=true]>span,.care-schedule-date[aria-pressed=true]>small{color:#fff}
+.care-schedule-legend{font-size:10px;color:#8a7b82;text-align:right;margin:11px 5px 0}
+.care-schedule-day-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:3px}
+.care-schedule-day-head h2{font-size:17px;margin:0}.care-schedule-day-head>span{font-size:12px;color:#879287}
+.care-schedule-empty{font-size:13px;line-height:1.7;color:#859086;margin:14px 0}
+.care-schedule-event{padding:15px 0;border-bottom:1px solid #eef0eb;overflow-wrap:anywhere}
+.care-schedule-event:last-child{border-bottom:0}
+.care-schedule-event-meta{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-bottom:7px}
+.care-schedule-kind{font-size:10px;color:#8b4161;background:#fbf0f5;border-radius:6px;padding:4px 7px}
+.care-schedule-event-meta>b{font-size:12px;color:#627665;white-space:nowrap}
+.care-schedule-event h3{font-size:15px;line-height:1.6;margin:0;color:#314b39}
+.care-schedule-place{font-size:12px;line-height:1.6;color:#77877b;margin:5px 0}
+.care-schedule-memo{font-size:12px;line-height:1.7;color:#66786a;white-space:pre-wrap;margin:7px 0;padding:9px 11px;border-radius:8px;background:#f6f9f4}
+.care-schedule-event-actions{display:flex;justify-content:flex-end;gap:7px;margin:7px 0 0}
+.care-schedule-event-actions>button{font-size:12px;min-height:36px;border:1px solid #dce6dc;border-radius:8px;background:#fff;padding:7px 12px;color:#517359}
+.care-schedule-event-actions>.care-schedule-remove{border-color:transparent;color:#a2767e}
+.care-schedule-day-add{width:100%;min-height:44px;border:1px dashed #dec9d2;border-radius:10px;background:#fff9fb;color:#8b4161;padding:10px;font-size:13px!important;margin-top:11px}
+.care-schedule-due-note{font-size:11px;line-height:1.6;color:#8e7c86;margin-top:5px}
+.care-schedule-jump{border:0;background:none;color:#8b4161;padding:0 0 9px;font-size:12px!important;font-weight:700!important;text-align:left;min-height:34px}
+.care-schedule-upcoming h2{font-size:17px;margin-bottom:0}
+.care-schedule-more{width:100%;border:0;border-radius:9px;background:#f4f7f1;color:#56715b;padding:12px;font-size:12px!important;margin-top:8px}
+.care-schedule-local{text-align:center;color:#819085;font-size:11px;line-height:1.7;margin:17px 2px 5px}
+.care-schedule-editor label{display:block;font-size:13px;color:#4b6050;font-weight:700;margin:13px 0 6px}
+.care-schedule-editor label>span{color:#a45a77;font-size:10px;margin-left:5px}.care-schedule-editor label>small{color:#8a968b;font-size:10px;font-weight:400}
+.care-schedule-editor :is(input,select,textarea){box-sizing:border-box;width:100%;min-width:0;border:1px solid #d9e3d8;border-radius:10px;background:#fafcf9;color:#304a37;padding:11px 10px;font-size:16px;min-height:44px}
+.care-schedule-editor textarea{resize:vertical;line-height:1.6}
+.care-schedule-editor-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:10px}
+.care-schedule-save{width:100%;margin-top:15px}
+.care-schedule-editor-local{text-align:center;font-size:11px;line-height:1.7;color:#819085;margin:10px 0 0}
+.care-schedule-home h2{font-size:16px;margin:0 0 10px}
+.care-schedule-home-link{display:flex;align-items:center;justify-content:space-between;gap:12px;border:0;background:#fbf1f5;border-radius:11px;padding:13px 14px;text-align:left;width:100%;color:#8b4161}
+.care-schedule-home-link>span:first-child{min-width:0;display:flex;flex-direction:column;gap:4px;overflow-wrap:anywhere}
+.care-schedule-home-link small{font-size:11px;color:#9a6078}.care-schedule-home-link b{font-size:14px;line-height:1.5}.care-schedule-home-link>span:first-child>span{font-size:11px;color:#877b81}
+.care-schedule-undo{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;width:calc(100% - 36px);max-width:424px;padding:11px 13px;border-radius:12px;background:#31483b;color:#fff;box-shadow:0 6px 24px #213b3330;z-index:5;font-size:12px}
+.care-schedule-undo[hidden]{display:none}.care-schedule-undo>span{flex:1}
+.care-schedule-undo button{border:0;border-radius:7px;background:#fff;color:#31483b;padding:8px 10px;min-height:36px;white-space:nowrap;font-size:12px;font-weight:700}
+.care-schedule-undo .care-schedule-undo-close{background:transparent;color:#fff;font-size:22px;padding:3px 6px;min-width:28px}
+@media(max-width:360px){.care-schedule-page .care-pre-head{padding:19px 14px}.care-schedule-page .care-pre-head h1{font-size:23px}.care-schedule-calendar{padding:13px 9px 10px}.care-schedule-grid{gap:2px}.care-schedule-editor-row{gap:8px}.care-schedule-editor input{padding-left:7px;padding-right:5px}}
+
 </style></head><body><div class="app"><div class="photo" id="photo"></div><div class="wash" id="wash"></div><main class="content"><div class="top"><button class="brand" id="brand" type="button" onclick="openSideMenu()" aria-label="メニューを開く" aria-expanded="false" aria-controls="sideMenu">☰</button><button class="switch" id="switchBtn">ホーム ▾</button></div><div id="view"></div><nav class="care-history-nav" aria-label="画面の移動"><button type="button" id="careBack" onclick="careNavigate(-1)" aria-label="前の画面へ">〈</button><button type="button" id="careForward" onclick="careNavigate(1)" aria-label="次の画面へ">〉</button></nav><div class="footer">医療上の判断は医療機関・母子健康手帳で確認してください</div></main></div><div id="sideMenu" class="modal hide" role="dialog" aria-modal="true" aria-label="メニュー">
   <div class="sheet">
     <div class="row">
@@ -260,7 +330,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSideMenu
 const APP_PREF_KEY='kodomo-care-preferences-v1';
 function getAppPrefs(){let raw={};try{raw=JSON.parse(localStorage.getItem(APP_PREF_KEY)||'{}')||{}}catch{}let days=Array.isArray(raw.reminderDaysSelected)?raw.reminderDaysSelected:(Number.isInteger(raw.reminderDays)?[raw.reminderDays]:[1]);return {fontSize:['small','normal','large'].includes(raw.fontSize)?raw.fontSize:'normal',reminderDaysSelected:[...new Set(days.map(Number).filter(n=>[0,1,3,7].includes(n)))],reminderHour:Number.isInteger(raw.reminderHour)&&raw.reminderHour>=0&&raw.reminderHour<=23?raw.reminderHour:8,reminderMinute:Number.isInteger(raw.reminderMinute)&&raw.reminderMinute>=0&&raw.reminderMinute<=59?raw.reminderMinute:0}}
 function applyAppPrefs(){let p=getAppPrefs();document.documentElement.dataset.fontSize=p.fontSize;document.documentElement.style.fontSize=p.fontSize==='large'?'19px':p.fontSize==='small'?'14px':'16px';}
-function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.17.27</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
+function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.17.28</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
 function refreshPushPermissionStatus(){
   const status=document.getElementById('pushPermissionStatus');
   const enable=document.getElementById('pushEnableButton');
@@ -485,6 +555,7 @@ function render(){
   $('#switchBtn').textContent='ホーム ▾';
   if(careSection==='procedure'){renderCareProcedure();return;}
   if(careSection==='checklist'){renderCarePrepChecklist();return;}
+  if(careSection==='schedule'){renderCareSchedule();return;}
   if(careSection==='prenatal'){
     const due=localStorage.getItem('care-prenatal-due')||'';
     let remaining=null;
@@ -501,9 +572,10 @@ function render(){
       <div class="care-section"><h2>出産準備メニュー</h2><div class="care-prenatal-grid">
         <button class="care-prenatal-tile" onclick="goCareSection('procedure')"><span class="care-tile-icon">▤</span><b>出産手続きナビ</b><small>自治体別の必要手続き</small></button>
         <button class="care-prenatal-tile" onclick="carePrenatalInfo('checklist')"><span class="care-tile-icon">☑</span><b>準備チェックリスト</b><small>${carePrepHomeLabel()}</small></button>
-        <button class="care-prenatal-tile" onclick="carePrenatalInfo('calendar')"><span class="care-tile-icon">▦</span><b>予定・スケジュール</b><small>健診や大切な予定</small></button>
+        <button class="care-prenatal-tile" onclick="carePrenatalInfo('calendar')"><span class="care-tile-icon">▦</span><b>予定・スケジュール</b><small>${careScheduleHomeLabel()}</small></button>
         <button class="care-prenatal-tile" onclick="carePrenatalInfo('family')"><span class="care-tile-icon">♧</span><b>家族と共有</b><small>夫婦で準備を分担</small></button>
       </div></div>
+      ${careScheduleHomePreview()}
       <div class="care-section care-prenatal-tasks"><h2>次にやること</h2>${tasks.map(([id,label])=>`<label><input type="checkbox" ${completed[id]?'checked':''} onchange="careSetPrenatalTask('${id}',this.checked)"><span>${label}</span></label>`).join('')}</div>
     </div>`;
     return;
@@ -105017,8 +105089,206 @@ function carePrepDismissUndo() {
   carePrepRenderParts();
 }
 
+// 出産前の予定は、既存の医療記録・チェックリストとは別にこの端末へ保存する。
+const CARE_SCHEDULE_KEY = 'kodomo-care-prenatal-schedule-v1';
+const CARE_SCHEDULE_KINDS = [
+  { id: 'checkup', label: '健診・受診' }, { id: 'class', label: '母親・両親学級' },
+  { id: 'procedure', label: '手続き' }, { id: 'other', label: 'その他' }
+];
+let careScheduleMemory = null;
+let careScheduleSelection = '';
+let careScheduleMonth = '';
+let careScheduleEditing = null;
+let careScheduleDeleted = null;
+let careScheduleSaveError = false;
+let careScheduleReadNotice = '';
+let careScheduleExpanded = false;
+
+function careScheduleToday() {
+  const d = new Date();
+  return String(d.getFullYear()).padStart(4, '0') + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function careScheduleValidDate(value) {
+  return typeof value === 'string' && value >= '1900-01-01' && value <= '2100-12-31' && !!careProcedureDate(value);
+}
+function careScheduleValidTime(value) { return typeof value === 'string' && /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value); }
+function careScheduleId() { return 'schedule-' + String(uuid()).replace(/[^a-zA-Z0-9_-]/g, '') + '-' + Math.random().toString(36).slice(2, 8); }
+function careScheduleState() {
+  if (careScheduleMemory !== null) return careScheduleMemory;
+  let events = [];
+  try {
+    const raw = localStorage.getItem(CARE_SCHEDULE_KEY);
+    if (raw !== null) {
+      const saved = JSON.parse(raw);
+      if (!saved || saved.version !== 1 || !Array.isArray(saved.events)) throw new Error('Invalid schedule');
+      const seen = new Set();
+      events = saved.events.slice(0, 500).filter(x => x && typeof x.title === 'string' && x.title.trim() && careScheduleValidDate(x.date)).map(x => {
+        let id = typeof x.id === 'string' && /^[a-zA-Z0-9_-]{1,100}$/.test(x.id) && x.id !== 'registered-due-date' ? x.id : careScheduleId();
+        if (seen.has(id)) id = careScheduleId();
+        seen.add(id);
+        return { id, title: x.title.trim().slice(0, 100), date: x.date, time: careScheduleValidTime(x.time) ? x.time : '',
+          kind: CARE_SCHEDULE_KINDS.some(k => k.id === x.kind) ? x.kind : 'other',
+          place: typeof x.place === 'string' ? x.place.slice(0, 120) : '', memo: typeof x.memo === 'string' ? x.memo.slice(0, 500) : '' };
+      });
+      if (events.length !== saved.events.length) careScheduleReadNotice = '一部の保存データを読み込めませんでした。表示されている予定をご確認ください。';
+    }
+  } catch (e) { careScheduleReadNotice = '予定を読み込めませんでした。空のカレンダーを表示しています。'; }
+  careScheduleMemory = { version: 1, events };
+  return careScheduleMemory;
+}
+function careSchedulePersist() {
+  try { localStorage.setItem(CARE_SCHEDULE_KEY, JSON.stringify(careScheduleState())); careScheduleSaveError = false; careScheduleReadNotice = ''; return true; }
+  catch (e) { careScheduleSaveError = true; return false; }
+}
+function careScheduleEvents() {
+  const events = [...careScheduleState().events];
+  let due = '';
+  try { due = localStorage.getItem('care-prenatal-due') || ''; } catch (e) {}
+  if (careScheduleValidDate(due)) events.push({ id: 'registered-due-date', title: '出産予定日', date: due, time: '', kind: 'due', place: '', memo: '', readonly: true });
+  return events.sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time) || a.id.localeCompare(b.id));
+}
+function careScheduleUpcoming() {
+  const today = careScheduleToday(), now = new Date();
+  const time = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+  return careScheduleEvents().filter(e => e.date > today || (e.date === today && (!e.time || e.time >= time)));
+}
+function careScheduleDateLabel(date, year = false) {
+  const d = careProcedureDate(date);
+  return d ? (year ? d.getUTCFullYear() + '年' : '') + (d.getUTCMonth() + 1) + '月' + d.getUTCDate() + '日（' + '日月火水木金土'[d.getUTCDay()] + '）' : '';
+}
+function careScheduleHomeLabel() {
+  const next = careScheduleUpcoming()[0];
+  return next ? '次の予定：' + Number(next.date.slice(5, 7)) + '/' + Number(next.date.slice(8)) + (next.time ? ' ' + next.time : '') : '健診や大切な予定を登録';
+}
+function careScheduleHomePreview() {
+  const next = careScheduleUpcoming()[0];
+  if (!next) return '';
+  return `<div class="care-section care-schedule-home"><h2>次の予定</h2><button type="button" class="care-schedule-home-link" data-event-id="${next.id}" onclick="careScheduleGoTo(this.dataset.eventId)"><span><small>${careScheduleDateLabel(next.date)}${next.time ? ' ' + next.time : ''}</small><b>${escapeHtml(next.title)}</b>${next.place ? `<span>${escapeHtml(next.place)}</span>` : ''}</span><span aria-hidden="true">›</span></button></div>`;
+}
+function careScheduleEnsureSelection() {
+  if (!careScheduleValidDate(careScheduleSelection)) careScheduleSelection = careScheduleToday();
+  if (!/^\d{4}-\d{2}$/.test(careScheduleMonth) || !careScheduleValidDate(careScheduleMonth + '-01')) careScheduleMonth = careScheduleSelection.slice(0, 7);
+}
+function renderCareSchedule() {
+  careScheduleEnsureSelection();
+  $('#view').innerHTML = `<div class="care-shell care-schedule-page">
+    <button type="button" class="care-schedule-back" onclick="goCareSection('prenatal')">‹ 出産前の準備に戻る</button>
+    <header class="care-pre-head"><div class="care-kicker">こどもケア · 出産前</div><h1>予定・スケジュール</h1><p>健診も、大切な予定も、ひとまとめに。</p></header>
+    <div class="care-schedule-toolbar"><span id="careScheduleSaveBadge"></span><button type="button" class="care-schedule-primary" onclick="careScheduleEdit()">＋ 予定を追加</button></div>
+    <p id="careScheduleSaveNotice" class="care-schedule-notice" role="status" aria-live="polite"></p>
+    <section class="care-section care-schedule-calendar" aria-label="月のカレンダー"><div id="careScheduleCalendar"></div></section>
+    <section class="care-section care-schedule-day" aria-live="polite" aria-atomic="false"><div id="careScheduleDay"></div></section>
+    <section class="care-section care-schedule-upcoming"><h2>これからの予定</h2><div id="careScheduleUpcoming"></div></section>
+    <p class="care-schedule-local">登録した予定は、この端末に自動保存されます。</p>
+    <div id="careScheduleUndo" class="care-schedule-undo" role="status" aria-live="polite" hidden></div>
+  </div>`;
+  careScheduleRenderParts();
+}
+function careScheduleRenderParts() {
+  const calendar = $('#careScheduleCalendar');
+  if (!calendar) return;
+  const [year, month] = careScheduleMonth.split('-').map(Number), today = careScheduleToday(), all = careScheduleEvents();
+  const first = careProcedureDate(careScheduleMonth + '-01').getUTCDay(), days = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  const cells = [];
+  for (let i = 0; i < Math.ceil((first + days) / 7) * 7; i++) {
+    const day = i - first + 1;
+    if (day < 1 || day > days) { cells.push('<span class="care-schedule-blank" aria-hidden="true"></span>'); continue; }
+    const date = careScheduleMonth + '-' + String(day).padStart(2, '0'), events = all.filter(e => e.date === date), due = events.some(e => e.readonly);
+    const label = careScheduleDateLabel(date, true) + (events.length ? '、予定' + events.length + '件' : '、予定なし');
+    cells.push(`<button type="button" class="care-schedule-date ${i % 7 === 0 ? 'is-sun' : i % 7 === 6 ? 'is-sat' : ''} ${date === today ? 'is-today' : ''}" data-schedule-date="${date}" onclick="careScheduleSelect(this.dataset.scheduleDate)" aria-label="${label}" aria-pressed="${date === careScheduleSelection}" ${date === today ? 'aria-current="date"' : ''}><span>${day}</span><small>${events.length ? (due ? '◇' : '●') + (events.length > 1 ? Math.min(events.length, 99) : '') : '&nbsp;'}</small></button>`);
+  }
+  calendar.innerHTML = `<div class="care-schedule-month"><button type="button" aria-label="前の月" onclick="careScheduleShift(-1)" ${careScheduleMonth === '1900-01' ? 'disabled' : ''}>‹</button><h2>${year}年 ${month}月</h2><button type="button" aria-label="次の月" onclick="careScheduleShift(1)" ${careScheduleMonth === '2100-12' ? 'disabled' : ''}>›</button></div>
+    <div class="care-schedule-calendar-tools"><span>今月の予定 ${all.filter(e => e.date.startsWith(careScheduleMonth)).length}件</span><button type="button" onclick="careScheduleTodayView()">今日</button></div>
+    <div class="care-schedule-week" aria-hidden="true">${[...'日月火水木金土'].map(w => `<span>${w}</span>`).join('')}</div>
+    <div class="care-schedule-grid" role="group" aria-label="${year}年${month}月の日付">${cells.join('')}</div>
+    <p class="care-schedule-legend">● 登録した予定　◇ 出産予定日</p>`;
+  const onDay = all.filter(e => e.date === careScheduleSelection);
+  $('#careScheduleDay').innerHTML = `<div class="care-schedule-day-head"><h2>${careScheduleDateLabel(careScheduleSelection)}</h2><span>${onDay.length}件</span></div>${onDay.length ? onDay.map(e => careScheduleCard(e, false)).join('') : '<p class="care-schedule-empty">この日の予定はまだありません。</p>'}<button type="button" class="care-schedule-day-add" onclick="careScheduleEdit()">＋ この日に予定を追加</button>`;
+  const upcoming = careScheduleUpcoming(), shown = careScheduleExpanded ? upcoming : upcoming.slice(0, 5);
+  $('#careScheduleUpcoming').innerHTML = shown.length ? shown.map(e => careScheduleCard(e, true)).join('') + (upcoming.length > 5 ? `<button type="button" class="care-schedule-more" onclick="careScheduleShowAll()">${careScheduleExpanded ? '5件に戻す' : 'すべて表示（' + upcoming.length + '件）'}</button>` : '') : '<p class="care-schedule-empty">これからの予定はまだありません。</p>';
+  $('#careScheduleSaveBadge').textContent = careScheduleSaveError ? '未保存の変更があります' : 'この端末に自動保存';
+  $('#careScheduleSaveBadge').className = careScheduleSaveError ? 'is-unsaved' : '';
+  $('#careScheduleSaveNotice').textContent = careScheduleSaveError ? '予定を端末に保存できませんでした。画面を閉じずに、空き容量やブラウザーの設定を確認してください。' : careScheduleReadNotice;
+  const undo = $('#careScheduleUndo');undo.hidden = !careScheduleDeleted;
+  undo.innerHTML = careScheduleDeleted ? '<span>予定を削除しました</span><button type="button" onclick="careScheduleUndoDelete()">元に戻す</button><button type="button" class="care-schedule-undo-close" aria-label="削除のお知らせを閉じる" onclick="careScheduleDismissUndo()">×</button>' : '';
+}
+function careScheduleCard(event, withDate) {
+  const label = event.readonly ? '出産予定日' : CARE_SCHEDULE_KINDS.find(k => k.id === event.kind)?.label || 'その他';
+  return `<article class="care-schedule-event ${event.readonly ? 'is-due' : ''}">${withDate ? `<button type="button" class="care-schedule-jump" data-event-id="${event.id}" onclick="careScheduleGoTo(this.dataset.eventId)">${careScheduleDateLabel(event.date, event.date.slice(0, 4) !== careScheduleToday().slice(0, 4))} ›</button>` : ''}<div class="care-schedule-event-meta"><span class="care-schedule-kind">${label}</span><b>${event.time || '時刻の指定なし'}</b></div><h3>${escapeHtml(event.title)}</h3>${event.place ? `<p class="care-schedule-place">場所：${escapeHtml(event.place)}</p>` : ''}${event.memo ? `<p class="care-schedule-memo">${escapeHtml(event.memo)}</p>` : ''}${event.readonly ? '<p class="care-schedule-due-note">出産前の画面で登録した予定日です。</p>' : `<div class="care-schedule-event-actions"><button type="button" data-event-id="${event.id}" onclick="careScheduleEdit(this.dataset.eventId)" aria-label="${escapeHtml(event.title)}を編集">編集</button><button type="button" class="care-schedule-remove" data-event-id="${event.id}" onclick="careScheduleRemove(this.dataset.eventId)" aria-label="${escapeHtml(event.title)}を削除">削除</button></div>`}</article>`;
+}
+function careScheduleSelect(date) {
+  if (!careScheduleValidDate(date)) return;
+  careScheduleSelection = date; careScheduleMonth = date.slice(0, 7); careScheduleRenderParts();
+  document.querySelector('[data-schedule-date="' + date + '"]')?.focus({ preventScroll: true });
+}
+function careScheduleShift(delta) {
+  if (delta !== -1 && delta !== 1) return;
+  const [y, m] = careScheduleMonth.split('-').map(Number), d = new Date(Date.UTC(y, m - 1 + delta, 1));
+  const date = d.toISOString().slice(0, 10);
+  if (!careScheduleValidDate(date)) return;
+  careScheduleSelection = date; careScheduleMonth = date.slice(0, 7); careScheduleRenderParts();
+}
+function careScheduleTodayView() { careScheduleSelect(careScheduleToday()); }
+function careScheduleShowAll() { careScheduleExpanded = !careScheduleExpanded; careScheduleRenderParts(); }
+function careScheduleGoTo(id) {
+  const event = careScheduleEvents().find(e => e.id === id);
+  if (!event) return;
+  careScheduleSelection = event.date; careScheduleMonth = event.date.slice(0, 7);
+  if (careSection !== 'schedule') goCareSection('schedule'); else careScheduleRenderParts();
+}
+function careScheduleEdit(id) {
+  const event = id ? careScheduleState().events.find(e => e.id === id) : null;
+  if (id && !event) return;
+  careScheduleEditing = event ? event.id : null;
+  const e = event || { title: '', date: careScheduleSelection || careScheduleToday(), time: '', kind: 'checkup', place: '', memo: '' };
+  modal(event ? '予定を編集' : '予定を追加', `<form class="care-schedule-editor" id="careScheduleForm" onsubmit="careScheduleSave(event)">
+    <label for="careScheduleTitle">予定の名前 <span>必須</span></label><input id="careScheduleTitle" type="text" maxlength="100" required value="${escapeHtml(e.title)}" placeholder="例：妊婦健診" autocomplete="off">
+    <div class="care-schedule-editor-row"><div><label for="careScheduleDate">日付 <span>必須</span></label><input id="careScheduleDate" type="date" min="1900-01-01" max="2100-12-31" required value="${e.date}"></div><div><label for="careScheduleTime">時刻 <small>任意</small></label><input id="careScheduleTime" type="time" value="${e.time}"></div></div>
+    <label for="careScheduleKind">種類</label><select id="careScheduleKind">${CARE_SCHEDULE_KINDS.map(k => `<option value="${k.id}" ${k.id === e.kind ? 'selected' : ''}>${k.label}</option>`).join('')}</select>
+    <label for="careSchedulePlace">場所 <small>任意</small></label><input id="careSchedulePlace" type="text" maxlength="120" value="${escapeHtml(e.place)}" placeholder="病院・会場など" autocomplete="off">
+    <label for="careScheduleMemo">メモ <small>任意</small></label><textarea id="careScheduleMemo" rows="3" maxlength="500" placeholder="持ち物・聞いておきたいことなど">${escapeHtml(e.memo)}</textarea>
+    <p id="careScheduleFormError" class="care-schedule-form-error" role="alert"></p><button class="care-schedule-primary care-schedule-save" type="submit">${event ? '変更を保存' : '予定を登録'}</button><p class="care-schedule-editor-local">この端末に保存されます。</p>
+  </form>`);
+  $('#careScheduleTitle').focus({ preventScroll: true });
+}
+function careScheduleSave(event) {
+  event.preventDefault();
+  const title = $('#careScheduleTitle').value.trim(), date = $('#careScheduleDate').value, time = $('#careScheduleTime').value;
+  const kind = $('#careScheduleKind').value, place = $('#careSchedulePlace').value.trim(), memo = $('#careScheduleMemo').value.trim();
+  const error = $('#careScheduleFormError');
+  if (!title || title.length > 100) { error.textContent = '予定の名前を1～100文字で入力してください。'; $('#careScheduleTitle').focus(); return; }
+  if (!careScheduleValidDate(date)) { error.textContent = '正しい日付を入力してください。'; $('#careScheduleDate').focus(); return; }
+  if (time && !careScheduleValidTime(time)) { error.textContent = '時刻を確認してください。'; $('#careScheduleTime').focus(); return; }
+  if (!CARE_SCHEDULE_KINDS.some(k => k.id === kind) || place.length > 120 || memo.length > 500) { error.textContent = '種類・場所・メモの入力内容を確認してください。'; return; }
+  const events = careScheduleState().events, index = careScheduleEditing ? events.findIndex(e => e.id === careScheduleEditing) : -1;
+  if (careScheduleEditing && index < 0) { error.textContent = '編集する予定が見つかりません。いったん閉じて、もう一度開いてください。'; return; }
+  if (!careScheduleEditing && events.length >= 500) { error.textContent = '予定は500件まで登録できます。不要な予定を整理してください。'; return; }
+  const item = { id: careScheduleEditing || careScheduleId(), title, date, time, kind, place, memo };
+  if (index < 0) events.push(item); else events[index] = item;
+  careScheduleEditing = item.id;
+  if (!careSchedulePersist()) { error.textContent = '端末に保存できませんでした。入力内容は画面内に残っています。'; careScheduleRenderParts(); return; }
+  careScheduleSelection = date; careScheduleMonth = date.slice(0, 7);
+  closeModal(); careScheduleRenderParts();
+}
+function careScheduleRemove(id) {
+  const events = careScheduleState().events, index = events.findIndex(e => e.id === id);
+  if (index < 0) return;
+  careScheduleDeleted = { event: events[index], index }; events.splice(index, 1);
+  careSchedulePersist(); careScheduleRenderParts();
+  document.querySelector('#careScheduleUndo button')?.focus({ preventScroll: true });
+}
+function careScheduleUndoDelete() {
+  if (!careScheduleDeleted) return;
+  const events = careScheduleState().events;
+  if (events.length >= 500 && !events.some(e => e.id === careScheduleDeleted.event.id)) { careScheduleReadNotice = '予定が500件あるため、削除を取り消せません。予定を整理してから元に戻してください。'; careScheduleRenderParts(); return; }
+  if (!events.some(e => e.id === careScheduleDeleted.event.id)) events.splice(Math.min(events.length, careScheduleDeleted.index), 0, careScheduleDeleted.event);
+  careScheduleDeleted = null; careSchedulePersist(); careScheduleRenderParts();
+}
+function careScheduleDismissUndo() { careScheduleDeleted = null; careScheduleRenderParts(); }
+
 function carePrenatalInfo(section){
   if(section==='checklist')return goCareSection('checklist');
+  if(section==='calendar')return goCareSection('schedule');
   const labels={checklist:'準備チェックリスト',calendar:'予定・スケジュール',family:'家族と共有'};
   modal(labels[section]||'出産前の準備','<p>この機能は次の開発段階で追加します。現在は出産前トップページのレイアウト確認用です。</p>');
 }
