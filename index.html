@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.16.26"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>こどもケア</title><meta name="app-version" content="2026.11.17.27"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="こどもケア"><link rel="manifest" href="manifest.webmanifest"><style>
 
 :root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#20342c;background:#f2f7f3}*{box-sizing:border-box}body{margin:0}.app{max-width:480px;margin:auto;min-height:100dvh;position:relative;overflow:hidden;background:linear-gradient(145deg,#eaf8eb,#faf9ee)}.photo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.95;pointer-events:none}.wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.20),rgba(255,255,255,.08) 32%,rgba(255,255,255,.44) 85%);pointer-events:none}.content{position:relative;padding:20px 18px 40px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-size:24px;font-weight:850;color:white;text-shadow:0 2px 7px #253d3b88}.switch{border:0;border-radius:22px;background:#ffffffed;padding:12px 15px;font-weight:750;color:#234437;max-width:50%}h1{color:white;text-shadow:0 2px 8px #203c3488;font-size:31px;margin:0}h2{font-size:20px;margin:10px 0}p{margin:5px 0}.sub{color:#f9fffc;text-shadow:0 1px 6px #2448;font-weight:600}.hero{margin-top:20px;background:linear-gradient(115deg,#16a977,#0c9870);border-radius:20px;padding:20px;color:white;box-shadow:0 7px 18px #154d3326}.hero small{font-weight:750}.hero strong{display:block;font-size:20px;margin:8px 0}.hero button{float:right;border:0;background:transparent;color:white;font-size:22px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.tile{background:#ffffffed;border:0;border-radius:17px;padding:15px 5px;text-align:center;box-shadow:0 5px 15px #344b2518;cursor:pointer}.tile b{display:block;font-size:25px}.tile small{font-weight:700}.white{background:#fffffff0;border-radius:18px;padding:16px;margin:11px 0;box-shadow:0 5px 15px #334b2515}.action{width:100%;border:0;background:#fffffff0;padding:16px;text-align:left;border-radius:15px;margin:7px 0;font-weight:750;font-size:16px;cursor:pointer}.action span{float:right;color:#748780}.action .action-icon{float:none;display:inline-flex;align-items:center;justify-content:center;width:24px;margin-right:7px;vertical-align:middle;color:#d18a26}.btn{border:0;border-radius:11px;background:#0e9e72;color:white;padding:11px 14px;font-weight:700;cursor:pointer}.btn.alt{background:#e7f3ee;color:#196d52}.btn.warn{background:#c65b55}.small{font-size:12px;color:#64766b}.row{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{background:#e5f5ee;padding:6px 9px;border-radius:30px;font-size:12px;font-weight:700}.field{width:100%;border:1px solid #cadbd0;border-radius:10px;padding:12px;font:inherit;background:white;margin:5px 0 10px}label{display:block;font-size:13px;font-weight:700;margin-top:9px}.hide{display:none!important}.item{border-bottom:1px solid #e5ebe6;padding:12px 0}.item:last-child{border:0}.muted{color:#64766b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.day{text-align:center;border:0;border-radius:9px;background:#f0f5f0;padding:9px 2px;min-height:43px;font-size:13px}.day.has{background:#d7efe4}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin:2px}.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}.sheet{background:#fff;border-radius:20px;padding:20px;width:min(440px,100%);max-height:88dvh;overflow:auto}.error{color:#a23d3d;white-space:pre-wrap}.note{padding:10px;background:#fff7db;border-radius:10px;font-size:12px;color:#5b512a}.empty{padding:15px;color:#687d70;text-align:center}.footer{font-size:11px;color:#52675b;text-align:center;margin-top:24px}
 
@@ -158,6 +158,76 @@ body{background:#e7ece9}.app{max-width:430px;min-height:100dvh;background:linear
 .care-procedure-card dd{margin:0;line-height:1.55}
 .care-procedure-card ul{margin:0;padding-inline-start:20px}
 .care-procedure-card a{display:inline-block;padding:8px 0 10px;color:var(--procedure-accent);text-underline-offset:3px}
+/* 出産準備チェックリスト。既存画面に影響しないページ内スタイル。 */
+.care-prep-page{--prep-accent:#8b4161;--prep-border:#eadce2;--prep-soft:#f9eaf0}
+.care-prep-page button,.care-prep-page input,.care-prep-page select{font:inherit}
+.care-prep-page button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.care-prep-page button:focus-visible,.care-prep-page input:focus-visible,.care-prep-page select:focus-visible{outline:3px solid #8b4161;outline-offset:3px}
+.care-prep-back{border:0;background:transparent;color:#8b4161;padding:0 0 15px;font-size:13px!important;font-weight:700!important;min-height:40px}
+.care-prep-page .care-pre-head{padding:23px 20px}
+.care-prep-page .care-pre-head h1{font-size:26px;letter-spacing:-.5px;line-height:1.4}
+.care-prep-page .care-pre-head .care-kicker{color:#98536f}
+.care-prep-page .care-section{border:1px solid #edf0eb;box-shadow:0 4px 15px #294d3008}
+.care-prep-summary{padding:19px 18px}
+.care-prep-summary-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.care-prep-summary-top h2{font-size:14px;margin:0;color:#45574c}
+.care-prep-save-badge{font-size:10px;color:#397158;display:inline-flex;align-items:center;gap:5px}
+.care-prep-save-badge:before{content:'';height:5px;width:5px;border-radius:50%;background:#5b9877;flex:none}
+.care-prep-save-badge.is-unsaved{color:#a13449}
+.care-prep-save-badge.is-unsaved:before{background:#a13449}
+.care-prep-total{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:12px 0 13px;flex-wrap:wrap}
+.care-prep-total strong{font-size:38px;line-height:1.1;font-weight:800;color:#8b4161;letter-spacing:-1px}
+.care-prep-total span{font-size:13px;color:#7a817b}
+.care-prep-total>b{font-size:13px;color:#8b4161;background:#fbf1f5;border-radius:8px;padding:7px 9px}
+.care-prep-progress{height:8px;border-radius:10px;background:#f3e9ed;overflow:hidden}
+.care-prep-progress>span{display:block;height:100%;background:#b56586;border-radius:10px;transition:width .2s ease}
+.care-prep-filters{display:flex;gap:7px;margin:20px 0 12px}
+.care-prep-filters button{flex:1;min-width:0;border:1px solid #dce4dc;background:#fff;color:#5e6a61;border-radius:11px;padding:10px 3px;min-height:44px;font-size:12px;font-weight:700}
+.care-prep-filters button[aria-pressed=true]{background:#8b4161;border-color:#8b4161;color:#fff}
+.care-prep-filters button span{margin-left:3px;font-size:11px;opacity:.85}
+.care-prep-guide{color:#6e7b71;font-size:12px;line-height:1.7;margin:0 3px 12px}
+.care-prep-save-notice:empty,.care-prep-form-error:empty{display:none}
+.care-prep-save-notice,.care-prep-form-error{color:#a13449;font-size:13px;line-height:1.6;background:#fff0f2;padding:10px 12px;border-radius:9px;margin:10px 0}
+.care-prep-group{padding:17px 14px 5px;margin-top:12px}
+.care-prep-group-head{display:flex;gap:10px;align-items:center;padding:0 1px 12px;border-bottom:1px solid #edf0eb}
+.care-prep-group-mark{height:33px;width:33px;flex:none;display:grid;place-items:center;border-radius:10px;background:#f9eaf0;color:#9a5673;font-size:11px;font-weight:800}
+.care-prep-group-head>div{min-width:0;flex:1}
+.care-prep-group-head h2{font-size:16px;margin:0 0 3px;line-height:1.5}
+.care-prep-group-head p{font-size:11px;color:#879087;line-height:1.5;margin:0}
+.care-prep-group-count{flex:none;white-space:nowrap;color:#7e8b80;font-size:11px}
+.care-prep-group ul{margin:0;padding:0;list-style:none}
+.care-prep-row{display:flex;align-items:center;gap:5px;border-bottom:1px solid #f0f1ed;min-height:55px}
+.care-prep-row:last-child{border-bottom:0}
+.care-prep-row label{display:flex;align-items:center;gap:11px;flex:1;min-width:0;padding:13px 1px;cursor:pointer;font-size:14px;line-height:1.65}
+.care-prep-row input{appearance:auto!important;accent-color:#a95879;width:21px;height:21px;flex:none;margin:0;cursor:pointer}
+.care-prep-row label>span{overflow-wrap:anywhere}
+.care-prep-row.is-done label>span{color:#8c958e;text-decoration:line-through;text-decoration-color:#bac1bb}
+.care-prep-delete{display:grid;place-items:center;border:0;background:transparent;color:#8c968d;min-width:40px;min-height:44px;padding:7px;border-radius:9px;flex:none}
+.care-prep-delete:hover{background:#fff0f2;color:#a13449}
+.care-prep-add{margin-top:20px;padding:19px 17px}
+.care-prep-add h2{font-size:16px;margin:0 0 15px}
+.care-prep-add label{display:block;font-size:12px;color:#667569;font-weight:700;margin:0 0 6px}
+.care-prep-add input,.care-prep-add select{box-sizing:border-box;width:100%;min-width:0;background:#fafcf9;border:1px solid #d9e2d9;border-radius:10px;padding:12px 10px;color:#2c4434;min-height:46px;font-size:14px}
+.care-prep-add input::placeholder{color:#8b968d;font-size:12px}
+.care-prep-add-bottom{display:flex;align-items:flex-end;gap:9px;margin-top:13px}
+.care-prep-add-bottom>div{flex:1;min-width:0}
+.care-prep-add select{padding-right:4px;font-size:12px}
+.care-prep-add-button{border:0;border-radius:10px;background:#8b4161;color:#fff;min-height:46px;flex:none;padding:11px 13px;font-size:13px!important;font-weight:700!important}
+.care-prep-form-status{font-size:12px;line-height:1.7;color:#397158;margin-top:10px;overflow-wrap:anywhere}
+.care-prep-form-status:empty{display:none}
+.care-prep-local{text-align:center;margin:17px 4px 5px;color:#7b887e;font-size:11px;line-height:1.7}
+.care-prep-empty{text-align:center;padding:27px 14px}
+.care-prep-empty>div{font-size:27px;color:#a96582;margin:0 0 9px}
+.care-prep-empty h2{font-size:16px;line-height:1.6;margin:0 0 6px}
+.care-prep-empty p{font-size:12px;color:#7b887e;line-height:1.7}
+.care-prep-undo{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;width:calc(100% - 36px);max-width:424px;padding:11px 13px;border-radius:12px;background:#31483b;color:#fff;box-shadow:0 6px 24px #213b3330;z-index:5;font-size:12px}
+.care-prep-undo[hidden]{display:none}
+.care-prep-undo>span{flex:1}
+.care-prep-undo button{border:0;border-radius:7px;background:#fff;color:#31483b;padding:8px 10px;min-height:36px;white-space:nowrap;font-size:12px;font-weight:700}
+.care-prep-undo .care-prep-undo-close{background:transparent;color:#fff;font-size:22px;padding:3px 6px;min-width:28px}
+@media(max-width:360px){.care-prep-page .care-pre-head{padding:19px 14px}.care-prep-page .care-pre-head h1{font-size:23px}.care-prep-group{padding-left:11px;padding-right:11px}.care-prep-group-head h2{font-size:14px}.care-prep-group-head p{font-size:10px}.care-prep-row label{font-size:13px;gap:8px}.care-prep-summary{padding:17px 14px}.care-prep-save-badge{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.care-prep-progress>span{transition:none}}
+
 </style></head><body><div class="app"><div class="photo" id="photo"></div><div class="wash" id="wash"></div><main class="content"><div class="top"><button class="brand" id="brand" type="button" onclick="openSideMenu()" aria-label="メニューを開く" aria-expanded="false" aria-controls="sideMenu">☰</button><button class="switch" id="switchBtn">ホーム ▾</button></div><div id="view"></div><nav class="care-history-nav" aria-label="画面の移動"><button type="button" id="careBack" onclick="careNavigate(-1)" aria-label="前の画面へ">〈</button><button type="button" id="careForward" onclick="careNavigate(1)" aria-label="次の画面へ">〉</button></nav><div class="footer">医療上の判断は医療機関・母子健康手帳で確認してください</div></main></div><div id="sideMenu" class="modal hide" role="dialog" aria-modal="true" aria-label="メニュー">
   <div class="sheet">
     <div class="row">
@@ -190,7 +260,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSideMenu
 const APP_PREF_KEY='kodomo-care-preferences-v1';
 function getAppPrefs(){let raw={};try{raw=JSON.parse(localStorage.getItem(APP_PREF_KEY)||'{}')||{}}catch{}let days=Array.isArray(raw.reminderDaysSelected)?raw.reminderDaysSelected:(Number.isInteger(raw.reminderDays)?[raw.reminderDays]:[1]);return {fontSize:['small','normal','large'].includes(raw.fontSize)?raw.fontSize:'normal',reminderDaysSelected:[...new Set(days.map(Number).filter(n=>[0,1,3,7].includes(n)))],reminderHour:Number.isInteger(raw.reminderHour)&&raw.reminderHour>=0&&raw.reminderHour<=23?raw.reminderHour:8,reminderMinute:Number.isInteger(raw.reminderMinute)&&raw.reminderMinute>=0&&raw.reminderMinute<=59?raw.reminderMinute:0}}
 function applyAppPrefs(){let p=getAppPrefs();document.documentElement.dataset.fontSize=p.fontSize;document.documentElement.style.fontSize=p.fontSize==='large'?'19px':p.fontSize==='small'?'14px':'16px';}
-function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.16.26</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
+function showAppSettings(){let p=getAppPrefs();let checks=[[7,'7日前'],[3,'3日前'],[1,'前日'],[0,'当日']].map(([d,label])=>`<label style="display:flex;align-items:center;gap:9px;font-size:15px;padding:8px 0"><input type="checkbox" name="reminderDay" value="${d}" ${p.reminderDaysSelected.includes(d)?'checked':''}>${label}</label>`).join('');let hours=Array.from({length:24},(_,i)=>`<option value="${i}" ${p.reminderHour===i?'selected':''}>${String(i).padStart(2,'0')}時</option>`).join('');let minutes=Array.from({length:60},(_,i)=>`<option value="${i}" ${p.reminderMinute===i?'selected':''}>${String(i).padStart(2,'0')}分</option>`).join('');modal('アプリの設定',`<p class="small" style="font-weight:700;color:#087e59">アプリ更新版 v2026.11.17.27</p><p class="small">文字サイズはこの端末に保存されます。通知日・通知時刻はログイン時に保存ボタンを押すとクラウドへ同期します。</p><label for="appFontSize">文字サイズ</label><select class="field" id="appFontSize"><option value="small" ${p.fontSize==='small'?'selected':''}>小さめ</option><option value="normal" ${p.fontSize==='normal'?'selected':''}>標準</option><option value="large" ${p.fontSize==='large'?'selected':''}>大きめ</option></select><hr><b>💉 予防接種のリマインダー</b><p class="small">通知日を複数選択できます。</p>${checks}<label>通知時刻</label><div style="display:flex;gap:10px"><select class="field" id="appReminderHour" aria-label="通知する時">${hours}</select><select class="field" id="appReminderMinute" aria-label="通知する分">${minutes}</select></div><button class="btn" type="button" onclick="saveAppPreferences()">通知設定を保存</button><p id="appPrefsSaveStatus" class="small" role="status"></p><div class="note">予約時刻は任意です。通知はここで指定した時刻に送信されます。</div><hr><b>🔔 スマホへのプッシュ通知</b><p class="small">ホーム画面に追加したアプリから通知を許可できます。自動配信にはサーバー側の定期実行設定が必要です。</p><p id="pushPermissionStatus" class="small" role="status">通知の状態を確認中…</p><button class="btn alt" id="pushEnableButton" type="button" onclick="enablePushPermission()">通知を許可する</button> <button class="btn alt" id="pushTestButton" type="button" onclick="testPushNotification()">通知の状態を確認・テスト</button><div style="margin-top:12px"><b>☁ サーバー通知テスト</b><p class="small">公開鍵を設定して、このiPhoneを通知先に登録します。ログインが必要です。</p><label for="pushPublicKey">VAPID Public Key（公開鍵）</label><input id="pushPublicKey" class="field" autocomplete="off" placeholder="生成したPublic Keyを貼り付け" value="${escapeHtml(localStorage.getItem('kodomo-care-vapid-public')||'')}"><button class="btn" type="button" onclick="registerServerPush()">この端末を通知先に登録</button> <button class="btn alt" type="button" onclick="sendServerPushTest()">サーバーからテスト送信</button><p id="serverPushStatus" class="small" role="status"></p></div><hr><button class="action" onclick="showFamily()">👪 家族共有・バックアップ <span>›</span></button><button class="action" onclick="showSupportInfo()">✉ お問い合わせ・サポート <span>›</span></button><button class="action" onclick="showPrivacyInfo()">🔒 プライバシーについて <span>›</span></button>`);refreshPushPermissionStatus()}
 function refreshPushPermissionStatus(){
   const status=document.getElementById('pushPermissionStatus');
   const enable=document.getElementById('pushEnableButton');
@@ -414,6 +484,7 @@ function render(){
   $('#brand').textContent='☰';
   $('#switchBtn').textContent='ホーム ▾';
   if(careSection==='procedure'){renderCareProcedure();return;}
+  if(careSection==='checklist'){renderCarePrepChecklist();return;}
   if(careSection==='prenatal'){
     const due=localStorage.getItem('care-prenatal-due')||'';
     let remaining=null;
@@ -429,7 +500,7 @@ function render(){
       <div class="care-prenatal-hero"><div>出産予定日まで</div><div class="care-days" id="careCountdown">${remaining===null?'予定日を登録':remaining>=0?'あと '+remaining+' 日':'予定日から '+Math.abs(remaining)+' 日'}</div><small>予定日を登録すると自動計算</small><input aria-label="出産予定日" type="date" value="${due}" oninput="careSetDueDate(this.value)" onchange="careSetDueDate(this.value)"></div>
       <div class="care-section"><h2>出産準備メニュー</h2><div class="care-prenatal-grid">
         <button class="care-prenatal-tile" onclick="goCareSection('procedure')"><span class="care-tile-icon">▤</span><b>出産手続きナビ</b><small>自治体別の必要手続き</small></button>
-        <button class="care-prenatal-tile" onclick="carePrenatalInfo('checklist')"><span class="care-tile-icon">☑</span><b>準備チェックリスト</b><small>入院・育児用品など</small></button>
+        <button class="care-prenatal-tile" onclick="carePrenatalInfo('checklist')"><span class="care-tile-icon">☑</span><b>準備チェックリスト</b><small>${carePrepHomeLabel()}</small></button>
         <button class="care-prenatal-tile" onclick="carePrenatalInfo('calendar')"><span class="care-tile-icon">▦</span><b>予定・スケジュール</b><small>健診や大切な予定</small></button>
         <button class="care-prenatal-tile" onclick="carePrenatalInfo('family')"><span class="care-tile-icon">♧</span><b>家族と共有</b><small>夫婦で準備を分担</small></button>
       </div></div>
@@ -104749,7 +104820,205 @@ function renderCareProcedureResults() {
     <p class="care-muted">表示の日付は暦上の目安です。窓口の受付日や個別の必要書類は、申請先の公式案内で確認してください。</p>`;
 }
 
+// 出産準備はこの端末に保存。家族の医療記録や既存の設定とは別に管理する。
+const CARE_PREP_KEY = 'kodomo-care-prenatal-checklist-v1';
+const CARE_PREP_GROUPS = [
+  { id: 'hospital', title: '入院の準備', hint: '産院の持ち物案内に合わせて整理', mark: '01', items: [
+    '母子健康手帳', '診察券・産院から指定された書類', 'スマートフォン・充電器',
+    '入院中の着替え・パジャマ', '下着・靴下', 'タオル', '洗面・入浴用品',
+    '飲み物・飲みやすいコップ', '産院から指定された出産用品'
+  ] },
+  { id: 'discharge', title: '退院するとき', hint: '当日の服と、帰るための準備', mark: '02', items: [
+    'お母さんの退院時の服', '赤ちゃんの退院時の服', 'おくるみ・掛けもの',
+    '帰宅手段・迎えの時間を確認', 'チャイルドシート（車で帰る場合）'
+  ] },
+  { id: 'baby', title: '赤ちゃんを迎える準備', hint: 'おうちでの暮らしに必要なもの', mark: '03', items: [
+    '肌着・ベビー服', 'おむつ', 'おしりふき', '赤ちゃんの寝る場所を整える',
+    '沐浴用品', 'タオル・ガーゼ', '授乳に必要な用品', '赤ちゃんの衣類を洗う・収納する'
+  ] }
+];
+let carePrepMemory = null;
+let carePrepFilter = 'all';
+let carePrepDeleted = null;
+let carePrepSaveError = false;
+let carePrepReadNotice = '';
+
+function carePrepNewId() {
+  return 'prep-' + String(uuid()).replace(/[^a-zA-Z0-9_-]/g, '') + '-' + Math.random().toString(36).slice(2, 8);
+}
+function carePrepDefaults() {
+  return CARE_PREP_GROUPS.flatMap(group => group.items.map((label, i) => ({
+    id: group.id + '-' + (i + 1), group: group.id, label, done: false
+  })));
+}
+function carePrepState() {
+  if (carePrepMemory !== null) return carePrepMemory;
+  let items = carePrepDefaults();
+  try {
+    const raw = localStorage.getItem(CARE_PREP_KEY);
+    if (raw !== null) {
+      const saved = JSON.parse(raw);
+      if (!saved || saved.version !== 1 || !Array.isArray(saved.items)) throw new Error('Invalid checklist');
+      const seen = new Set();
+      items = saved.items.slice(0, 500).filter(x => x && typeof x.label === 'string' && x.label.trim()).map(x => {
+        let id = typeof x.id === 'string' && /^[a-zA-Z0-9_-]{1,100}$/.test(x.id) ? x.id : carePrepNewId();
+        if (seen.has(id)) id = carePrepNewId();
+        seen.add(id);
+        return { id, group: CARE_PREP_GROUPS.some(g => g.id === x.group) ? x.group : 'hospital',
+          label: x.label.trim().slice(0, 100), done: x.done === true };
+      });
+    }
+  } catch (e) {
+    carePrepReadNotice = '保存されたリストを読み込めませんでした。標準の項目を表示しています。';
+  }
+  carePrepMemory = { version: 1, items };
+  return carePrepMemory;
+}
+function carePrepPersist() {
+  try {
+    localStorage.setItem(CARE_PREP_KEY, JSON.stringify(carePrepState()));
+    carePrepSaveError = false;
+    carePrepReadNotice = '';
+    return true;
+  } catch (e) {
+    carePrepSaveError = true;
+    return false;
+  }
+}
+function carePrepCounts() {
+  const items = carePrepState().items;
+  const done = items.filter(x => x.done).length;
+  return { total: items.length, done, remaining: items.length - done };
+}
+function carePrepHomeLabel() {
+  const count = carePrepCounts();
+  return count.done + ' / ' + count.total + ' 項目 準備済み';
+}
+function renderCarePrepChecklist() {
+  $('#view').innerHTML = `<div class="care-shell care-prep-page">
+    <button class="care-prep-back" type="button" onclick="goCareSection('prenatal')">‹ 出産前の準備に戻る</button>
+    <header class="care-pre-head">
+      <div class="care-kicker">こどもケア · 出産前</div><h1>準備チェックリスト</h1>
+      <p>必要なものを、ひとつずつ。</p>
+    </header>
+    <section id="carePrepSummary" class="care-section care-prep-summary" aria-label="準備の進み具合"></section>
+    <div class="care-prep-filters" role="group" aria-label="準備状況で絞り込み">
+      <button type="button" data-prep-filter="all" onclick="carePrepSetFilter('all')">すべて</button>
+      <button type="button" data-prep-filter="remaining" onclick="carePrepSetFilter('remaining')">未準備</button>
+      <button type="button" data-prep-filter="done" onclick="carePrepSetFilter('done')">準備済み</button>
+    </div>
+    <p class="care-prep-guide">産院の案内に合わせて、必要な項目を残したり追加したりできます。</p>
+    <p id="carePrepSaveNotice" class="care-prep-save-notice" role="status" aria-live="polite"></p>
+    <div id="carePrepList"></div>
+    <section class="care-section care-prep-add">
+      <h2>自分の項目を追加</h2>
+      <form id="carePrepAddForm" onsubmit="carePrepAdd(event)">
+        <label for="carePrepName">準備するもの・やること</label>
+        <input id="carePrepName" name="label" type="text" required maxlength="100" autocomplete="off" placeholder="例：上の子の送迎をお願いする" aria-describedby="carePrepFormError">
+        <div class="care-prep-add-bottom"><div><label for="carePrepGroup">追加するリスト</label>
+          <select id="carePrepGroup" name="group">${CARE_PREP_GROUPS.map(g => `<option value="${g.id}">${g.title}</option>`).join('')}</select>
+        </div><button class="care-prep-add-button" type="submit">＋ 追加する</button></div>
+        <p id="carePrepFormError" class="care-prep-form-error" role="alert"></p>
+        <p id="carePrepFormStatus" class="care-prep-form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <p class="care-prep-local">チェック・追加・削除は、この端末に自動保存されます。</p>
+    <div id="carePrepUndo" class="care-prep-undo" role="status" aria-live="polite" hidden></div>
+  </div>`;
+  carePrepRenderParts();
+}
+function carePrepRenderParts() {
+  const summary = $('#carePrepSummary'), list = $('#carePrepList');
+  if (!summary || !list) return;
+  const items = carePrepState().items, count = carePrepCounts();
+  const percent = count.total ? Math.round(count.done / count.total * 100) : 0;
+  const complete = count.total > 0 && count.remaining === 0;
+  summary.innerHTML = `<div class="care-prep-summary-top"><h2>準備の進み具合</h2><span class="care-prep-save-badge ${carePrepSaveError ? 'is-unsaved' : ''}">${carePrepSaveError ? '未保存' : 'この端末に自動保存'}</span></div>
+    <div class="care-prep-total"><div><strong>${count.done}</strong><span> / ${count.total} 項目</span></div><b>${count.total === 0 ? '項目を追加しよう' : complete ? '準備がそろいました' : 'あと ' + count.remaining + ' 個'}</b></div>
+    <div class="care-prep-progress" role="progressbar" aria-label="出産準備" aria-valuemin="0" aria-valuemax="${count.total || 1}" aria-valuenow="${count.done}" aria-valuetext="${count.total ? count.done + ' / ' + count.total + '項目 準備済み' : '項目はありません'}"><span style="width:${percent}%"></span></div>`;
+  for (const button of document.querySelectorAll('[data-prep-filter]')) {
+    const filter = button.dataset.prepFilter;
+    button.setAttribute('aria-pressed', String(filter === carePrepFilter));
+    const text = filter === 'all' ? 'すべて' : filter === 'remaining' ? '未準備' : '準備済み';
+    const n = filter === 'all' ? count.total : filter === 'remaining' ? count.remaining : count.done;
+    button.innerHTML = `${text} <span>${n}</span>`;
+  }
+  const visible = items.filter(x => carePrepFilter === 'all' || (carePrepFilter === 'done' ? x.done : !x.done));
+  if (!visible.length) {
+    const message = !count.total ? 'リストは空です' : carePrepFilter === 'done' ? '準備済みの項目はまだありません' : '未準備の項目はありません';
+    list.innerHTML = `<div class="care-section care-prep-empty"><div aria-hidden="true">${complete ? '✓' : '☑'}</div><h2>${message}</h2><p>${!count.total ? '下のフォームから、必要な項目を追加できます。' : carePrepFilter === 'done' ? '用意できたものにチェックを入れていきましょう。' : '必要な項目が増えたら、下から追加できます。'}</p></div>`;
+  } else {
+    list.innerHTML = CARE_PREP_GROUPS.map(group => {
+      const rows = visible.filter(x => x.group === group.id);
+      if (!rows.length) return '';
+      const all = items.filter(x => x.group === group.id), done = all.filter(x => x.done).length;
+      return `<section class="care-section care-prep-group" aria-labelledby="carePrepTitle-${group.id}">
+        <div class="care-prep-group-head"><span class="care-prep-group-mark" aria-hidden="true">${group.mark}</span><div><h2 id="carePrepTitle-${group.id}">${group.title}</h2><p>${group.hint}</p></div><span class="care-prep-group-count">${done} / ${all.length}</span></div>
+        <ul>${rows.map(item => `<li class="care-prep-row ${item.done ? 'is-done' : ''}"><label for="carePrepItem-${item.id}"><input id="carePrepItem-${item.id}" type="checkbox" data-prep-id="${item.id}" ${item.done ? 'checked' : ''} onchange="carePrepToggle(this.dataset.prepId,this.checked)"><span>${escapeHtml(item.label)}</span></label>
+          <button type="button" class="care-prep-delete" data-prep-id="${item.id}" onclick="carePrepRemove(this.dataset.prepId)" aria-label="${escapeHtml(item.label)}を削除"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg></button></li>`).join('')}</ul>
+      </section>`;
+    }).join('');
+  }
+  $('#carePrepSaveNotice').textContent = carePrepSaveError
+    ? '端末に保存できませんでした。画面を閉じずに、空き容量やブラウザーの設定を確認してください。'
+    : carePrepReadNotice;
+  const undo = $('#carePrepUndo');
+  undo.hidden = !carePrepDeleted;
+  undo.innerHTML = carePrepDeleted ? `<span>項目を削除しました</span><button type="button" onclick="carePrepUndoDelete()">元に戻す</button><button type="button" class="care-prep-undo-close" aria-label="削除のお知らせを閉じる" onclick="carePrepDismissUndo()">×</button>` : '';
+}
+function carePrepSetFilter(filter) {
+  if (!['all', 'remaining', 'done'].includes(filter)) return;
+  carePrepFilter = filter;
+  carePrepRenderParts();
+  document.querySelector('[data-prep-filter="' + filter + '"]')?.focus({ preventScroll: true });
+}
+function carePrepToggle(id, checked) {
+  const item = carePrepState().items.find(x => x.id === id);
+  if (!item) return;
+  item.done = checked === true;
+  carePrepPersist();
+  carePrepRenderParts();
+  const checkbox = document.getElementById('carePrepItem-' + id);
+  if (checkbox) checkbox.focus({ preventScroll: true });
+  else document.querySelector('[data-prep-filter="' + carePrepFilter + '"]')?.focus({ preventScroll: true });
+}
+function carePrepAdd(event) {
+  event.preventDefault();
+  const input = $('#carePrepName'), group = $('#carePrepGroup');
+  const label = input.value.replace(/\s+/g, ' ').trim();
+  const error = $('#carePrepFormError');
+  if (!label || label.length > 100) { error.textContent = '項目を1～100文字で入力してください。'; input.focus(); return; }
+  if (carePrepState().items.length >= 500) { error.textContent = '項目は500件まで追加できます。不要な項目を整理してください。'; return; }
+  if (!CARE_PREP_GROUPS.some(g => g.id === group.value)) { error.textContent = '追加するリストを選んでください。'; return; }
+  carePrepState().items.push({ id: carePrepNewId(), group: group.value, label, done: false });
+  carePrepPersist();
+  carePrepFilter = 'all';
+  input.value = ''; error.textContent = '';
+  carePrepRenderParts(); input.focus({ preventScroll: true });
+  $('#carePrepFormStatus').textContent = carePrepSaveError ? '追加しましたが、端末に保存できませんでした。' : '「' + label + '」を追加しました。';
+}
+function carePrepRemove(id) {
+  const items = carePrepState().items, index = items.findIndex(x => x.id === id);
+  if (index < 0) return;
+  carePrepDeleted = { item: items[index], index };
+  items.splice(index, 1);
+  carePrepPersist(); carePrepRenderParts();
+  document.querySelector('#carePrepUndo button')?.focus({ preventScroll: true });
+}
+function carePrepUndoDelete() {
+  if (!carePrepDeleted) return;
+  const items = carePrepState().items;
+  if (!items.some(x => x.id === carePrepDeleted.item.id)) items.splice(Math.min(carePrepDeleted.index, items.length), 0, carePrepDeleted.item);
+  carePrepDeleted = null;
+  carePrepPersist(); carePrepRenderParts();
+}
+function carePrepDismissUndo() {
+  carePrepDeleted = null;
+  carePrepRenderParts();
+}
+
 function carePrenatalInfo(section){
+  if(section==='checklist')return goCareSection('checklist');
   const labels={checklist:'準備チェックリスト',calendar:'予定・スケジュール',family:'家族と共有'};
   modal(labels[section]||'出産前の準備','<p>この機能は次の開発段階で追加します。現在は出産前トップページのレイアウト確認用です。</p>');
 }
